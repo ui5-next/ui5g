@@ -18,21 +18,20 @@ yarn global add generator-ui5g
 
 Then generate your new project:
 
-**PLEASE MAKE YOUR PROJECT DIRECTORY MANUALLY**
-
 ```bash
 # yes you have to mk your project directory manually
 mkdir sample-project
 cd sample-project
 yo ui5g
 # it will ask your 3 questions
+# please make sure your answer is logical, because generator not process empty or wrong input error
 ? App name theo1
 ? App namespace corp.sap.msms.theo
+# PLEASE CHOOSE OpenUI5 IF YOU DONT HAVE SAPUI5 LINCENSE
 ? SAPUI5 or OpenUI5? OpenUI5
-# please make sure your answer is logical, because generator not process empty or wrong input error
 ```
 
-**PLEASE CHOOSE OpenUI5 IF YOU DONT HAVE SAPUI5 LINCENSE**
+****
 
 and install dependencies
 
@@ -58,9 +57,9 @@ you can use ```es6/es2015``` features and ```less``` in project, and js sourcema
 
 you can edit ```proxies.js``` to add more proxy srevices
 
-also, ```eslintrc``` is exist in project directory
+also, ```eslintrc``` works
 
 
 ## About
 
-This generator is written by theo but some ideas come from Madeleine, and it only can generate really simple project. Very pleased to be able to help you.
+This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project. Very pleased to be able to help you.
