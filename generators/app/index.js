@@ -40,7 +40,8 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath(), this.destinationPath(), this.props);
+    this.fs.copy(this.templatePath('.*'), this.destinationRoot());
+    this.fs.copyTpl(this.sourceRoot(), this.destinationRoot(), this.props, {}, { dot: true });
   }
 
 };
