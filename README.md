@@ -43,7 +43,7 @@ npm i
 
 ## Dev
 
-This template is based on [UI5 Workthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5
+This template is based on [UI5 Walkthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5
 
 start your project
 
@@ -53,20 +53,24 @@ yarn run dev
 npm run dev
 ```
 
-you can use ```es6/es2015``` features and ```less``` in project, and js sourcemap is open defaultly
+## Configuration
 
-you can edit ```proxies.js``` to add more proxy servers
+* ```Babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemap inline
 
-also, ```eslintrc``` works
+* ```ESLint```, edit ```.eslintrc``` to modify eslint lint config, by default, new project will use most rules of ui5 standard, only add es6 and other essential rules.
 
-edit ```.babelrc``` to modify babel config
+* ```gulp```, edit ```gulpfile.js``` to modify gulp task and other task behavior, you can add *sass* or *uglify* or other processes manually, or adjust *src*/*dist* directory
 
-use ```gulp lint``` to use eslint auto fix your code,
+* ```proxy```, edit ```proxies.js```, supported by gulp connect, use a tranditional node lib, it can set local proxy to remote server
 
-by default, ```gulp build``` will delete ```dist``` directory, and lint all source files
+## Command
+
+* ```gulp```, default *gulp* will start a hot refresh server, watch file change and refresh browser when your codes change.
+* ```gulp lint```, use *eslint* to auto fix your code.
+* ```gulp build```, delete *dist* directory and build es6 codes to es5, and compile less to css.
 
 ## About
 
-This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project. 
+This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project.
 
 Very pleased to be able to help you.
