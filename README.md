@@ -1,6 +1,6 @@
 # generator-ui5g 
 
-This is a basic generator for sapui5/openui5, use gulp to build
+Basic generator for sapui5/openui5, with gulp
 
 ## Installation
 
