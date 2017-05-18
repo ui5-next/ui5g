@@ -43,7 +43,7 @@ npm i
 
 ## Dev
 
-This template is based on [UI5 Workthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5, if you not need that, delete them directly
+This template is based on [UI5 Workthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5, if you not need some files, delete them directly
 
 start your project
 
