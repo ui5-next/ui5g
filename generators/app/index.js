@@ -14,22 +14,24 @@ module.exports = class extends Generator {
     const prompts = [{
       type: 'input',
       name: 'name',
-      message: 'App name'
+      message: 'App name',
+      default: 'ui5-workthrough'
     }, {
       type: 'input',
       name: 'namespace',
-      message: 'App namespace'
+      message: 'App namespace',
+      default:'sap.ui5.demo.workthrough'
     },
     {
       type: 'list',
       name: 'ui5Domain',
       message: 'SAPUI5 or OpenUI5?',
       choices: [{
-        name: 'SAPUI5',
-        value: '<%= ui5Domain %>'
-      }, {
         name: 'OpenUI5',
         value: 'openui5.hana.ondemand.com'
+      }, {
+        name: 'SAPUI5',
+        value: 'sapui5.hana.ondemand.com'
       }]
     }];
 
@@ -40,7 +42,9 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    // dot files
     this.fs.copy(this.templatePath('.*'), this.destinationRoot());
+    // files
     this.fs.copyTpl(this.sourceRoot(), this.destinationRoot(), this.props, {}, { dot: true });
   }
 
