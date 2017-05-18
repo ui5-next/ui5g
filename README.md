@@ -43,7 +43,7 @@ npm i
 
 ## Dev
 
-This template is based on [UI5 Workthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5, if you not need some files, delete them directly
+This template is based on [UI5 Workthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5
 
 start your project
 
@@ -55,11 +55,18 @@ npm run dev
 
 you can use ```es6/es2015``` features and ```less``` in project, and js sourcemap is open defaultly
 
-you can edit ```proxies.js``` to add more proxy srevices
+you can edit ```proxies.js``` to add more proxy servers
 
 also, ```eslintrc``` works
 
+edit ```.babelrc``` to modify babel config
+
+use ```gulp lint``` to use eslint auto fix your code,
+
+by default, ```gulp build``` will delete ```dist``` directory, and lint all source files
 
 ## About
 
-This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project. Very pleased to be able to help you.
+This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project. 
+
+Very pleased to be able to help you.

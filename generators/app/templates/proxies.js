@@ -22,10 +22,12 @@ module.exports = function ui5ProxyMiddleware(c, o) {
         p.headers["cache-control"] = "public, max-age=31536000";
       }
     }),
-    // Above proxy are not necessary
+    // Above proxies are not necessary
+
     proxy("/destinations/northwind", {
       target: "http://services.odata.org/",
-      auth: "suntheo:12345678",
+      // with http basic auth if necessary
+      auth: "username:password",
       pathRewrite: {
         '^/destinations/northwind': '/'
       },
