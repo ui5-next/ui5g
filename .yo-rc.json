@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Theo Sun",
+      "authorEmail": "theo.sun@sap.com",
+      "authorUrl": ""
+    }
+  }
+}
