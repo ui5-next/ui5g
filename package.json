@@ -42,6 +42,6 @@
       "node": true
     }
   },
-  "repository": "/generator-ui5g",
+  "repository": "https://github.com/Soontao/ui5g",
   "license": "Apache 2.0"
 }
