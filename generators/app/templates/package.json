@@ -19,6 +19,7 @@
     "http-proxy-middleware": "^0.17.4",
     "merge-stream": "^1.0.1",
     "run-sequence": "^1.2.2",
-    "gulp-eslint": "^3.0.1"
+    "gulp-eslint": "^3.0.1",
+    "@types/openui5": "^1.40.1"
   }
 }
