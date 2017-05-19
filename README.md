@@ -65,9 +65,9 @@ npm run dev
 
 ## Command
 
-* ```gulp```, default *gulp* will start a hot refresh server, watch file change and refresh browser when your codes change.
+* ```gulp```, default *gulp* will start a hot reload server, based on BrowserSync. PLEASE NOTE THAT: ALL FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
 * ```gulp lint```, use *eslint* to auto fix your code.
-* ```gulp build```, delete *dist* directory and build es6 codes to es5, and compile less to css.
+* ```gulp build```, build files to *dist* directory.
 
 ## About
 
