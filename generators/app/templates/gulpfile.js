@@ -42,9 +42,7 @@ var build = () => {
 };
 
 
-gulp.task('default', () => {
-  runSequence('build:mem', 'bs', 'watch');
-});
+gulp.task('default', ['build:mem', 'bs', 'watch']);
 
 gulp.task('build:mem', () => {
   return build()
@@ -82,14 +80,16 @@ gulp.task('lint', () => {
 
 
 gulp.task('watch', () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, ['reload']);
+  gulp.watch(`${SRC_ROOT}/**/*`, ['build:mem', 'reload']);
 });
 
 gulp.task('live-build', ['build', 'bs'], () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, ['build'], browserSync);
+  gulp.watch(`${SRC_ROOT}/**/*`, ['build', 'reload']);
 });
 
-gulp.task('reload', ['build:mem'], browserSync.reload);
+gulp.task('reload', ()=>{
+  browserSync.reload();
+});
 
 gulp.task("build-js", buildJs);
 
