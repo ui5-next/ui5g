@@ -65,7 +65,10 @@ npm run dev
 
 ## Command
 
-* ```gulp```, default *gulp* will start a hot reload server, based on BrowserSync. PLEASE NOTE THAT: ALL FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
+* ```gulp```, default *gulp* will start a hot reload server, based on BrowserSync. 
+  
+  PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
+  
 * ```gulp lint```, use *eslint* to auto fix your code.
 * ```gulp build```, build files to *dist* directory.
 
