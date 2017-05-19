@@ -19,16 +19,16 @@ yarn global add generator-ui5g
 Then generate your new project:
 
 ```bash
-# yes you have to mk your project directory manually
+# --- mk your project directory manually
 mkdir sample-project
 cd sample-project
+# --- start generate
 yo ui5g
-# it will ask your 3 questions
-# please make sure your answer is logical, because generator not process empty or wrong input error
-? App name theo1
-? App namespace corp.sap.msms.theo
-# PLEASE CHOOSE OpenUI5 IF YOU DONT HAVE SAPUI5 LINCENSE
-? SAPUI5 or OpenUI5? OpenUI5
+# --- three questions
+? App name 
+? App namespace 
+? SAPUI5 or OpenUI5?
+# --- use openui5 if you dont know what is sapui5
 ```
 
 ****
