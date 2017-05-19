@@ -19,7 +19,7 @@ gulpMem.enableLog = false;
 
 
 var buildJs = () => {
-  return gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/lib/*.js`])
+  return gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`])
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('.'));
@@ -31,7 +31,10 @@ var buildCss = () => {
 };
 
 var copy = () => {
-  return gulp.src([`${SRC_ROOT}/**/*`, `!${SRC_ROOT}/**/*.less`], { base: `${SRC_ROOT}` });
+  return merge(
+    gulp.src([`${SRC_ROOT}/**/*`, `!${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/*.less`], { base: `${SRC_ROOT}` }),
+    gulp.src([`${SRC_ROOT}/**/lib/*`], { base: `${SRC_ROOT}` })
+  );
 };
 
 var build = () => {
@@ -80,6 +83,10 @@ gulp.task('lint', () => {
 
 gulp.task('watch', () => {
   gulp.watch(`${SRC_ROOT}/**/*`, ['reload']);
+});
+
+gulp.task('live-build', ['build', 'bs'], () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, ['build'], browserSync);
 });
 
 gulp.task('reload', ['build:mem'], browserSync.reload);
