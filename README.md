@@ -4,11 +4,11 @@ Basic generator for sapui5/openui5, with gulp
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated app
+First, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
 
 ```bash
-npm install -g yo
-npm install -g generator-ui5g
+npm i -g yo
+npm i -g generator-ui5g
 # or
 yarn global add yo
 yarn global add generator-ui5g
@@ -19,16 +19,16 @@ yarn global add generator-ui5g
 Then generate your new project:
 
 ```bash
-# yes you have to mk your project directory manually
+# --- mk your project directory manually
 mkdir sample-project
 cd sample-project
+# --- start generate
 yo ui5g
-# it will ask your 3 questions
-# please make sure your answer is logical, because generator not process empty or wrong input error
-? App name theo1
-? App namespace corp.sap.msms.theo
-# PLEASE CHOOSE OpenUI5 IF YOU DONT HAVE SAPUI5 LINCENSE
-? SAPUI5 or OpenUI5? OpenUI5
+# --- three questions
+? App name 
+? App namespace 
+? SAPUI5 or OpenUI5?
+# --- use openui5 if you dont know what is sapui5
 ```
 
 ****
