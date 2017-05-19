@@ -2,13 +2,14 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
 
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the astounding ' + chalk.red('generator-ui5g') + ' generator!'
+      'Welcome to the ' + chalk.red('generator-ui5g') + ' generator!'
     ));
 
     const prompts = [{
@@ -20,7 +21,7 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'namespace',
       message: 'App namespace',
-      default:'sap.ui5.demo.workthrough'
+      default: 'sap.ui5.demo.workthrough'
     },
     {
       type: 'list',
@@ -42,10 +43,12 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    // dot files
-    this.fs.copy(this.templatePath('.*'), this.destinationRoot());
-    // files
-    this.fs.copyTpl(this.sourceRoot(), this.destinationRoot(), this.props, {}, { dot: true });
+    var appContentDir = this.destinationRoot() + '/webapp/' + this.props.namepath;
+    mkdirp(appContentDir);
+    this.fs.copyTpl(this.templatePath('*'), this.destinationRoot(), this.props);
+    this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(), this.props);
+    this.fs.copyTpl(this.templatePath('webapp/index.html'), this.destinationRoot() + '/webapp/index.html', this.props);
+    this.fs.copyTpl(this.templatePath('webapp/content'), appContentDir, this.props);
   }
 
 };

@@ -26,7 +26,7 @@ var buildJs = () => {
 };
 
 var buildCss = () => {
-  return gulp.src(`${SRC_ROOT}/css/*.less`, { base: `${SRC_ROOT}` })
+  return gulp.src(`${SRC_ROOT}/**/css/*.less`, { base: `${SRC_ROOT}` })
     .pipe(less());
 };
 
