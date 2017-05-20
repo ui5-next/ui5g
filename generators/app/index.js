@@ -21,7 +21,7 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'namespace',
       message: 'App namespace',
-      default: 'sap.ui5.demo.workthrough'
+      default: 'sap.ui5.demo.walkthrough'
     },
     {
       type: 'list',

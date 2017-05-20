@@ -1,13 +1,14 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
-var runSequence = require("run-sequence");
+var ui5preload = require('gulp-ui5-preload');
 var eslint = require('gulp-eslint');
 var merge = require('merge-stream');
 var browserSync = require("browser-sync");
 var GulpMem = require('gulp-mem');
 var less = require('gulp-less');
 var del = require('del');
+var filter = require('gulp-filter');
 
 var SRC_ROOT = "./webapp";
 var DEST_ROOT = "./dist";
@@ -50,8 +51,11 @@ gulp.task('build:mem', () => {
 });
 
 gulp.task('build', () => {
-  return build().
-    pipe(gulp.dest(DEST_ROOT));
+  return build()
+    .pipe(gulp.dest(DEST_ROOT))
+    .pipe(filter(['**/*.js', '**/*.xml', '!**/lib/*']))
+    .pipe(ui5preload({ base: `${DEST_ROOT}/<%= namepath %>`, namespace: '<%= namespace %>' }))
+    .pipe(gulp.dest(`${DEST_ROOT}/<%= namepath %>`));
 });
 
 gulp.task('clean', () => {
@@ -87,7 +91,7 @@ gulp.task('live-build', ['build', 'bs'], () => {
   gulp.watch(`${SRC_ROOT}/**/*`, ['build', 'reload']);
 });
 
-gulp.task('reload', ()=>{
+gulp.task('reload', () => {
   browserSync.reload();
 });
 

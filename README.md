@@ -70,7 +70,7 @@ npm run dev
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
 * ```gulp lint```, use *eslint* to auto fix your code.
-* ```gulp build```, build files to *dist* directory.
+* ```gulp build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
 
 ## About
 
