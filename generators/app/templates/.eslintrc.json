@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "env": {
     "browser": true,
     "es6": true,
@@ -18,7 +21,10 @@
       2,
       "never"
     ],
-    "indent": ["warn", 2],
+    "indent": [
+      "warn",
+      2
+    ],
     "comma-spacing": "warn",
     "no-cond-assign": 2,
     "no-console": 2,
@@ -57,9 +63,12 @@
         "requireReturn": false
       }
     ],
-    "newline-per-chained-call": ["warn", {
-      "ignoreChainWithDepth": 4
-    }],
+    "newline-per-chained-call": [
+      "warn",
+      {
+        "ignoreChainWithDepth": 4
+      }
+    ],
     "valid-typeof": 2,
     "accessor-pairs": 2,
     "block-scoped-var": 1,
@@ -166,7 +175,10 @@
     ],
     "semi": 2,
     "no-multi-spaces": "warn",
-    "space-before-function-paren": ["warn", "never"],
+    "space-before-function-paren": [
+      "warn",
+      "never"
+    ],
     "space-infix-ops": 2,
     "space-unary-ops": [
       2,
