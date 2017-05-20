@@ -1,17 +1,13 @@
-sap.ui.define([
-  "sap/ui/core/mvc/Controller"
-], function(Controller) {
-  "use strict";
+import Controller from "sap/ui/core/mvc/Controller";
 
-  return Controller.extend("<%= namespace %>.controller.App", {
+export default class App extends Controller {
 
-    onInit: function() {
-      this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-    },
+  onInit() {
+    this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+  }
 
-    onOpenDialog : function() {
-      this.getOwnerComponent().openHelloDialog();
-    }
-  });
+  onOpenDialog() {
+    this.getOwnerComponent().openHelloDialog();
+  }
 
-});
+}

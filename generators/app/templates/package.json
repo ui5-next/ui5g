@@ -11,6 +11,7 @@
     "babel-preset-ui5": "^6.1.0",
     "browser-sync": "^2.18.11",
     "del": "^2.2.2",
+    "run-sequence": "^1.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-less": "^3.3.0",

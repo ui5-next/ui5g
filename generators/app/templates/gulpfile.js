@@ -9,6 +9,7 @@ var GulpMem = require('gulp-mem');
 var less = require('gulp-less');
 var del = require('del');
 var filter = require('gulp-filter');
+var seq = require('run-sequence');
 
 var SRC_ROOT = "./webapp";
 var DEST_ROOT = "./dist";
@@ -43,7 +44,7 @@ var build = () => {
 };
 
 
-gulp.task('default', ['build:mem', 'bs', 'watch']);
+gulp.task('default', ['build:mem', 'bs', 'watch:mem']);
 
 gulp.task('build:mem', () => {
   return build()
@@ -82,18 +83,15 @@ gulp.task('lint', () => {
     .pipe(gulp.dest(SRC_ROOT));
 });
 
-
-gulp.task('watch', () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, ['build:mem', 'reload']);
+gulp.task('watch:mem', () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, () => seq('build:mem', 'reload'));
 });
 
 gulp.task('live-build', ['build', 'bs'], () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, ['build', 'reload']);
+  gulp.watch(`${SRC_ROOT}/**/*`, () => seq('build', 'reload'));
 });
 
-gulp.task('reload', () => {
-  browserSync.reload();
-});
+gulp.task('reload', () => browserSync.reload());
 
 gulp.task("build-js", buildJs);
 
