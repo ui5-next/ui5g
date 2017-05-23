@@ -10,6 +10,7 @@ var less = require('gulp-less');
 var del = require('del');
 var filter = require('gulp-filter');
 var seq = require('run-sequence');
+var process = require("process");
 
 var SRC_ROOT = "./webapp";
 var DEST_ROOT = "./dist";
@@ -21,9 +22,15 @@ gulpMem.enableLog = false;
 
 
 var buildJs = () => {
+  // use to avoid an error cause whole gulp failed
+  var b = babel()
+    .on("error", (e) => {
+      console.log(e.stack);
+      b.end();
+    });
   return gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`])
     .pipe(sourcemaps.init())
-    .pipe(babel())
+    .pipe(b)
     .pipe(sourcemaps.write('.'));
 };
 
@@ -44,7 +51,7 @@ var build = () => {
 };
 
 
-gulp.task('default', ['build:mem', 'bs', 'watch:mem']);
+gulp.task('default', () => seq('clean', 'build:mem', 'bs', 'watch:mem'));
 
 gulp.task('build:mem', () => {
   return build()
