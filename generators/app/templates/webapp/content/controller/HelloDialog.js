@@ -1,35 +1,30 @@
-sap.ui.define([
-  "sap/ui/base/Object"
-], function(UI5Object) {
-  "use strict";
+import Object from "sap/ui/base/Object";
 
-  return UI5Object.extend("<%= namespace %>.controller.HelloDialog", {
+export default class HelloDialog extends Object {
 
-    constructor : function(oView) {
-      this._oView = oView;
-    },
+  constructor(oView) {
+    this._oView = oView;
+  }
 
-    open : function() {
-      var oView = this._oView;
-      var oDialog = oView.byId("helloDialog");
+  open() {
+    var oView = this._oView;
+    var oDialog = oView.byId("helloDialog");
 
-			// create dialog lazily
-      if (!oDialog) {
-        var oFragmentController = {
-          onCloseDialog : function() {
-            oDialog.close();
-          }
-        };
-				// create dialog via fragment factory
-        oDialog = sap.ui.xmlfragment(oView.getId(), "<%= namespace %>.view.HelloDialog", oFragmentController);
-				// connect dialog to the root view of this component (models, lifecycle)
-        oView.addDependent(oDialog);
-				// forward compact/cozy style into dialog
-        jQuery.sap.syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, oDialog);
-      }
-      oDialog.open();
+    // create dialog lazily
+    if (!oDialog) {
+      var oFragmentController = {
+        onCloseDialog: function () {
+          oDialog.close();
+        }
+      };
+      // create dialog via fragment factory
+      oDialog = sap.ui.xmlfragment(oView.getId(), "<%= namespace %>.view.HelloDialog", oFragmentController);
+      // connect dialog to the root view of this component (models, lifecycle)
+      oView.addDependent(oDialog);
+      // forward compact/cozy style into dialog
+      jQuery.sap.syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, oDialog);
     }
+    oDialog.open();
+  }
 
-  });
-
-});
+}
