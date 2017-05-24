@@ -10,7 +10,7 @@ var less = require('gulp-less');
 var del = require('del');
 var filter = require('gulp-filter');
 var seq = require('run-sequence');
-var process = require("process");
+var console = require('console');
 
 var SRC_ROOT = "./webapp";
 var DEST_ROOT = "./dist";
@@ -53,6 +53,8 @@ var build = () => {
 
 gulp.task('default', () => seq('clean', 'build:mem', 'bs', 'watch:mem'));
 
+gulp.task('test', () => seq('clean', 'build:mem', 'bs:test', 'watch:mem'));
+
 gulp.task('build:mem', () => {
   return build()
     .pipe(gulpMem.dest(DEST_ROOT));
@@ -78,6 +80,19 @@ gulp.task('bs', () => {
       baseDir: DEST_ROOT,
       middleware: middlewares
     }
+  });
+});
+
+gulp.task('bs:test', () => {
+  var middlewares = require('./proxies');
+  middlewares.push(gulpMem.middleware);
+  browserSync.init({
+    server: {
+      baseDir: DEST_ROOT,
+      middleware: middlewares,
+      notify: false
+    },
+    startPath: "<%= namepath %>/test/mockServer.html"
   });
 });
 
