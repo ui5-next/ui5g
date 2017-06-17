@@ -1,6 +1,6 @@
 {
   "name": "generator-ui5g",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Basic generator for sapui5/openui5",
   "homepage": "",
   "author": {
@@ -13,8 +13,8 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
-    "yeoman-generator"
+    "yeoman-generator",
+    "ui5"
   ],
   "devDependencies": {
     "eslint": "^3.18.0",

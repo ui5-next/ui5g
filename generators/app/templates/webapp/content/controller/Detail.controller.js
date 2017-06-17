@@ -15,7 +15,7 @@ export default class Detail extends Controller {
     oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
   }
 
-  _onObjectMatched() {
+  _onObjectMatched(oEvent) {
     this.getView().bindElement({
       path: "/" + oEvent.getParameter("arguments").invoicePath,
       model: "invoice"
