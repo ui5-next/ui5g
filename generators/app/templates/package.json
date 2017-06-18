@@ -22,6 +22,7 @@
     "merge-stream": "^1.0.1",
     "gulp-eslint": "^3.0.1",
     "gulp-ui5-preload": "^1.3.1",
-    "@types/openui5": "^1.40.1"
+    "@types/openui5": "^1.40.1",
+    "sap": "https://github.com/Soontao/openui5.git"
   }
 }
