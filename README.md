@@ -9,9 +9,6 @@ First, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https:/
 ```bash
 npm i -g yo
 npm i -g generator-ui5g
-# or
-yarn global add yo
-yarn global add generator-ui5g
 ```
 
 ## Generate Project
@@ -48,8 +45,6 @@ This template is based on [UI5 Walkthrough](https://sapui5.hana.ondemand.com/tes
 start your project
 
 ```bash
-yarn run dev
-# or
 npm run dev
 ```
 
