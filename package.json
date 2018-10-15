@@ -1,12 +1,10 @@
 {
   "name": "generator-ui5g",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Basic generator for sapui5/openui5",
-  "homepage": "",
   "author": {
     "name": "Theo Sun",
-    "email": "theo.sun@sap.com",
-    "url": ""
+    "email": "theo.sun@sap.com"
   },
   "files": [
     "generators"

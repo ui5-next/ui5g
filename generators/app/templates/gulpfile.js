@@ -9,7 +9,6 @@ var GulpMem = require('gulp-mem');
 var less = require('gulp-less');
 var del = require('del');
 var filter = require('gulp-filter');
-var seq = require('run-sequence');
 var console = require('console');
 
 var SRC_ROOT = "./webapp";
@@ -50,10 +49,7 @@ var build = () => {
   return merge(copy(), buildJs(), buildCss());
 };
 
-
-gulp.task('default', () => seq('clean', 'build:mem', 'bs', 'watch:mem'));
-
-gulp.task('test', () => seq('clean', 'build:mem', 'bs:test', 'watch:mem'));
+gulp.task('clean', () => del(DEST_ROOT));
 
 gulp.task('build:mem', () => {
   return build()
@@ -68,9 +64,7 @@ gulp.task('build', () => {
     .pipe(gulp.dest(`${DEST_ROOT}/<%= namepath %>`));
 });
 
-gulp.task('clean', () => {
-  del(DEST_ROOT);
-});
+
 
 gulp.task('bs', () => {
   var middlewares = require('./proxies');
@@ -79,7 +73,8 @@ gulp.task('bs', () => {
     server: {
       baseDir: DEST_ROOT,
       middleware: middlewares
-    }
+    },
+    notify: false
   });
 });
 
@@ -96,6 +91,8 @@ gulp.task('bs:test', () => {
   });
 });
 
+
+
 // run gulp lint to auto fix src directory
 gulp.task('lint', () => {
   return gulp.src([`${SRC_ROOT}/**/*.js`, '!node_modules/**'])
@@ -106,11 +103,11 @@ gulp.task('lint', () => {
 });
 
 gulp.task('watch:mem', () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, () => seq('build:mem', 'reload'));
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(['build:mem', 'reload']));
 });
 
-gulp.task('live-build', ['build', 'bs'], () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, () => seq('build', 'reload'));
+gulp.task('live-build', gulp.series('build', 'bs'), () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, () => gulp.series('build', 'reload'));
 });
 
 gulp.task('reload', () => browserSync.reload());
@@ -120,3 +117,8 @@ gulp.task("build-js", buildJs);
 gulp.task('build-css', buildCss);
 
 gulp.task("copy", copy);
+
+gulp.task('default', gulp.series('clean', 'build:mem', gulp.parallel('bs', 'watch:mem')));
+
+gulp.task('test', gulp.series(['clean', 'build:mem', 'bs:test', 'watch:mem']));
+

@@ -24,7 +24,7 @@ module.exports =
     // Above proxies are not necessary
 
     proxy("/destinations/northwind", {
-      target: "http://services.odata.org/",
+      target: "https://services.odata.org/",
       // with http basic auth if necessary
       auth: "username:password",
       pathRewrite: {
