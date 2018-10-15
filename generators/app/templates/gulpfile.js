@@ -11,7 +11,7 @@ var del = require('del');
 var filter = require('gulp-filter');
 var console = require('console');
 
-var SRC_ROOT = "./webapp";
+var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
 
 var gulpMem = new GulpMem();
@@ -58,8 +58,8 @@ gulp.task('build', () => {
   return build()
     .pipe(gulp.dest(DEST_ROOT))
     .pipe(filter(['**/*.js', '**/*.xml', '!**/lib/*']))
-    .pipe(ui5preload({ base: `${DEST_ROOT}/<%= namepath %>`, namespace: '<%= namespace %>' }))
-    .pipe(gulp.dest(`${DEST_ROOT}/<%= namepath %>`));
+    .pipe(ui5preload({ base: `${DEST_ROOT}`, namespace: '<%= namespace %>' }))
+    .pipe(gulp.dest(`${DEST_ROOT}`));
 });
 
 

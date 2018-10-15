@@ -54,7 +54,7 @@ mock_preview_sapui5.html
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html
 visual_ext_index.html
-/webapp/visual_ext_index.html
+/src/visual_ext_index.html
 /.user.project.json
 /dist/
 

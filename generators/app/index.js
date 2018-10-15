@@ -42,13 +42,11 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    var appContentDir = this.destinationRoot() + '/webapp/' + this.props.namepath;
+    var appContentDir = this.destinationRoot() + '/src/' + this.props.namepath;
     mkdirp(appContentDir);
     this.fs.copyTpl(this.templatePath('*'), this.destinationRoot(), this.props);
     this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(), this.props);
-    this.fs.copyTpl(this.templatePath('webapp/index.html'), this.destinationRoot() + '/webapp/index.html', this.props);
-    this.fs.copyTpl(this.templatePath('webapp/content'),
-      appContentDir, this.props);
+    this.fs.copyTpl(this.templatePath('webapp/**'), this.destinationRoot("src"), this.props);
     this.fs.copy(this.templatePath('_vscode/**'), this.destinationRoot('.vscode'), this.props);
   }
 };

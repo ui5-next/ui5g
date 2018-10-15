@@ -1,6 +1,6 @@
 {
-  "sourceRoot": "webapp",
+  "sourceRoot": "src",
   "presets": [
-    "ui5"
+    "./build/babel-preset"
   ]
 }
