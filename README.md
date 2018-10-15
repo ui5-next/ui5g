@@ -4,9 +4,23 @@
 
 Basic generator for sapui5/openui5, with gulp
 
+## TO-DO
+
+* webpack support
+* commit check
+* auto import support based on openui5 type
+* inline thirdparty library
+
+## feature
+
+* ES6 support
+* compile to ui5 code
+* preload file support
+* eslint
+
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
+Firstly, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
 
 ```bash
 npm i -g yo generator-ui5g
