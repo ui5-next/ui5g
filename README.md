@@ -1,4 +1,6 @@
-# generator-ui5g 
+# generator-ui5g
+
+[![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
 Basic generator for sapui5/openui5, with gulp
 
