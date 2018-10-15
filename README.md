@@ -7,8 +7,7 @@ Basic generator for sapui5/openui5, with gulp
 First, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
 
 ```bash
-npm i -g yo
-npm i -g generator-ui5g
+npm i -g yo generator-ui5g
 ```
 
 ## Generate Project
@@ -22,8 +21,8 @@ cd sample-project
 # --- start generate
 yo ui5g
 # --- three questions
-? App name 
-? App namespace 
+? App name
+? App namespace
 ? SAPUI5 or OpenUI5?
 # --- use openui5 if you dont know what is sapui5
 ```
@@ -45,7 +44,7 @@ This template is based on [UI5 Walkthrough](https://sapui5.hana.ondemand.com/tes
 start your project
 
 ```bash
-npm run dev
+npm start
 ```
 
 ## Configuration
@@ -69,6 +68,6 @@ npm run dev
 
 ## About
 
-This generator is written by Theo but some ideas come from Madeleine, and it only can generate really simple project.
+This generator is written by `Theo` but some ideas come from `Madeleine`, and it only can generate really simple project.
 
 Very pleased to be able to help you.

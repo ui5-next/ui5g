@@ -14,11 +14,9 @@ var console = require('console');
 var SRC_ROOT = "./webapp";
 var DEST_ROOT = "./dist";
 
-
 var gulpMem = new GulpMem();
 gulpMem.serveBasePath = DEST_ROOT;
 gulpMem.enableLog = false;
-
 
 var buildJs = () => {
   // use to avoid an error cause whole gulp failed

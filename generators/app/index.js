@@ -5,7 +5,6 @@ const yosay = require('yosay');
 const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
-
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -48,7 +47,8 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.templatePath('*'), this.destinationRoot(), this.props);
     this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(), this.props);
     this.fs.copyTpl(this.templatePath('webapp/index.html'), this.destinationRoot() + '/webapp/index.html', this.props);
-    this.fs.copyTpl(this.templatePath('webapp/content'), appContentDir, this.props);
+    this.fs.copyTpl(this.templatePath('webapp/content'),
+      appContentDir, this.props);
+    this.fs.copy(this.templatePath('_vscode/**'), this.destinationRoot('.vscode'), this.props);
   }
-
 };
