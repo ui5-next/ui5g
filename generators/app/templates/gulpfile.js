@@ -108,7 +108,7 @@ gulp.task('live-build', gulp.series('build', 'bs'), () => {
   gulp.watch(`${SRC_ROOT}/**/*`, () => gulp.series('build', 'reload'));
 });
 
-gulp.task('reload', () => browserSync.reload());
+gulp.task('reload', (done) => { browserSync.reload(); done(); });
 
 gulp.task("build-js", buildJs);
 
