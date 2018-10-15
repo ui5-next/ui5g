@@ -3,13 +3,13 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import HelloDialog from "./controller/HelloDialog";
 import Device from "sap/ui/Device";
 
-export default UIComponent.extend("<%= namespace %>.Component", {
+export default class Component extends UIComponent {
 
-  metadata: {
+  metadata = {
     manifest: "json"
-  },
+  }
 
-  init: function () {
+  init() {
 
     // call the init function of the parent
     UIComponent.prototype.init.apply(this, arguments);
@@ -34,13 +34,13 @@ export default UIComponent.extend("<%= namespace %>.Component", {
     // create the views based on the url/hash
     this.getRouter().initialize();
 
-  },
+  }
 
-  openHelloDialog: function () {
+  openHelloDialog() {
     this._helloDialog.open();
-  },
+  }
 
-  getContentDensityClass: function () {
+  getContentDensityClass() {
     if (!this._sContentDensityClass) {
       if (!sap.ui.Device.support.touch) {
         this._sContentDensityClass = "sapUiSizeCompact";
@@ -51,4 +51,4 @@ export default UIComponent.extend("<%= namespace %>.Component", {
     return this._sContentDensityClass;
   }
 
-});
+}

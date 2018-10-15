@@ -15,6 +15,7 @@
     "com": true,
     "_": true
   },
+  "parser": "babel-eslint",
   "rules": {
     "no-mixed-spaces-and-tabs": "error",
     "comma-dangle": [
