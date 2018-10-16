@@ -28,7 +28,7 @@ var buildJs = () => {
   return gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`])
     .pipe(sourcemaps.init())
     .pipe(b)
-    .pipe(sourcemaps.write('.'));
+    .pipe(sourcemaps.write('/sourcemap'));
 };
 
 var buildCss = () => {
