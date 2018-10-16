@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
-Basic generator for sapui5/openui5, with gulp
+Enhanced generator for sapui5/openui5, with gulp
 
 ## TO-DO
 
@@ -13,7 +13,7 @@ Basic generator for sapui5/openui5, with gulp
 
 ## feature
 
-* ES6 support
+* full ES6 feat support
 * compile to ui5 code
 * preload file support
 * eslint
@@ -65,9 +65,9 @@ npm start
 
 ## Configuration
 
-* ```Babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemap inline
+* ```babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemap inline
 
-* ```ESLint```, edit ```.eslintrc``` to modify eslint lint config, by default, new project will use most rules of ui5 standard, only add es6 and other essential rules.
+* ```eslint```, edit ```.eslintrc``` to modify eslint lint config, by default, new project will use most rules of ui5 standard, only add es6 and other essential rules.
 
 * ```gulp```, edit ```gulpfile.js``` to modify gulp task and other task behavior, you can add *sass* or *uglify* or other processes manually, or adjust *src*/*dist* directory
 
@@ -75,12 +75,11 @@ npm start
 
 ## Command
 
-* ```gulp```, default *gulp* will start a hot reload server, based on BrowserSync. 
+* ```npm start```, default *gulp* will start a hot reload server, based on BrowserSync.
   
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
-* ```gulp lint```, use *eslint* to auto fix your code.
-* ```gulp build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
+* ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
 
 ## About
 

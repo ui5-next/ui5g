@@ -2,7 +2,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
   prompting() {
@@ -43,9 +42,7 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(this.templatePath(), this.destinationRoot(), this.props);
-    // this.fs.copyTpl(this.templatePath('*'), this.destinationRoot(), this.props);
     this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(), this.props);
-    // this.fs.copy(this.templatePath('build/**'), this.destinationRoot('build'), this.props);
     this.fs.copy(this.templatePath('.vscode/**'), this.destinationRoot('.vscode'), this.props);
   }
 };
