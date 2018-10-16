@@ -31,27 +31,18 @@ npm i -g yo generator-ui5g
 Then generate your new project:
 
 ```bash
-# --- mk your project directory manually
-mkdir sample-project
-cd sample-project
 # --- start generate
 yo ui5g
-# --- three questions
+# --- ask three questions
 ? App name
 ? App namespace
 ? SAPUI5 or OpenUI5?
 # --- use openui5 if you dont know what is sapui5
 ```
 
-****
+And project will be generated in a new folder, the folder name is same as app name.
 
-and install dependencies
-
-```bash
-yarn
-# or
-npm i
-```
+Dependencies will be auto installed
 
 ## Dev
 

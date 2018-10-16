@@ -1,25 +1,21 @@
-sap.ui.define([
-  "sap/ui/core/mvc/Controller",
-  "sap/m/MessageToast"
-], function(Controller, MessageToast) {
-  "use strict";
+import Controller from "sap/ui/core/mvc/Controller";
+import MessageToast from "sap/m/MessageToast";
 
-  return Controller.extend("<%= namespace %>.controller.HelloPanel", {
+export default class HelloPanel extends Controller {
 
-    onShowHello : function() {
+  onShowHello() {
 
-			// read msg from i18n model
-      var oBundle = this.getView().getModel("i18n").getResourceBundle();
-      var sRecipient = this.getView().getModel().getProperty("/recipient/name");
-      var sMsg = oBundle.getText("helloMsg", [sRecipient]);
+    // read msg from i18n model
+    var oBundle = this.getView().getModel("i18n").getResourceBundle();
+    var sRecipient = this.getView().getModel().getProperty("/recipient/name");
+    var sMsg = oBundle.getText("helloMsg", [sRecipient]);
+    // show message
+    MessageToast.show(sMsg);
 
-			// show message
-      MessageToast.show(sMsg);
-    },
+  }
 
-    onOpenDialog : function() {
-      this.getOwnerComponent().openHelloDialog();
-    }
-  });
+  onOpenDialog() {
+    this.getOwnerComponent().openHelloDialog();
+  }
 
-});
+}

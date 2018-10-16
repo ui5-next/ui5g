@@ -11,8 +11,7 @@ export default class Component extends UIComponent {
 
   init() {
 
-    // call the init function of the parent
-    UIComponent.prototype.init.apply(this, arguments);
+    super.init(this, arguments);
 
     // set data model
     var oData = {

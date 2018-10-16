@@ -2,9 +2,12 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require('path');
+const process = require('process');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
-  prompting() {
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the ' + chalk.red('generator-ui5g') + ' generator!'
@@ -19,7 +22,7 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'namespace',
       message: 'App namespace',
-      default: 'sap.ui5.demo.walkthrough'
+      default: 'ui5.demo.walkthrough'
     },
     {
       type: 'list',
@@ -34,15 +37,22 @@ module.exports = class extends Generator {
       }]
     }];
 
-    return this.prompt(prompts).then(props => {
-      props.namepath = props.namespace.replace(/\./g, '/');
-      this.props = props;
-    });
+    const props = await this.prompt(prompts);
+    props.dir = props.name.replace(/[^a-zA-Z]/g, '');
+    props.namepath = props.namespace.replace(/\./g, '/');
+    this.props = props;
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath(), this.destinationRoot(), this.props);
-    this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(), this.props);
-    this.fs.copy(this.templatePath('.vscode/**'), this.destinationRoot('.vscode'), this.props);
+    const targetPathRoot = path.join(process.cwd(), this.props.dir);
+    mkdirp(targetPathRoot, () => {
+      this.fs.copyTpl(this.templatePath(), this.destinationRoot(targetPathRoot), this.props);
+      this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(targetPathRoot), this.props);
+      this.fs.copy(this.templatePath('.vscode/**'), this.destinationRoot(path.join(targetPathRoot, '.vscode')), this.props);
+    });
+  }
+
+  installing() {
+    this.npmInstall();
   }
 };

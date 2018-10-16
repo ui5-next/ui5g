@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new OpenUI5Plugin({
-      modulePath: "sap/ui5/demo/walkthrough"
+      modulePath: "<%= namepath %>"
     })
   ],
   externals: [

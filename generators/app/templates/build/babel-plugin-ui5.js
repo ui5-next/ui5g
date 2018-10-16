@@ -1,4 +1,5 @@
 const Path = require("path");
+const { cloneDeep, countBy, forEach, filter, concat, find } = require("lodash");
 
 exports.default = (ui5NameSpace = "") => function ({ types: t }) {
   const ui5ModuleVisitor = {
@@ -14,12 +15,16 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
           relativeFilePath = Path.relative(sourceRootPath, filePath);
           relativeFilePathWithoutExtension = Path.dirname(relativeFilePath) + Path.sep + Path.basename(relativeFilePath, Path.extname(relativeFilePath));
           relativeFilePathWithoutExtension = relativeFilePathWithoutExtension.replace(/\\/g, "/");
-
         }
+        // > process root statements
+        const rootStatement = filter(path.node.body, n => n.type == "ExpressionStatement");
+        path.node.body = filter(path.node.body, n => n.type != "ExpressionStatement");
+        // < process root statements
 
         if (!path.state) {
           path.state = {};
         }
+
         path.state.ui5 = {
           filePath,
           relativeFilePath,
@@ -30,9 +35,82 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
           fullClassName: null,
           superClassName: null,
           imports: [],
-          staticMembers: []
+          staticMembers: [],
+          exports: [],
+          rootStatement
         };
+      },
+      exit: path => {
+        const state = path.state.ui5;
+        const program = path.hub.file.ast.program;
+        const fileAbsPath = t.stringLiteral(Path.normalize(state.namePath + "/" + state.relativeFilePathWithoutExtension).replace(/\\/g, "\/"));
+        var defineCallArgs = [];
+        if (state.exports.length > 0) {
+
+          const counts = countBy(state.exports, "type");
+          const haveDefualtExport = counts["ExportDefaultDeclaration"] ? true : false;
+          const haveOtherExport = counts["ExportNamedDeclaration"] ? true : false;
+          const defaultExport = find(state.exports, { type: "ExportDefaultDeclaration" });
+          // with export thing
+          if (haveDefualtExport && !(haveOtherExport)) {
+            var declaration = state.exports[0].declaration;
+
+            defineCallArgs = [
+              fileAbsPath,
+              t.arrayExpression(state.imports.map(i => t.stringLiteral(i.src)))
+            ];
+            switch (declaration.type) {
+              case "ClassDeclaration":
+                defineCallArgs.push(
+                  t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(concat(
+                    state.rootStatement,
+                    t.returnStatement(transformClass(defaultExport.declaration, program, state))
+                  )))
+                );
+                break;
+              case "ObjectExpression":
+                defineCallArgs.push(
+                  declaration
+                );
+                break;
+              default:
+
+                break;
+            }
+
+          } else if ((!haveDefualtExport) && haveOtherExport) {
+            const props = [];
+
+            forEach(path.state.ui5.exports, node => {
+              var varD = node.declaration.declarations[0];
+              props.push(t.objectProperty(varD.id, varD.init));
+            });
+
+            defineCallArgs = [
+              fileAbsPath,
+              t.arrayExpression(),
+              t.objectExpression(props)
+            ];
+          }
+
+
+        } else {
+          // without export thing
+          defineCallArgs = [
+            fileAbsPath,
+            t.arrayExpression(state.imports.map(i => t.stringLiteral(i.src))),
+            t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(state.rootStatement))
+          ];
+
+        }
+        const defineCall = t.callExpression(t.identifier("sap.ui.define"), defineCallArgs);
+        if (state.leadingComments) {
+          defineCall.leadingComments = state.leadingComments;
+        }
+
+        path.node.body.push(defineCall);
       }
+
     },
 
     ImportDeclaration: path => {
@@ -79,67 +157,57 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
 
     ExportDeclaration: path => {
       const state = path.state.ui5;
-      const program = path.hub.file.ast.program;
+      path.traverse({
 
-      const defineCallArgs = [
-        t.stringLiteral(Path.normalize(state.namePath + "/" + state.relativeFilePathWithoutExtension).replace(/\\/g, "\/")),
-        t.arrayExpression(state.imports.map(i => t.stringLiteral(i.src))),
-        t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement([
-          t.expressionStatement(t.stringLiteral("use strict")),
-          t.returnStatement(transformClass(path.node.declaration, program, state))
-        ]))
-      ];
-      const defineCall = t.callExpression(t.identifier("sap.ui.define"), defineCallArgs);
-      if (state.leadingComments) {
-        defineCall.leadingComments = state.leadingComments;
-      }
-      path.replaceWith(defineCall);
+        CallExpression(innerPath) {
 
-      // Add static members
-      for (let key in state.staticMembers) {
-        const id = t.identifier(state.fullClassName + "." + key);
-        const statement = t.expressionStatement(t.assignmentExpression("=", id, state.staticMembers[key]));
-        path.insertAfter(statement);
-      }
-    },
+          const node = innerPath.node;
+          innerPath.findParent((p) => {
+            if (p.isClassDeclaration()) {
+              const superClassName = p.node.superClass.name;
 
-    CallExpression(path) {
-      const state = path.state.ui5;
-      const node = path.node;
+              if (node.callee.type === "Super") {
+                if (!superClassName) {
+                  this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                }
 
-      if (node.callee.type === "Super") {
-        if (!state.superClassName) {
-          this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                const identifier = t.identifier(superClassName + ".apply");
+                let args = t.arrayExpression(node.arguments);
+                if (node.arguments.length === 1 && node.arguments[0].type === "Identifier" && node.arguments[0].name === "arguments") {
+                  args = t.identifier("arguments");
+                }
+                innerPath.replaceWith(
+                  t.callExpression(identifier, [
+                    t.identifier("this"),
+                    args
+                  ])
+                );
+              } else if (node.callee.object && node.callee.object.type === "Super") {
+                if (!superClassName) {
+                  this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                }
+                const identifier = t.identifier(superClassName + ".prototype" + "." + node.callee.property.name + ".apply");
+                innerPath.replaceWith(
+                  t.callExpression(identifier, [
+                    t.identifier("this"),
+                    t.arrayExpression(node.arguments)
+                  ])
+                );
+              }
+            }
+          });
+
+
         }
+      });
 
-        const identifier = t.identifier(state.superClassName + ".apply");
-        let args = t.arrayExpression(node.arguments);
-        if (node.arguments.length === 1 && node.arguments[0].type === "Identifier" && node.arguments[0].name === "arguments") {
-          args = t.identifier("arguments");
-        }
-        path.replaceWith(
-          t.callExpression(identifier, [
-            t.identifier("this"),
-            args
-          ])
-        );
-      } else if (node.callee.object && node.callee.object.type === "Super") {
-        if (!state.superClassName) {
-          this.errorWithNode("The keyword 'super' can only used in a derrived class.");
-        }
+      state.exports.push(cloneDeep(path.node));
 
-        const identifier = t.identifier(state.superClassName + ".prototype" + "." + node.callee.property.name + ".apply");
-        path.replaceWith(
-          t.callExpression(identifier, [
-            t.identifier("this"),
-            t.arrayExpression(node.arguments)
-          ])
-        );
-      }
+      path.remove();
     }
+
+
   };
-
-
 
   function transformClass(node, program, state) {
     if (node.type !== "ClassDeclaration") {
