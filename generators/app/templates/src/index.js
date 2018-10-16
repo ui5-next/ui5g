@@ -1,10 +1,8 @@
-
+import ComponentContainer from "sap/ui/core/ComponentContainer";
 import Component from "./Component";
 
-sap.ui.getCore().attachInit(function() {
-  new sap.m.Shell({
-    app: new sap.ui.core.ComponentContainer({
-      component: new Component()
-    })
-  }).placeAt("content");
-});
+sap.ui.getCore().boot();
+
+var container = new ComponentContainer({ component: new Component() });
+
+container.placeAt("content");

@@ -17,8 +17,8 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
           relativeFilePathWithoutExtension = relativeFilePathWithoutExtension.replace(/\\/g, "/");
         }
         // > process root statements
-        const rootStatement = filter(path.node.body, n => n.type == "ExpressionStatement");
-        path.node.body = filter(path.node.body, n => n.type != "ExpressionStatement");
+        const rootStatement = filter(path.node.body, n => (n.type == "ExpressionStatement" || n.type == "VariableDeclaration"));
+        path.node.body = filter(path.node.body, n => (n.type != "ExpressionStatement" && n.type != "VariableDeclaration"));
         // < process root statements
 
         if (!path.state) {
