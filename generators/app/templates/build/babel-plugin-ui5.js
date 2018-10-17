@@ -1,8 +1,8 @@
 const Path = require("path");
 const { cloneDeep, countBy, forEach, filter, concat, find } = require("lodash");
 
-exports.default = (ui5NameSpace = "") => function ({ types: t }) {
-  const ui5ModuleVisitor = {
+exports.default = (configNameSpace = "") => function ({ types: t }) {
+  const visitor = {
     Program: {
       enter: path => {
         const filePath = Path.resolve(path.hub.file.opts.filename);
@@ -29,8 +29,8 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
           filePath,
           relativeFilePath,
           relativeFilePathWithoutExtension,
-          namespace: ui5NameSpace,
-          namePath: ui5NameSpace.replace(/\./g, "\/"),
+          namespace: configNameSpace,
+          namePath: configNameSpace.replace(/\./g, "\/"),
           className: null,
           fullClassName: null,
           superClassName: null,
@@ -113,97 +113,101 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
 
     },
 
-    ImportDeclaration: path => {
-      const state = path.state.ui5;
-      const node = path.node;
-      let name = null;
-      var localFile = false;
+    ImportDeclaration: {
+      enter: path => {
+        const state = path.state.ui5;
+        const node = path.node;
+        let name = null;
+        var localFile = false;
 
-      let src = node.source.value;
-      if (src.startsWith("./") || src.startsWith("../") || !src.startsWith("sap")) {
-        try {
-          const sourceRootPath = getSourceRoot(path);
-          src = Path.relative(sourceRootPath, Path.resolve(Path.dirname(path.hub.file.opts.filename), src));
-          localFile = true;
-        } catch (e) {
-          localFile = false;
+        let src = node.source.value;
+        if (src.startsWith("./") || src.startsWith("../") || !src.startsWith("sap")) {
+          try {
+            const sourceRootPath = getSourceRoot(path);
+            src = Path.relative(sourceRootPath, Path.resolve(Path.dirname(path.hub.file.opts.filename), src));
+            localFile = true;
+          } catch (e) {
+            localFile = false;
+          }
         }
-      }
-      if (localFile) {
-        src = Path.normalize(`${state.namePath}/${src}`);
-      } else {
-        src = Path.normalize(src);
-      }
+        if (localFile) {
+          src = Path.normalize(`${state.namePath}/${src}`);
+        } else {
+          src = Path.normalize(src);
+        }
 
-      if (node.specifiers && node.specifiers.length === 1) {
-        name = node.specifiers[0].local.name;
-      } else {
-        const parts = src.split(Path.sep);
-        name = parts[parts.length - 1];
+        if (node.specifiers && node.specifiers.length === 1) {
+          name = node.specifiers[0].local.name;
+        } else {
+          const parts = src.split(Path.sep);
+          name = parts[parts.length - 1];
+        }
+
+        if (node.leadingComments) {
+          state.leadingComments = node.leadingComments;
+        }
+
+        const imp = {
+          name,
+          src: src.replace(/\\/g, "/")
+        };
+        state.imports.push(imp);
+
+        path.remove();
       }
-
-      if (node.leadingComments) {
-        state.leadingComments = node.leadingComments;
-      }
-
-      const imp = {
-        name,
-        src: src.replace(/\\/g, "/")
-      };
-      state.imports.push(imp);
-
-      path.remove();
     },
 
-    ExportDeclaration: path => {
-      const state = path.state.ui5;
-      path.traverse({
+    ExportDeclaration: {
+      exit: path => {
+        const state = path.state.ui5;
+        path.traverse({
 
-        CallExpression(innerPath) {
+          CallExpression(innerPath) {
 
-          const node = innerPath.node;
-          innerPath.findParent((p) => {
-            if (p.isClassDeclaration()) {
-              const superClassName = p.node.superClass.name;
+            const node = innerPath.node;
+            innerPath.findParent((p) => {
+              if (p.isClassDeclaration()) {
+                const superClassName = p.node.superClass.name;
 
-              if (node.callee.type === "Super") {
-                if (!superClassName) {
-                  this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                if (node.callee.type === "Super") {
+                  if (!superClassName) {
+                    this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                  }
+
+                  const identifier = t.identifier(superClassName + ".apply");
+                  let args = t.arrayExpression(node.arguments);
+                  if (node.arguments.length === 1 && node.arguments[0].type === "Identifier" && node.arguments[0].name === "arguments") {
+                    args = t.identifier("arguments");
+                  }
+                  innerPath.replaceWith(
+                    t.callExpression(identifier, [
+                      t.identifier("this"),
+                      args
+                    ])
+                  );
+                } else if (node.callee.object && node.callee.object.type === "Super") {
+                  if (!superClassName) {
+                    this.errorWithNode("The keyword 'super' can only used in a derrived class.");
+                  }
+                  const identifier = t.identifier(superClassName + ".prototype" + "." + node.callee.property.name + ".apply");
+                  innerPath.replaceWith(
+                    t.callExpression(identifier, [
+                      t.identifier("this"),
+                      t.arrayExpression(node.arguments)
+                    ])
+                  );
                 }
-
-                const identifier = t.identifier(superClassName + ".apply");
-                let args = t.arrayExpression(node.arguments);
-                if (node.arguments.length === 1 && node.arguments[0].type === "Identifier" && node.arguments[0].name === "arguments") {
-                  args = t.identifier("arguments");
-                }
-                innerPath.replaceWith(
-                  t.callExpression(identifier, [
-                    t.identifier("this"),
-                    args
-                  ])
-                );
-              } else if (node.callee.object && node.callee.object.type === "Super") {
-                if (!superClassName) {
-                  this.errorWithNode("The keyword 'super' can only used in a derrived class.");
-                }
-                const identifier = t.identifier(superClassName + ".prototype" + "." + node.callee.property.name + ".apply");
-                innerPath.replaceWith(
-                  t.callExpression(identifier, [
-                    t.identifier("this"),
-                    t.arrayExpression(node.arguments)
-                  ])
-                );
               }
-            }
-          });
+            });
 
 
-        }
-      });
+          }
+        });
 
-      state.exports.push(cloneDeep(path.node));
+        state.exports.push(cloneDeep(path.node));
 
-      path.remove();
+        path.remove();
+      }
     }
 
 
@@ -270,7 +274,7 @@ exports.default = (ui5NameSpace = "") => function ({ types: t }) {
 
 
   return {
-    visitor: ui5ModuleVisitor
+    visitor: visitor
   };
 };
 
