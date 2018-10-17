@@ -2,11 +2,11 @@ import Controller from "sap/ui/core/mvc/Controller";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
-import F from "../model/formatter";
+import { formatter } from "../model/formatter";
 
 export default class InvoiceList extends Controller {
 
-  formatter = F.formatter;
+  formatter = formatter;
 
   onInit() {
     var oViewModel = new JSONModel({

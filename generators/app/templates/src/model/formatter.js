@@ -1,12 +1,9 @@
+export const formatter = function () {
+  return {
+    statusText: function (sStatus) {
+      var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
-export default {
-  formatter: function() {
-
-    return {
-      statusText: function(sStatus) {
-        var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-
-        switch (sStatus) {
+      switch (sStatus) {
         case "A":
           return oResourceBundle.getText("invoiceStatusA");
         case "B":
@@ -15,8 +12,7 @@ export default {
           return oResourceBundle.getText("invoiceStatusC");
         default:
           return sStatus;
-        }
       }
-    };
-  }
+    }
+  };
 };
