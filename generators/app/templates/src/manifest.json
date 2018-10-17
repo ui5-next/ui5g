@@ -34,7 +34,10 @@
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
-		"rootView": "<%= namespace %>.view.App",
+		"rootView": {
+			"viewName": "<%= namespace %>.components.App",
+			"type": "JS"
+		},
 		"dependencies": {
 			"minUI5Version": "1.30",
 			"libs": {

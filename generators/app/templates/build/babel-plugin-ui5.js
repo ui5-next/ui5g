@@ -1,7 +1,28 @@
 const Path = require("path");
-const { cloneDeep, countBy, forEach, filter, concat, find } = require("lodash");
+const { cloneDeep, countBy, forEach, filter, concat, find, split, slice, join } = require("lodash");
 
-exports.default = (configNameSpace = "") => function ({ types: t }) {
+/**
+ * get full extesion name
+ * @param {string} path
+ */
+const extensionName = (path) => {
+  var r = join(slice(split(path, "."), 1), ".");
+  if (r) {
+    return `.${r}`;
+  }
+  return r;
+};
+
+exports.default = (configNameSpace = "") => function({ types: t }) {
+  /**
+   * project namespace
+   */
+  const projectNameSpace = configNameSpace;
+  /**
+   * project namespace to path
+   */
+  const projectNamePath = configNameSpace.replace(/\./g, "/");
+
   const visitor = {
     Program: {
       enter: path => {
@@ -11,10 +32,17 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
 
         let relativeFilePath = null;
         let relativeFilePathWithoutExtension = null;
+
+        let namespace = projectNameSpace;
+        let namepath = projectNamePath;
+
         if (filePath.startsWith(sourceRootPath)) {
           relativeFilePath = Path.relative(sourceRootPath, filePath);
-          relativeFilePathWithoutExtension = Path.dirname(relativeFilePath) + Path.sep + Path.basename(relativeFilePath, Path.extname(relativeFilePath));
+          relativeFilePathWithoutExtension = Path.dirname(relativeFilePath) + Path.sep + Path.basename(relativeFilePath, extensionName(relativeFilePath));
           relativeFilePathWithoutExtension = relativeFilePathWithoutExtension.replace(/\\/g, "/");
+          namepath = Path.join(namepath, relativeFilePathWithoutExtension).replace(/\\/g, "/");
+          // not root file
+          namespace = namepath.replace(/\//g, ".");
         }
         // > process root statements
         const rootStatement = filter(path.node.body, n => (n.type == "ExpressionStatement" || n.type == "VariableDeclaration"));
@@ -27,15 +55,15 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
 
         path.state.ui5 = {
           filePath,
+          sourceRootPath,
           relativeFilePath,
           relativeFilePathWithoutExtension,
-          namespace: configNameSpace,
-          namePath: configNameSpace.replace(/\./g, "\/"),
+          namespace,
+          namePath: namepath,
           className: null,
           fullClassName: null,
           superClassName: null,
           imports: [],
-          staticMembers: [],
           exports: [],
           rootStatement
         };
@@ -43,7 +71,7 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
       exit: path => {
         const state = path.state.ui5;
         const program = path.hub.file.ast.program;
-        const fileAbsPath = t.stringLiteral(Path.normalize(state.namePath + "/" + state.relativeFilePathWithoutExtension).replace(/\\/g, "\/"));
+        const fileAbsPath = t.stringLiteral(Path.normalize(state.namePath));
         var defineCallArgs = [];
         if (state.exports.length > 0) {
 
@@ -60,22 +88,22 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
               t.arrayExpression(state.imports.map(i => t.stringLiteral(i.src)))
             ];
             switch (declaration.type) {
-              case "ClassDeclaration":
-                defineCallArgs.push(
-                  t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(concat(
-                    state.rootStatement,
-                    t.returnStatement(transformClass(defaultExport.declaration, program, state))
-                  )))
-                );
-                break;
-              case "ObjectExpression":
-                defineCallArgs.push(
-                  declaration
-                );
-                break;
-              default:
+            case "ClassDeclaration":
+              defineCallArgs.push(
+                t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(concat(
+                  state.rootStatement,
+                  t.returnStatement(transformClass(defaultExport.declaration, program, state))
+                )))
+              );
+              break;
+            case "ObjectExpression":
+              defineCallArgs.push(
+                declaration
+              );
+              break;
+            default:
 
-                break;
+              break;
             }
 
           } else if ((!haveDefualtExport) && haveOtherExport) {
@@ -118,23 +146,17 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
         const state = path.state.ui5;
         const node = path.node;
         let name = null;
-        var localFile = false;
 
         let src = node.source.value;
         if (src.startsWith("./") || src.startsWith("../") || !src.startsWith("sap")) {
           try {
             const sourceRootPath = getSourceRoot(path);
-            src = Path.relative(sourceRootPath, Path.resolve(Path.dirname(path.hub.file.opts.filename), src));
-            localFile = true;
+            src = Path.join(projectNamePath, Path.relative(sourceRootPath, Path.resolve(Path.dirname(path.hub.file.opts.filename), src))).replace(/\\/g, "");
           } catch (e) {
-            localFile = false;
+            // pass
           }
         }
-        if (localFile) {
-          src = Path.normalize(`${state.namePath}/${src}`);
-        } else {
-          src = Path.normalize(src);
-        }
+
 
         if (node.specifiers && node.specifiers.length === 1) {
           name = node.specifiers[0].local.name;
@@ -214,53 +236,58 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
   };
 
   function transformClass(node, program, state) {
+
     if (node.type !== "ClassDeclaration") {
       return node;
     } else {
-      resolveClass(node, state);
+
+      var superClassName = node.superClass.name;
+      var fullClassName = "";
+
+      if (state.namespace) {
+        fullClassName = state.namespace;
+      } else {
+        fullClassName = node.id.name;
+      }
 
       const props = [];
       node.body.body.forEach(member => {
         if (member.type === "ClassMethod") {
           const func = t.functionExpression(null, member.params, member.body);
-          if (!member.static) {
-            func.generator = member.generator;
-            func.async = member.async;
-            props.push(t.objectProperty(member.key, func));
-          } else {
-            func.body.body.unshift(t.expressionStatement(t.stringLiteral("use strict")));
-            state.staticMembers[member.key.name] = func;
-          }
+          func.generator = member.generator;
+          func.async = member.async;
+          props.push(t.objectProperty(member.key, func));
         } else if (member.type == "ClassProperty") {
-          if (!member.static) {
-            props.push(t.objectProperty(member.key, member.value));
-          } else {
-            state.staticMembers[member.key.name] = member.value;
-          }
+          props.push(t.objectProperty(member.key, member.value));
         }
       });
 
-      const bodyJSON = t.objectExpression(props);
-      const extendCallArgs = [
-        t.stringLiteral(state.fullClassName),
-        bodyJSON
-      ];
-      const extendCall = t.callExpression(t.identifier(state.superClassName + ".extend"), extendCallArgs);
-      return extendCall;
+
+      switch (superClassName) {
+      case "JSView":
+        props.push(
+          t.objectProperty(
+            t.identifier("getControllerName"),
+            t.functionExpression(
+              null,
+              [],
+              t.blockStatement([t.returnStatement(t.stringLiteral(fullClassName))])
+            )
+          )
+        );
+        return t.callExpression(t.identifier("sap.ui.jsview"), [
+          t.stringLiteral(fullClassName),
+          t.objectExpression(props)
+        ]);
+      default:
+        return t.callExpression(t.identifier(superClassName + ".extend"), [
+          t.stringLiteral(fullClassName),
+          t.objectExpression(props)
+        ]);
+      }
+
     }
   }
-
-  function resolveClass(node, state) {
-    state.className = node.id.name;
-    state.superClassName = node.superClass.name;
-    if (state.namespace) {
-      state.fullClassName = state.namespace + "." + state.className;
-    } else {
-      state.fullClassName = state.className;
-    }
-  }
-
-
 
   function getSourceRoot(path) {
     let sourceRootPath = null;
@@ -271,7 +298,6 @@ exports.default = (configNameSpace = "") => function ({ types: t }) {
     }
     return sourceRootPath;
   }
-
 
   return {
     visitor: visitor
