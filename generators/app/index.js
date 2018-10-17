@@ -1,4 +1,4 @@
-'use strict';
+
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
@@ -7,7 +7,7 @@ const process = require('process');
 const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
-  async prompting() {
+  prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the ' + chalk.red('generator-ui5g') + ' generator!'
@@ -17,12 +17,12 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'name',
       message: 'App name',
-      default: 'ui5-workthrough'
+      "default": 'ui5-workthrough'
     }, {
       type: 'input',
       name: 'namespace',
       message: 'App namespace',
-      default: 'ui5.demo.walkthrough'
+      "default": 'ui5.demo.walkthrough'
     },
     {
       type: 'list',
@@ -36,19 +36,20 @@ module.exports = class extends Generator {
         value: 'sapui5.hana.ondemand.com'
       }]
     }];
-
-    const props = await this.prompt(prompts);
-    props.dir = props.name.replace(/[^a-zA-Z]/g, '');
-    props.namepath = props.namespace.replace(/\./g, '/');
-    this.props = props;
+    return this.prompt(prompts).then(props => {
+      props.dir = props.name.replace(/[^a-zA-Z]/g, '');
+      props.namepath = props.namespace.replace(/\./g, '/');
+      this.props = props;
+    });
   }
 
   writing() {
     const targetPathRoot = path.join(process.cwd(), this.props.dir);
+    this.destinationRoot(targetPathRoot);
     mkdirp(targetPathRoot, () => {
-      this.fs.copyTpl(this.templatePath(), this.destinationRoot(targetPathRoot), this.props);
-      this.fs.copyTpl(this.templatePath('.*'), this.destinationRoot(targetPathRoot), this.props);
-      this.fs.copy(this.templatePath('.vscode/**'), this.destinationRoot(path.join(targetPathRoot, '.vscode')), this.props);
+      this.fs.copyTpl(this.templatePath(), this.destinationPath(), this.props);
+      this.fs.copyTpl(this.templatePath('.*/**'), this.destinationPath(), this.props);
+      this.fs.copyTpl(this.templatePath('.vscode/**'), this.destinationPath('.vscode'), this.props);
     });
   }
 

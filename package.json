@@ -14,8 +14,16 @@
     "yeoman-generator",
     "ui5"
   ],
+  "scripts": {
+    "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master",
+    "commitmsg": "commitlint -E GIT_PARAMS"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "standard-version": "^4.4.0",
     "eslint": "^5.7.0",
+    "husky": "0.14.3",
     "eslint-config-xo-space": "^0.16.0",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^2.0.0"
