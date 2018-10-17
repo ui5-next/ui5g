@@ -4,6 +4,8 @@
 
 Enhanced generator for sapui5/openui5, with gulp
 
+## [CHANGELOG](./CHANGELOG.md)
+
 ## TO-DO
 
 * webpack support
