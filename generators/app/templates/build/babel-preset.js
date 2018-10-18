@@ -1,5 +1,7 @@
 module.exports = {
   plugins: [
+    require("babel-plugin-syntax-jsx"),
+    require("./babel-plugin-ui5-jsx"),
     require("babel-plugin-transform-es2015-template-literals"),
     require("babel-plugin-transform-es2015-literals"),
     require("babel-plugin-transform-es2015-function-name"),

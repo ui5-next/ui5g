@@ -13,7 +13,7 @@ const extensionName = (path) => {
   return r;
 };
 
-exports.default = (configNameSpace = "") => function({ types: t }) {
+exports.default = (configNameSpace = "") => function ({ types: t }) {
   /**
    * project namespace
    */
@@ -88,22 +88,22 @@ exports.default = (configNameSpace = "") => function({ types: t }) {
               t.arrayExpression(state.imports.map(i => t.stringLiteral(i.src)))
             ];
             switch (declaration.type) {
-            case "ClassDeclaration":
-              defineCallArgs.push(
-                t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(concat(
-                  state.rootStatement,
-                  t.returnStatement(transformClass(defaultExport.declaration, program, state))
-                )))
-              );
-              break;
-            case "ObjectExpression":
-              defineCallArgs.push(
-                declaration
-              );
-              break;
-            default:
+              case "ClassDeclaration":
+                defineCallArgs.push(
+                  t.functionExpression(null, state.imports.map(i => t.identifier(i.name)), t.blockStatement(concat(
+                    state.rootStatement,
+                    t.returnStatement(transformClass(defaultExport.declaration, program, state))
+                  )))
+                );
+                break;
+              case "ObjectExpression":
+                defineCallArgs.push(
+                  declaration
+                );
+                break;
+              default:
 
-              break;
+                break;
             }
 
           } else if ((!haveDefualtExport) && haveOtherExport) {
@@ -264,26 +264,31 @@ exports.default = (configNameSpace = "") => function({ types: t }) {
 
 
       switch (superClassName) {
-      case "JSView":
-        props.push(
-          t.objectProperty(
-            t.identifier("getControllerName"),
-            t.functionExpression(
-              null,
-              [],
-              t.blockStatement([t.returnStatement(t.stringLiteral(fullClassName))])
+        case "JSView":
+          props.push(
+            t.objectProperty(
+              t.identifier("getControllerName"),
+              t.functionExpression(
+                null,
+                [],
+                t.blockStatement([t.returnStatement(t.stringLiteral(fullClassName))])
+              )
             )
-          )
-        );
-        return t.callExpression(t.identifier("sap.ui.jsview"), [
-          t.stringLiteral(fullClassName),
-          t.objectExpression(props)
-        ]);
-      default:
-        return t.callExpression(t.identifier(superClassName + ".extend"), [
-          t.stringLiteral(fullClassName),
-          t.objectExpression(props)
-        ]);
+          );
+          return t.callExpression(t.identifier("sap.ui.jsview"), [
+            t.stringLiteral(fullClassName),
+            t.objectExpression(props)
+          ]);
+        case "Fragment":
+          return t.callExpression(t.identifier("sap.ui.jsfragment"), [
+            t.stringLiteral(fullClassName),
+            t.objectExpression(props)
+          ]);
+        default:
+          return t.callExpression(t.identifier(superClassName + ".extend"), [
+            t.stringLiteral(fullClassName),
+            t.objectExpression(props)
+          ]);
       }
 
     }

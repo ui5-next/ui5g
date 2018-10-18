@@ -7,7 +7,7 @@ import MessageToast from "sap/m/MessageToast";
 
 export default class HelloPanel extends JSView {
 
-  onShowHello = () => {
+  onShowHello() {
 
     // read msg from i18n model
     var oBundle = this.getModel("i18n").getResourceBundle();
@@ -19,40 +19,46 @@ export default class HelloPanel extends JSView {
 
   }
 
-  onOpenDialog = () => {
+  onOpenDialog() {
     this.oController.getOwnerComponent().openHelloDialog();
   }
 
-  createContent = () => {
-    return new Panel({
-      headerText: "{i18n>helloPanelTitle}",
-      "class": "sapUiResponsiveMargin",
-      width: "auto",
-      expandable: "{device>/system/phone}",
-      expanded: "{= !${device>/system/phone} }",
-      content: [
-        new Button({
-          icon: "sap-icon://world",
-          text: "{i18n>openDialogButtonText}",
-          press: this.onOpenDialog.bind(this),
-          "class": "sapUiSmallMarginEnd sapUiVisibleOnlyOnDesktop"
-        }),
-        new Button({
-          text: "{i18n>showHelloButtonText}",
-          press: this.onShowHello.bind(this),
-          "class": "myCustomButton"
-        }),
-        new Input({
-          value: "{/recipient/name}",
-          valueLiveUpdate: true,
-          width: "60%"
-        }),
-        new Text({
-          text: "Hello {/recipient/name}",
-          "class": "sapUiSmallMargin sapThemeHighlight-asColor myCustomText"
-        })
-      ]
-    });
+  createContent() {
+    return (
+      <Panel
+        headerText="{i18n>helloPanelTitle}"
+        class="sapUiResponsiveMargin"
+        width="auto"
+        expandable="{device>/system/phone}"
+        expanded="{= !${device>/system/phone} }"
+      >
+        <Button
+          icon="sap-icon://world"
+          text="{i18n>openDialogButtonText}"
+          press={() => {
+            this.onOpenDialog();
+          }}
+          class="sapUiSmallMarginEnd sapUiVisibleOnlyOnDesktop"
+        />
+        <Button
+          text="{i18n>showHelloButtonText}"
+          press={() => {
+            this.onShowHello();
+          }}
+          class="myCustomButton"
+        />
+        <Input
+          value="{/recipient/name}"
+          valueLiveUpdate={true}
+          width="60%"
+        />
+        <Text
+          text="Hello {/recipient/name}"
+          class="sapUiSmallMargin sapThemeHighlight-asColor myCustomText"
+        />
+      </Panel>
+    );
+
   }
 
 }

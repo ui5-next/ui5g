@@ -6,8 +6,4 @@ export default class App extends Controller {
     this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
   }
 
-  onOpenDialog() {
-    this.getOwnerComponent().openHelloDialog();
-  }
-
 }
