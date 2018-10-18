@@ -1,6 +1,5 @@
 import UIComponent from "sap/ui/core/UIComponent";
 import JSONModel from "sap/ui/model/json/JSONModel";
-import HelloDialog from "./controller/HelloDialog";
 import Device from "sap/ui/Device";
 
 export default class Component extends UIComponent {
@@ -10,9 +9,7 @@ export default class Component extends UIComponent {
   }
 
   init() {
-
     super.init(this, arguments);
-
     // set data model
     var oData = {
       recipient: {
@@ -27,16 +24,28 @@ export default class Component extends UIComponent {
     oDeviceModel.setDefaultBindingMode("OneWay");
     this.setModel(oDeviceModel, "device");
 
-    // set dialog
-    this._helloDialog = new HelloDialog(this.getAggregation("rootControl"));
-
     // create the views based on the url/hash
     this.getRouter().initialize();
 
   }
 
   openHelloDialog() {
-    this._helloDialog.open();
+    const oView = this.getAggregation("rootControl");
+    // create dialog lazily
+    if (!this._dialog) {
+      var oFragmentController = {
+        onCloseDialog: () => {
+          this._dialog.close();
+        }
+      };
+      // create dialog via fragment factory
+      this._dialog = new sap.ui.jsfragment("<%= namespace %>.fragments.HelloDialog", oFragmentController);
+      // connect dialog to the root view of this component (models, lifecycle)
+      oView.addDependent(this._dialog);
+      // forward compact/cozy style into dialog
+      jQuery.sap.syncStyleClass(oView.getController().getOwnerComponent().getContentDensityClass(), oView, this._dialog);
+    }
+    this._dialog.open();
   }
 
   getContentDensityClass() {

@@ -13,6 +13,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.5",
+    "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-check-es2015-constants": "^6.3.13",
     "babel-plugin-syntax-class-properties": "^6.5.0",
     "babel-plugin-transform-async-to-generator": "^6.8.0",

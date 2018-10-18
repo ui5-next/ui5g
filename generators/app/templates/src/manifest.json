@@ -65,8 +65,8 @@
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
-				"viewType": "XML",
-				"viewPath": "<%= namespace %>.view",
+				"viewType": "JS",
+				"viewPath": "<%= namespace %>.components",
 				"controlId": "app",
 				"controlAggregation": "pages"
 			},
