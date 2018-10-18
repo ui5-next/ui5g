@@ -5,7 +5,7 @@ import Button from "sap/m/Button";
 
 export default class App extends JSView {
 
-  createContent() {
+  createContent(C) {
     return (
       <Page
         headerContent={
