@@ -1,7 +1,6 @@
 module.exports = {
   plugins: [
     require("babel-plugin-syntax-jsx"),
-    require("./babel-plugin-ui5-jsx"),
     require("babel-plugin-transform-es2015-template-literals"),
     require("babel-plugin-transform-es2015-literals"),
     require("babel-plugin-transform-es2015-function-name"),
@@ -22,6 +21,7 @@ module.exports = {
     require("babel-plugin-transform-regenerator"),
     require("babel-plugin-syntax-class-properties"),
     require("babel-plugin-transform-async-to-generator"),
-    require("./babel-plugin-ui5")("<%= namespace %>")
+    require("babel-plugin-transform-object-assign"),
+    require("./babel-plugin-ui5-next")("<%= namespace %>")
   ]
 };

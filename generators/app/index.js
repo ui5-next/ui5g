@@ -37,7 +37,7 @@ module.exports = class extends Generator {
       }]
     }];
     return this.prompt(prompts).then(props => {
-      props.dir = props.name.replace(/[^a-zA-Z]/g, '');
+      props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
       props.namepath = props.namespace.replace(/\./g, '/');
       this.props = props;
     });

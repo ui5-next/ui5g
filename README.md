@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
-Enhanced generator for sapui5/openui5, with gulp
+The ultimate generator for UI5
 
 ## [CHANGELOG](./CHANGELOG.md)
 
@@ -13,12 +13,88 @@ Enhanced generator for sapui5/openui5, with gulp
 * auto import support based on openui5 type
 * inline thirdparty library
 
-## feature
+## Features
 
-* full ES6 feat support
-* compile to ui5 code
-* preload file support
-* eslint
+* FULL ES6 feat support
+* React `JSX` syntax support
+* FULL compile to ui5 code
+* `Component-preload` file generate
+* predefined `vscode`, `eslint`, `babel` and `gulp` config
+
+## Limitation
+
+* Just a complier, not a runtime
+* Can't generated `bundle.js` file as `React` or `Vue`, but you can generate `Component-preload.js`, sometimes they are equivalent
+
+## A sample view file syntax
+
+code
+
+```jsx
+import JSView from "sap/ui/core/mvc/JSView";
+import Page from "sap/m/Page";
+import Button from "sap/m/Button";
+
+
+export default class App extends JSView {
+
+  createContent(C) {
+    return (
+      <Page
+        headerContent={
+          <Button
+            icon="sap-icon://hello-world"
+            press={() => {
+              this.oController.getOwnerComponent().openHelloDialog();
+            }}
+          />
+        }
+      >
+        <JSView viewName="sample.ui.components.HelloPanel" />
+        <JSView viewName="sample.ui.components.InvoiceList" />
+      </Page>
+    );
+  }
+
+}
+
+```
+
+compiled
+
+```js
+sap.ui.define("sample/ui/components/Overview", ["sap/ui/core/mvc/JSView", "sap/m/Page", "sap/m/Button"], function (JSView, Page, Button) {
+  var _default = {};
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  _default = _extends(sap.ui.jsview("sample.ui.components.Overview", {
+    createContent: function createContent(C) {
+      var _this = this;
+
+      return new Page({
+        headerContent: new Button({
+          icon: "sap-icon://hello-world",
+          press: function press() {
+            _this.oController.getOwnerComponent().openHelloDialog();
+          }
+        }),
+        content: [new JSView({
+          viewName: "sample.ui.components.HelloPanel"
+        }), new JSView({
+          viewName: "sample.ui.components.InvoiceList"
+        })]
+      });
+    },
+    getControllerName: function getControllerName() {
+      return "sample.ui.components.Overview";
+    }
+  }) || {}, _default);
+  return _default;
+})
+//# sourceMappingURL=../sourcemap/components/Overview.view.js.map
+
+```
 
 ## Installation
 
