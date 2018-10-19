@@ -28,7 +28,7 @@ The ultimate generator for UI5
 
 ## A sample view file syntax
 
-code
+source
 
 ```jsx
 import JSView from "sap/ui/core/mvc/JSView";
