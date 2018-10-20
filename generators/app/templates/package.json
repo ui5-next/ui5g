@@ -36,6 +36,7 @@
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-plugin-transform-es2015-unicode-regex": "^6.3.13",
     "babel-plugin-transform-regenerator": "^6.6.0",
+    "babel-plugin-ui5-next": "^1.1.3",
     "browser-sync": "2.26.3",
     "del": "^2.2.2",
     "eslint": "^5.7.0",
