@@ -44,12 +44,14 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const done = this.async();
     const targetPathRoot = path.join(process.cwd(), this.props.dir);
     this.destinationRoot(targetPathRoot);
     mkdirp(targetPathRoot, () => {
       this.fs.copyTpl(this.templatePath(), this.destinationPath(), this.props);
       this.fs.copyTpl(this.templatePath('.*/**'), this.destinationPath(), this.props);
       this.fs.copyTpl(this.templatePath('.vscode/**'), this.destinationPath('.vscode'), this.props);
+      done();
     });
   }
 
