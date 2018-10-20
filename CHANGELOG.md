@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/Soontao/ui5g/compare/v1.4.0...v1.5.0) (2018-10-20)
+
+
+### Bug Fixes
+
+* **install:** on windows ([12d90dd](https://github.com/Soontao/ui5g/commit/12d90dd))
+
+
+### Features
+
+* **full:** refactor plugin ([50ade00](https://github.com/Soontao/ui5g/commit/50ade00))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/Soontao/ui5g/compare/v1.3.0...v1.4.0) (2018-10-19)
 
