@@ -4,14 +4,52 @@ import ObjectHeader from "sap/m/ObjectHeader";
 import ObjectAttribute from "sap/m/ObjectAttribute";
 import ProductRating from "../control/ProductRating";
 
+import History from "sap/ui/core/routing/History";
+import MessageToast from "sap/m/MessageToast";
+import JSONModel from "sap/ui/model/json/JSONModel";
+
 export default class Detail extends JSView {
 
-  createContent(oController) {
+
+  _onObjectMatched(oEvent) {
+    this.bindElement({
+      path: "/" + oEvent.getParameter("arguments").invoicePath,
+      model: "invoice"
+    });
+  }
+
+  onNavBack() {
+    var oHistory = History.getInstance();
+    var sPreviousHash = oHistory.getPreviousHash();
+
+    if (sPreviousHash !== undefined) {
+      window.history.go(-1);
+    } else {
+      var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      oRouter.navTo("overview", {}, true);
+    }
+  }
+
+  onRatingChange(oEvent) {
+    var fValue = oEvent.getParameter("value");
+    var oResourceBundle = this.getModel("i18n").getResourceBundle();
+
+    MessageToast.show(oResourceBundle.getText("ratingConfirmation", [fValue]));
+  }
+
+  createContent() {
+
+    var oViewModel = new JSONModel({ currency: "EUR"});
+    this.setModel(oViewModel, "view");
+
+    var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+    oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched.bind(this), this);
+
     return (
       <Page
         title="{i18n>detailPageTitle}"
         showNavButton={true}
-        navButtonPress={oController.onNavBack}
+        navButtonPress={this.onNavBack.bind(this)}
       >
         <ObjectHeader
           responsive={true}
@@ -51,7 +89,7 @@ export default class Detail extends JSView {
         />
         <ProductRating
           class="sapUiSmallMarginBeginEnd"
-          change={oController.onRatingChange.bind(oController)}
+          change={this.onRatingChange.bind(this)}
         />
       </Page>
     );

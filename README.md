@@ -1,44 +1,63 @@
-# generator-ui5g
+# The ultimate generator for UI5
+
+![](https://openui5.org/images/OpenUI5_new_big_side.png)
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
-The ultimate generator for UI5
+The ultimate generator for UI5, provide the next generation syntax for UI5 envrionment.
 
 ## [CHANGELOG](./CHANGELOG.md)
 
 ## TO-DO
 
-* webpack support
-* commit check
-* auto import support based on openui5 type
-* inline thirdparty library
+* Auto import support based on UI5 Type
+* Thirdparty library support
+* Fragment Support
+* Convert react components to UI5 control 
 
 ## Features
 
 * FULL ES6 feat support
 * React `JSX` syntax support
 * FULL compile to ui5 code
-* `Component-preload` file generate
-* predefined `vscode`, `eslint`, `babel` and `gulp` config
+* `Component-preload` file
+* Predefined `vscode`, `eslint`, `babel` and `gulp` config
 
 ## Limitation
 
 * Just a complier, not a runtime
 * Can't generated `bundle.js` file as `React` or `Vue`, but you can generate `Component-preload.js`, sometimes they are equivalent
+* With JSX syntax, but not support `React` component lifecycle. 
+
+## Why not support react lifecycle(virtual dom) ?
+
+* UI5 Controls(Components in the modern sense) have its' own lifecycle, and can not overwrite them.
+* UI5 Renderers normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
+* Its hard to convert `model` in MVC to `react` single-flow data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
+* Additional performance overhead, and additional in-stability.
+
+But I think converting `React Component` to UI5 Control is feasible and meaningful.
 
 ## A sample view file syntax
 
-source
+Developer can use JSX element in JSView defination & and no need to write additional controllers. 
+
+(But developers can still use a custom controller by writing `getControllerName()`)
+
+Source Code:
 
 ```jsx
 import JSView from "sap/ui/core/mvc/JSView";
 import Page from "sap/m/Page";
 import Button from "sap/m/Button";
-
+import HelloPanel from "./HelloPanel.view"; // another js view
+import InvoiceList from "./InvoiceList.view"; // another js view
 
 export default class App extends JSView {
 
-  createContent(C) {
+  createContent(controller) {
+    this.addStyleClass(controller.getOwnerComponent().getContentDensityClass());
+    // yes, JSX support
     return (
       <Page
         headerContent={
@@ -50,51 +69,20 @@ export default class App extends JSView {
           />
         }
       >
-        <JSView viewName="sample.ui.components.HelloPanel" />
-        <JSView viewName="sample.ui.components.InvoiceList" />
+        {
+          // extra will passed in HelloPanel internal
+          // and use this.getViewData().extra to get it
+        }
+        <HelloPanel extra="this_is_a_test_string" />
+        <InvoiceList />
       </Page>
     );
   }
 
 }
-
 ```
 
-compiled
-
-```js
-sap.ui.define("sample/ui/components/Overview", ["sap/ui/core/mvc/JSView", "sap/m/Page", "sap/m/Button"], function (JSView, Page, Button) {
-  var _default = {};
-
-  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-  _default = _extends(sap.ui.jsview("sample.ui.components.Overview", {
-    createContent: function createContent(C) {
-      var _this = this;
-
-      return new Page({
-        headerContent: new Button({
-          icon: "sap-icon://hello-world",
-          press: function press() {
-            _this.oController.getOwnerComponent().openHelloDialog();
-          }
-        }),
-        content: [new JSView({
-          viewName: "sample.ui.components.HelloPanel"
-        }), new JSView({
-          viewName: "sample.ui.components.InvoiceList"
-        })]
-      });
-    },
-    getControllerName: function getControllerName() {
-      return "sample.ui.components.Overview";
-    }
-  }) || {}, _default);
-  return _default;
-})
-//# sourceMappingURL=../sourcemap/components/Overview.view.js.map
-
-```
+and it works
 
 ## Installation
 
@@ -106,23 +94,13 @@ npm i -g yo generator-ui5g
 
 ## Generate Project
 
-Then generate your new project:
+And run `yo ui5g` to generate your own project
 
-```bash
-# --- start generate
-yo ui5g
-# --- ask three questions
-? App name
-? App namespace
-? SAPUI5 or OpenUI5?
-# --- use openui5 if you dont know what is sapui5
-```
+The project will be generated in a new folder, and the folder name is same as app name.
 
-And project will be generated in a new folder, the folder name is same as app name.
+Also, Dependencies will be auto installed by `npm`
 
-Dependencies will be auto installed
-
-## Dev
+## Development
 
 This template is based on [UI5 Walkthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5
 
@@ -153,5 +131,7 @@ npm start
 ## About
 
 This generator is written by `Theo` but some ideas come from `Madeleine`, and it only can generate really simple project.
+
+`JSX` idea is from `Kenny`, just a syntactic sugar
 
 Very pleased to be able to help you.

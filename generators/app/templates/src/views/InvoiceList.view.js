@@ -10,8 +10,35 @@ import ToolbarSpacer from "sap/m/ToolbarSpacer";
 import SearchField from "sap/m/SearchField";
 import ObjectIdentifier from "sap/m/ObjectIdentifier";
 
+import JSONModel from "sap/ui/model/json/JSONModel";
+import Filter from "sap/ui/model/Filter";
+import FilterOperator from "sap/ui/model/FilterOperator";
+import { formatter } from "../model/formatter";
 
 export default class InvoiceList extends JSView {
+
+  onFilterInvoices(oEvent) {
+
+    // build filter array
+    var aFilter = [];
+    var sQuery = oEvent.getParameter("query");
+    if (sQuery) {
+      aFilter.push(new Filter("ProductName", FilterOperator.Contains, sQuery));
+    }
+
+    // filter binding
+    var oList = sap.ui.getCore().byId("invoiceList");
+    var oBinding = oList.getBinding("items");
+    oBinding.filter(aFilter);
+  }
+
+  onPress(oEvent) {
+    var oItem = oEvent.getSource();
+    var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+    oRouter.navTo("detail", {
+      invoicePath: oItem.getBindingContext("invoice").getPath().substr(1)
+    });
+  }
 
   renderColumns() {
     return [
@@ -41,7 +68,7 @@ export default class InvoiceList extends JSView {
     return (
       <ColumnListItem
         type="Navigation"
-        press={(e) => this.oController.onPress(e)}
+        press={this.onPress.bind(this)}
         cells={[
           <ObjectNumber
             number="{invoice>Quantity}"
@@ -53,7 +80,7 @@ export default class InvoiceList extends JSView {
           <Text
             text={{
               path: 'invoice>Status',
-              formatter: '.formatter.statusText'
+              formatter: this._formatter.statusText
             }}
           />,
           <Text text="{invoice>ShipperName}" />,
@@ -73,7 +100,12 @@ export default class InvoiceList extends JSView {
     );
   }
 
-  createContent(oController) {
+  createContent() {
+
+    var oViewModel = new JSONModel({ currency: "EUR" });
+    this.setModel(oViewModel, "view");
+    this._formatter = formatter(this);
+
     return (
       <Table
         id="invoiceList"
@@ -83,7 +115,7 @@ export default class InvoiceList extends JSView {
           <Toolbar>
             <Title>A Header Here</Title>
             <ToolbarSpacer />
-            <SearchField width="50%" search={oController.onFilterInvoices.bind(oController)} selectOnFocus={false} />
+            <SearchField width="50%" search={this.onFilterInvoices.bind(this)} selectOnFocus={false} />
           </Toolbar>
         }
         columns={this.renderColumns()}

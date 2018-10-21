@@ -35,7 +35,7 @@
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "<%= namespace %>.components.App",
+			"viewName": "<%= namespace %>.views.App",
 			"type": "JS"
 		},
 		"dependencies": {
@@ -66,7 +66,7 @@
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "JS",
-				"viewPath": "<%= namespace %>.components",
+				"viewPath": "<%= namespace %>.views",
 				"controlId": "app",
 				"controlAggregation": "pages"
 			},
