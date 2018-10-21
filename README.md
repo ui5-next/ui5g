@@ -17,9 +17,10 @@ The ultimate generator for UI5, provide the next generation syntax for UI5 envri
 
 ## Features
 
-* FULL ES6 feat support
+* Full ES6 feat support
+* Full module system mapping
 * React `JSX` syntax support
-* FULL compile to ui5 code
+* Full compile to ui5 code
 * `Component-preload` file
 * Predefined `vscode`, `eslint`, `babel` and `gulp` config
 
@@ -29,11 +30,11 @@ The ultimate generator for UI5, provide the next generation syntax for UI5 envri
 * Can't generated `bundle.js` file as `React` or `Vue`, but you can generate `Component-preload.js`, sometimes they are equivalent
 * With JSX syntax, but not support `React` component lifecycle. 
 
-## Why not support react lifecycle(virtual dom) ?
+## Why not support react lifecycle and virtual dom ?
 
-* UI5 Controls(Components in the modern sense) have its' own lifecycle, and can not overwrite them.
-* UI5 Renderers normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
-* Its hard to convert `model` in MVC to `react` single-flow data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
+* UI5 `Controls` (Components in the modern sense) have its' own lifecycle, and can not overwrite them.
+* UI5 `Renderers` normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
+* Its hard to convert `model` in MVC to `react` one-way data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
 * Additional performance overhead, and additional in-stability.
 
 But I think converting `React Component` to UI5 Control is feasible and meaningful.
@@ -94,11 +95,11 @@ npm i -g yo generator-ui5g
 
 ## Generate Project
 
-And run `yo ui5g` to generate your own project
+Run `yo ui5g` to generate your own project.
 
-The project will be generated in a new folder, and the folder name is same as app name.
+The project will be generated in a `new` folder, and the folder name is same as app name.
 
-Also, Dependencies will be auto installed by `npm`
+Also, dependencies will be auto installed by `npm`
 
 ## Development
 
@@ -132,6 +133,6 @@ npm start
 
 This generator is written by `Theo` but some ideas come from `Madeleine`, and it only can generate really simple project.
 
-`JSX` idea is from `Kenny`, just a syntactic sugar
+The idea of `JSX Support` is from `Kenny`, just a syntactic sugar.
 
 Very pleased to be able to help you.
