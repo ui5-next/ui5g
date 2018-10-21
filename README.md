@@ -71,7 +71,7 @@ export default class App extends JSView {
         }
       >
         {
-          // extra will passed in HelloPanel internal
+          // extra will be passed into HelloPanel
           // and use this.getViewData().extra to get it
         }
         <HelloPanel extra="this_is_a_test_string" />
