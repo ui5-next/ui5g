@@ -1,4 +1,4 @@
-export const formatter = oView => ({
+export const createFormatter = oView => ({
   statusText: function(sStatus) {
     var oResourceBundle = oView.getModel("i18n").getResourceBundle();
 
@@ -10,7 +10,7 @@ export const formatter = oView => ({
     case "C":
       return oResourceBundle.getText("invoiceStatusC");
     default:
-      return sStatus;
+      return oResourceBundle.getText("invoiceStatusA");
     }
   }
 });

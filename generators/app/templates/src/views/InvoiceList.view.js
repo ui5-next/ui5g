@@ -13,7 +13,7 @@ import ObjectIdentifier from "sap/m/ObjectIdentifier";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
-import { formatter } from "../model/formatter";
+import { createFormatter } from "../model/formatter";
 
 export default class InvoiceList extends JSView {
 
@@ -46,21 +46,26 @@ export default class InvoiceList extends JSView {
         hAlign="End"
         minScreenWidth="Small"
         demandPopin={true}
-        width="4em">
-        <Text text="{i18n>columnQuantity}" />
-      </Column>,
-      <Column>
-        <Text text="{i18n>columnName}" />
-      </Column>,
-      <Column minScreenWidth="Small" demandPopin={true}>
-        <Text text="{i18n>columnStatus}" />
-      </Column>,
-      <Column minScreenWidth="Tablet" demandPopin={false} >
-        <Text text="{i18n>columnSupplier}" />
-      </Column>,
-      <Column hAlign="End">
-        <Text text="{i18n>columnPrice}" />
-      </Column>
+        width="4em"
+        header={<Text text="{i18n>columnQuantity}" />}
+      />,
+      <Column
+        header={<Text text="{i18n>columnName}" />}
+      />,
+      <Column
+        minScreenWidth="Small"
+        demandPopin={true}
+        header={<Text text="{i18n>columnStatus}" />}
+      />,
+      <Column
+        minScreenWidth="Tablet"
+        demandPopin={false}
+        header={<Text text="{i18n>columnSupplier}" />}
+      />,
+      <Column
+        hAlign="End"
+        header={<Text text="{i18n>columnPrice}" />}
+      />
     ];
   }
 
@@ -104,7 +109,7 @@ export default class InvoiceList extends JSView {
 
     var oViewModel = new JSONModel({ currency: "EUR" });
     this.setModel(oViewModel, "view");
-    this._formatter = formatter(this);
+    this._formatter = createFormatter(this);
 
     return (
       <Table
