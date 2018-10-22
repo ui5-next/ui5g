@@ -6,15 +6,6 @@
 
 The ultimate generator for UI5, provide the next generation syntax for UI5 envrionment.
 
-## [CHANGELOG](./CHANGELOG.md)
-
-## TO-DO
-
-* Auto import support based on UI5 Type
-* Thirdparty library support
-* Fragment Support
-* Convert react components to UI5 control 
-
 ## Features
 
 * Full ES6 feat support
@@ -128,6 +119,15 @@ npm start
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
+
+## TO-DO
+
+* Auto import support based on UI5 Type
+* Thirdparty library support
+* Fragment Support
+* Convert react components to UI5 control 
+
+## [CHANGELOG](./CHANGELOG.md)
 
 ## About
 
