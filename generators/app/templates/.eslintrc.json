@@ -64,12 +64,6 @@
     "no-trailing-spaces": 2,
     "no-unreachable": 2,
     "use-isnan": 2,
-    "valid-jsdoc": [
-      1,
-      {
-        "requireReturn": false
-      }
-    ],
     "newline-per-chained-call": [
       "warn",
       {

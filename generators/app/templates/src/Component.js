@@ -1,6 +1,7 @@
 import UIComponent from "sap/ui/core/UIComponent";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Device from "sap/ui/Device";
+import { createHelloDialog } from "./fragments/HelloDialog";
 
 export default class Component extends UIComponent {
 
@@ -39,7 +40,7 @@ export default class Component extends UIComponent {
         }
       };
       // create dialog via fragment factory
-      this._dialog = new sap.ui.jsfragment("<%= namespace %>.fragments.HelloDialog", oFragmentController);
+      this._dialog = createHelloDialog(oFragmentController)
       // connect dialog to the root view of this component (models, lifecycle)
       oView.addDependent(this._dialog);
       // forward compact/cozy style into dialog

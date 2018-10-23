@@ -12,6 +12,7 @@ export default class App extends JSView {
     this.addStyleClass(controller.getOwnerComponent().getContentDensityClass());
     return (
       <Page
+        title="{i18n>appTitle}"
         headerContent={
           <Button
             icon="sap-icon://hello-world"

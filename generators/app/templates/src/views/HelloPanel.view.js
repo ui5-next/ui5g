@@ -4,19 +4,46 @@ import Button from "sap/m/Button";
 import Input from "sap/m/Input";
 import Text from "sap/m/Text";
 import MessageToast from "sap/m/MessageToast";
+import JSONModel from "sap/ui/model/json/JSONModel";
 
 export default class HelloPanel extends JSView {
+
+  /**
+   * init state
+   */
+  state = {
+    value: 0
+  };
+
+  init() {
+    /**
+     * one way model
+     * like react state
+     */
+    this.setModel(new JSONModel(this.state).setDefaultBindingMode("OneWay"));
+  }
+
+  /**
+   * setState in react, update model
+   */
+  setState(merge, fn) {
+    const oModel = this.getModel();
+    oModel.setData(merge, true);
+    this.state = oModel.getData();
+    if (fn) {
+      fn();
+    }
+  }
 
   onShowHello() {
 
     // read msg from i18n model
     var oBundle = this.getModel("i18n").getResourceBundle();
-    var sRecipient = this.getModel().getProperty("/recipient/name");
+    var sRecipient = this.state.value;
     var sMsg = oBundle.getText("helloMsg", [sRecipient]);
 
     // show message
     MessageToast.show(sMsg);
-
   }
 
   onOpenDialog() {
@@ -48,12 +75,15 @@ export default class HelloPanel extends JSView {
           class="myCustomButton"
         />
         <Input
-          value="{/recipient/name}"
+          value="{/value}"
+          liveChange={({ mParameters: { newValue } }) => {
+            this.setState({ value: newValue });
+          }}
           valueLiveUpdate={true}
           width="60%"
         />
         <Text
-          text="Hello {/recipient/name}"
+          text="Hello {/value}"
           class="sapUiSmallMargin sapThemeHighlight-asColor myCustomText"
         />
       </Panel>
