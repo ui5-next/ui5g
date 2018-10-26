@@ -10,29 +10,16 @@ The ultimate generator for UI5, provide the next generation syntax for UI5 envri
 
 * Full ES6 feat support
 * Full module system mapping
+* **Webpack** bundle support (incredible code execution efficiency)
+* Tranditional `Component-preload` file (with gulp)
 * React `JSX` syntax support
-* Full compile to ui5 code
-* `Component-preload` file
+* Full compile to UI5 code
 * Predefined `vscode`, `eslint`, `babel` and `gulp` config
 
-## Limitation
-
-* Just a complier, not a runtime
-* Can't generated `bundle.js` file as `React` or `Vue`, but you can generate `Component-preload.js`, sometimes they are equivalent
-* With JSX syntax, but not support `React` component lifecycle. 
-
-## Why not support react lifecycle and virtual dom ?
-
-* UI5 `Controls` (Components in the modern sense) have its' own lifecycle, and can not overwrite them.
-* UI5 `Renderers` normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
-* Its hard to convert `model` in MVC to `react` one-way data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
-* Additional performance overhead, and additional in-stability.
-
-But I think converting `React Component` to UI5 Control is feasible and meaningful.
 
 ## A sample view file syntax
 
-Developer can use JSX element in JSView defination & and no need to write additional controllers. 
+Developer can use JSX element in JSView defination & and no need to write additional controllers.
 
 (But developers can still use a custom controller by writing `getControllerName()`)
 
@@ -102,6 +89,16 @@ start your project
 npm start
 ```
 
+## Build
+
+Please run
+
+```bash
+npm run bundle
+```
+
+to generate webpack bundle, resources maybe lost, remember to check `webpack.config.js` if you meet 404 code
+
 ## Configuration
 
 * ```babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemap inline
@@ -112,20 +109,34 @@ npm start
 
 * ```proxy```, edit ```proxies.js```, supported by gulp connect, use a tranditional node lib, it can set local proxy to remote server
 
+* ```webpack.config.js```, webpack config, bundle file generator
+
 ## Command
 
-* ```npm start```, default *gulp* will start a hot reload server, based on BrowserSync.
+* ```npm start```, default *gulp* will start a hot reload server, based on BrowserSync. Recommended to develop in this way.
   
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
 
+* ```npm run dev```, start webpack dev server, but current version server not support `sourcemap`
+
+* ```npm run bundle```, generate `webpack` bundle file & copy necessary files.
+
+## Why support JSX syntax but not support react lifecycle and virtual dom
+
+* UI5 `Controls` (Components in the modern sense) have its' own lifecycle, and can not overwrite them.
+* UI5 `Renderers` normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
+* Its hard to convert `model` in MVC to `react` one-way data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
+* Additional performance overhead, and additional in-stability.
+
+But I think converting `React Component` to UI5 Control is feasible and meaningful.
+
 ## TO-DO
 
 * Auto import support based on UI5 Type
 * Thirdparty library support
-* Fragment Support
-* Convert react components to UI5 control 
+* Convert react components to UI5 control
 
 ## [CHANGELOG](./CHANGELOG.md)
 
