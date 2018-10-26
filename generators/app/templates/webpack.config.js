@@ -18,7 +18,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: "ui5-next-loader?sourceRoot=./src&namespace=<% namespace %>"
+            loader: "ui5-next-loader?sourceRoot=./src&namespace=<%= namespace =%>"
           },
           {
             loader: 'babel-loader?sourceRoot=./src'
