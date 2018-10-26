@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/Soontao/ui5g/compare/v1.7.1...v1.8.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **error:** in package json & other ([c2cf9c4](https://github.com/Soontao/ui5g/commit/c2cf9c4))
+* **webpack:** config ([533a817](https://github.com/Soontao/ui5g/commit/533a817))
+
+
+### Features
+
+* **webpack:** almost full support ([2e6ddcb](https://github.com/Soontao/ui5g/commit/2e6ddcb))
+
+
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://github.com/Soontao/ui5g/compare/v1.7.0...v1.7.1) (2018-10-26)
 
