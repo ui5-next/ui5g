@@ -52,7 +52,6 @@
     "http-proxy-middleware": "^0.17.4",
     "loader-utils": "^1.1.0",
     "merge-stream": "^1.0.1",
-    "openui5-webpack-plugin": "^0.3.0",
     "run-sequence": "2.2.1"
   }
 }
