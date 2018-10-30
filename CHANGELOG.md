@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/Soontao/ui5g/compare/v1.8.0...v1.9.0) (2018-10-30)
+
+
+### Features
+
+* **external-module:** support (only gulp) ([2117c22](https://github.com/Soontao/ui5g/commit/2117c22))
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/Soontao/ui5g/compare/v1.7.1...v1.8.0) (2018-10-26)
 
