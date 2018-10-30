@@ -10,9 +10,13 @@ var less = require('gulp-less');
 var del = require('del');
 var filter = require('gulp-filter');
 var console = require('console');
+var copyUi5Lib = require("gulp-copy-ui5-thirdparty-library");
 
 var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
+var namespace = "<%= namespace %>";
+var ui5RsourceRoot = "<%= ui5Domain %>"
+var projectName = "<%= name %>"
 
 var gulpMem = new GulpMem();
 gulpMem.serveBasePath = DEST_ROOT;
@@ -39,7 +43,16 @@ var buildCss = () => {
 var copy = () => {
   return merge(
     gulp.src([`${SRC_ROOT}/**/*`, `!${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/*.less`], { base: `${SRC_ROOT}` }),
-    gulp.src([`${SRC_ROOT}/**/lib/*`], { base: `${SRC_ROOT}` })
+    gulp.src([`${SRC_ROOT}/**/lib/*`], { base: `${SRC_ROOT}` }),
+    gulp.src("./package.json").pipe(
+      copyUi5Lib(
+        {
+          namespace,
+          resouceHost: ui5RsourceRoot,
+          indexPageTitle: projectName
+        }
+      )
+    )
   );
 };
 
@@ -58,7 +71,7 @@ gulp.task('build', () => {
   return build()
     .pipe(gulp.dest(DEST_ROOT))
     .pipe(filter(['**/*.js', '**/*.xml', '!**/lib/*']))
-    .pipe(ui5preload({ base: `${DEST_ROOT}`, namespace: '<%= namespace %>' }))
+    .pipe(ui5preload({ base: `${DEST_ROOT}`, namespace, }))
     .pipe(gulp.dest(`${DEST_ROOT}`));
 });
 
@@ -72,7 +85,8 @@ gulp.task('bs', () => {
       baseDir: DEST_ROOT,
       middleware: middlewares
     },
-    notify: false
+    notify: false,
+    startPath: "index-with-lib.html"
   });
 });
 
