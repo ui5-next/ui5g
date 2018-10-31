@@ -11,12 +11,11 @@ var del = require('del');
 var filter = require('gulp-filter');
 var console = require('console');
 var copyUi5Lib = require("gulp-copy-ui5-thirdparty-library");
+var { join } = require("path")
 
 var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
 var namespace = "<%= namespace %>";
-var ui5RsourceRoot = "<%= ui5Domain %>"
-var projectName = "<%= name %>"
 
 var gulpMem = new GulpMem();
 gulpMem.serveBasePath = DEST_ROOT;
@@ -42,14 +41,22 @@ var buildCss = () => {
 
 var copy = () => {
   return merge(
-    gulp.src([`${SRC_ROOT}/**/*`, `!${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/*.less`], { base: `${SRC_ROOT}` }),
+    gulp.src(
+      [
+        `${SRC_ROOT}/**/*`,
+        `!${SRC_ROOT}/**/*.js`,
+        // index html will be re-format by gulp-copy-ui5-thirdparty-library
+        `!${SRC_ROOT}/index.html`,
+        `!${SRC_ROOT}/**/*.less`
+      ],
+      { base: `${SRC_ROOT}` }
+    ),
     gulp.src([`${SRC_ROOT}/**/lib/*`], { base: `${SRC_ROOT}` }),
     gulp.src("./package.json").pipe(
+      // this lib will convert node.js library to ui5 module format
       copyUi5Lib(
         {
-          namespace,
-          resouceHost: ui5RsourceRoot,
-          indexPageTitle: projectName
+          indexTemplateAbsPath: join(__dirname, "./src/index.html")
         }
       )
     )
@@ -86,7 +93,7 @@ gulp.task('bs', () => {
       middleware: middlewares
     },
     notify: false,
-    startPath: "index-with-lib.html"
+    startPath: "index.html"
   });
 });
 
@@ -99,7 +106,7 @@ gulp.task('bs:test', () => {
       middleware: middlewares,
       notify: false
     },
-    startPath: "<%= namepath %>/test/mockServer.html"
+    startPath: "test/mockServer.html"
   });
 });
 
