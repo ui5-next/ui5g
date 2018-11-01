@@ -4,18 +4,17 @@
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
-The ultimate generator for UI5, provide the next generation syntax for UI5 envrionment.
+The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
 
 ## Features
 
-* Full ES6 feat support
-* Full module system mapping
-* **Webpack** bundle support (incredible code execution efficiency)
+* Full ES6 syntax support.
+* Full module system mapping, (ui5 tranditional `sap.ui.define` still work)
 * Tranditional `Component-preload` file (with gulp)
-* React `JSX` syntax support
-* Full compile to UI5 code
-* Predefined `vscode`, `eslint`, `babel` and `gulp` config
-
+* React `JSX` syntax support, (XMLView still work)
+* Allowed import third party libraries.
+* Predefined `vscode`, `eslint`, `babel`, `webpack` and `gulp` config
+* Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.
 
 ## A sample view file syntax
 
@@ -94,7 +93,7 @@ npm start
 Please run
 
 ```bash
-npm run bundle
+npm run build
 ```
 
 to generate webpack bundle, resources maybe lost, remember to check `webpack.config.js` if you meet 404 code
