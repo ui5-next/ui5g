@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.2"></a>
+## [1.9.2](https://github.com/Soontao/ui5g/compare/v1.9.1...v1.9.2) (2018-11-01)
+
+
+### Bug Fixes
+
+* **daily:** babel-plugin fix ([53cbb5b](https://github.com/Soontao/ui5g/commit/53cbb5b))
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://github.com/Soontao/ui5g/compare/v1.9.0...v1.9.1) (2018-10-31)
 
