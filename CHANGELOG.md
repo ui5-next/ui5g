@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.3"></a>
+## [1.9.3](https://github.com/Soontao/ui5g/compare/v1.9.2...v1.9.3) (2018-11-06)
+
+
+### Bug Fixes
+
+* **thirdparty-lib:** improvement ([4fbc717](https://github.com/Soontao/ui5g/commit/4fbc717))
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://github.com/Soontao/ui5g/compare/v1.9.1...v1.9.2) (2018-11-01)
 
