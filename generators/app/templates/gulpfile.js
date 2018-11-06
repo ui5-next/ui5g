@@ -56,7 +56,8 @@ var copy = () => {
       // this lib will convert node.js library to ui5 module format
       copyUi5Lib(
         {
-          indexTemplateAbsPath: join(__dirname, "./src/index.html")
+          indexTemplateAbsPath: join(__dirname, "./src/index.html"),
+          thirdpartyLibPath: "_thridparty"
         }
       )
     )

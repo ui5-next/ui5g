@@ -5,6 +5,7 @@ const yosay = require('yosay');
 const path = require('path');
 const process = require('process');
 const mkdirp = require('mkdirp');
+const { warn } = require("console");
 
 module.exports = class extends Generator {
   prompting() {
@@ -21,7 +22,7 @@ module.exports = class extends Generator {
     }, {
       type: 'input',
       name: 'namespace',
-      message: 'App namespace',
+      message: 'App namespace/package',
       "default": 'ui5.demo.walkthrough'
     },
     {
@@ -39,6 +40,9 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
       props.namepath = props.namespace.replace(/\./g, '/');
+      if (props.namespace.startWith("sap")) {
+        warn(`The namespace ${props.namespace} start with 'sap'\nIt will CAUSE error`);
+      }
       this.props = props;
     });
   }
