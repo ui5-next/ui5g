@@ -40,8 +40,8 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
       props.namepath = props.namespace.replace(/\./g, '/');
-      if (props.namespace.startWith("sap")) {
-        warn(`The namespace ${props.namespace} start with 'sap'\nIt will CAUSE error`);
+      if (props.namespace.startsWith("sap")) {
+        warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
       }
       this.props = props;
     });
