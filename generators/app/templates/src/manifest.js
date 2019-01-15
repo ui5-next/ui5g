@@ -1,4 +1,4 @@
-{
+export const manifest = {
 	"_version": "1.1.0",
 	"sap.app": {
 		"_version": "1.1.0",

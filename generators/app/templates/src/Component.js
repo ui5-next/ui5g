@@ -2,11 +2,12 @@ import UIComponent from "sap/ui/core/UIComponent";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Device from "sap/ui/Device";
 import { createHelloDialog } from "./fragments/HelloDialog";
+import { manifest } from "./manifest";
 
 export default class Component extends UIComponent {
 
   metadata = {
-    manifest: "json"
+    manifest
   }
 
   init() {
