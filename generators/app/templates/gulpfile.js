@@ -97,7 +97,7 @@ var build = ({ preload = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:mem", () => {
-  return build().pipe(gulpMem.dest(DEST_ROOT));
+  return build({ preload: false }).pipe(gulpMem.dest(DEST_ROOT));
 });
 
 gulp.task("build", () => {
@@ -140,6 +140,10 @@ gulp.task("lint", () => {
     .pipe(gulp.dest(SRC_ROOT));
 });
 
+gulp.task("watch", () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build", "reload"]));
+});
+
 gulp.task("watch:mem", () => {
   gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:mem", "reload"]));
 });
@@ -162,6 +166,16 @@ gulp.task("copy", copy);
 gulp.task(
   "default",
   gulp.series("clean", "build:mem", gulp.parallel("bs", "watch:mem"))
+);
+
+gulp.task(
+  "dev",
+  gulp.series("clean", "build:mem", gulp.parallel("bs", "watch:mem"))
+);
+
+gulp.task(
+  "dev:preload",
+  gulp.series("clean", "build", gulp.parallel("bs", "watch"))
 );
 
 gulp.task("test", gulp.series(["clean", "build:mem", "bs:test", "watch:mem"]));
