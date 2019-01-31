@@ -10,10 +10,10 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 * Full ES6 syntax support.
 * Full module system mapping, (ui5 tranditional `sap.ui.define` still work)
-* Tranditional `Component-preload` file (with gulp)
+* Eager `preload.js` file (with [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * React `JSX` syntax support, (XMLView still work)
-* Allowed import third party libraries.
-* Predefined `vscode`, `eslint`, `babel`, `webpack` and `gulp` config
+* Allowed import third party libraries from node_modules.
+* Pre-defined `vscode`, `eslint`, `babel`, `webpack` and `gulp` config
 * Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.
 
 ## A sample view file syntax
@@ -134,8 +134,8 @@ But I think converting `React Component` to UI5 Control is feasible and meaningf
 ## TO-DO
 
 * Auto import support based on UI5 Type
-* Thirdparty library support
 * Convert react components to UI5 control
+* Decorator support
 
 ## [CHANGELOG](./CHANGELOG.md)
 
