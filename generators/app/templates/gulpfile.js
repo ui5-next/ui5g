@@ -15,6 +15,7 @@ var { join } = require("path");
 
 var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
+var APP_NAME = "<%= name %>";
 var namespace = "<%= namespace %>";
 var resourceRoot = "https://<%= ui5Domain %>/resources/";
 
@@ -22,17 +23,21 @@ var gulpMem = new GulpMem();
 gulpMem.serveBasePath = DEST_ROOT;
 gulpMem.enableLog = false;
 
-var buildJs = () => {
+var buildJs = ({ sourcemap }) => {
   // use to avoid an error cause whole gulp failed
   var b = babel().on("error", e => {
     console.log(e.stack);
     b.end();
   });
-  return gulp
-    .src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`])
-    .pipe(sourcemaps.init())
-    .pipe(b)
-    .pipe(sourcemaps.write("/sourcemap"));
+  var rt = gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`]);
+  if (sourcemap) {
+    rt = rt.pipe(sourcemaps.init());
+  }
+  rt = rt.pipe(b);
+  if (sourcemap) {
+    rt = rt.pipe(sourcemaps.write("/sourcemap"));
+  }
+  return rt;
 };
 
 var buildCss = () => {
@@ -64,7 +69,7 @@ var copy = ({ preload = false }) => {
           "sap/m/messagebundle_zh_CN.properties",
           "sap/ui/core/messagebundle_zh_CN.properties"
         ],
-        title: "ui5-workthrough",
+        title: APP_NAME,
         theme: "sap_belize",
         bootScriptPath: "./index.js",
         addtionalModules: ["sap/m/routing/Router", "sap/ui/thirdparty/datajs"]
@@ -73,8 +78,8 @@ var copy = ({ preload = false }) => {
   );
 };
 
-var build = ({ preload = false }) => {
-  var tasks = merge(copy({ preload }), buildJs(), buildCss());
+var build = ({ preload = false, sourcemap = false }) => {
+  var tasks = merge(copy({ preload }), buildJs({ sourcemap }), buildCss());
   if (preload) {
     return tasks
       .pipe(gulp.dest(DEST_ROOT))
@@ -97,11 +102,15 @@ var build = ({ preload = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:mem", () => {
-  return build({ preload: false }).pipe(gulpMem.dest(DEST_ROOT));
+  return build({ preload: false, sourcemap: true }).pipe(gulpMem.dest(DEST_ROOT));
+});
+
+gulp.task("build:sourcemap", () => {
+  return build({ preload: true, sourcemap: true }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("build", () => {
-  return build({ preload: true }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
@@ -175,7 +184,7 @@ gulp.task(
 
 gulp.task(
   "dev:preload",
-  gulp.series("clean", "build", gulp.parallel("bs", "watch"))
+  gulp.series("clean", "build:sourcemap", gulp.parallel("bs", "watch"))
 );
 
 gulp.task("test", gulp.series(["clean", "build:mem", "bs:test", "watch:mem"]));
