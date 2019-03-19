@@ -3,6 +3,7 @@
 ![](https://openui5.org/images/OpenUI5_new_big_side.png)
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSoontao%2Fui5g.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSoontao%2Fui5g?ref=badge_shield)
 
 The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
 
@@ -146,3 +147,7 @@ This generator is written by `Theo` but some ideas come from `Madeleine`, and it
 The idea of `JSX Support` is from `Kenny`, just a syntactic sugar.
 
 Very pleased to be able to help you.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSoontao%2Fui5g.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSoontao%2Fui5g?ref=badge_large)
