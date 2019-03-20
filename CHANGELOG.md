@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/Soontao/ui5g/compare/v1.10.5...v1.11.0) (2019-03-20)
+
+
+### Features
+
+* **types:** import d.ts & remove webpack support ([a8a1d71](https://github.com/Soontao/ui5g/commit/a8a1d71))
+* **types:** support ([a08e439](https://github.com/Soontao/ui5g/commit/a08e439))
+
+
+
 <a name="1.10.5"></a>
 ## [1.10.5](https://github.com/Soontao/ui5g/compare/v1.10.4...v1.10.5) (2019-03-20)
 
