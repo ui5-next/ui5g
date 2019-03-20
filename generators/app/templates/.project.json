@@ -9,12 +9,6 @@
       "dateTimeStamp": "<%= new Date().toString() %>"
     }
   ],
-  "codeCheckingTriggers": {
-    "notifyBeforePush": true,
-    "notifyBeforePushLevel": "Error",
-    "blockPush": false,
-    "blockPushLevel": "Error"
-  },
   "mockpreview": {
     "mockUri": "",
     "metadataFilePath": "",
