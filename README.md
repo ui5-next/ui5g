@@ -1,9 +1,9 @@
 # The ultimate generator for UI5
 
-![](https://openui5.org/images/OpenUI5_new_big_side.png)
+![Open UI5 Logo](https://openui5.org/images/OpenUI5_new_big_side.png)
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSoontao%2Fui5g.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSoontao%2Fui5g?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git+github.com/Soontao/ui5g.svg?type=shield)](https://app.fossa.io/projects/git+github.com/Soontao/ui5g?ref=badge_shield)
 
 The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
 
@@ -14,8 +14,8 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 * Eager `preload.js` file (with [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * React `JSX` syntax support, (XMLView still work)
 * Allowed import third party libraries from node_modules.
-* Pre-defined `vscode`, `eslint`, `babel`, `webpack` and `gulp` config
-* Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.
+* Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
+* ~~Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.~~
 
 ## A sample view file syntax
 
@@ -134,9 +134,7 @@ But I think converting `React Component` to UI5 Control is feasible and meaningf
 
 ## TO-DO
 
-* Auto import support based on UI5 Type
 * Convert react components to UI5 control
-* Decorator support
 
 ## [CHANGELOG](./CHANGELOG.md)
 
@@ -148,6 +146,6 @@ The idea of `JSX Support` is from `Kenny`, just a syntactic sugar.
 
 Very pleased to be able to help you.
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSoontao%2Fui5g.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSoontao%2Fui5g?ref=badge_large)
