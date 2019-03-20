@@ -1,6 +1,6 @@
 {
   "name": "generator-ui5g",
-  "version": "1.10.4",
+  "version": "1.10.5",
   "description": "Basic generator for sapui5/openui5",
   "author": {
     "name": "Theo Sun",
@@ -15,7 +15,7 @@
     "ui5"
   ],
   "scripts": {
-    "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master&&npm publish",
+    "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master",
     "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "devDependencies": {
