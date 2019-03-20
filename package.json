@@ -15,7 +15,7 @@
     "ui5"
   ],
   "scripts": {
-    "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master&&npm publish",
+    "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master",
     "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "devDependencies": {
