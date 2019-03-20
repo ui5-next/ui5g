@@ -3,7 +3,6 @@
 ![Open UI5 Logo](https://openui5.org/images/OpenUI5_new_big_side.png)
 
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
-[![FOSSA Status](https://app.fossa.io/api/projects/git+github.com/Soontao/ui5g.svg?type=shield)](https://app.fossa.io/projects/git+github.com/Soontao/ui5g?ref=badge_shield)
 
 The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
 
