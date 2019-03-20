@@ -13,6 +13,7 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 * Eager `preload.js` file (with [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * React `JSX` syntax support, (XMLView still work)
 * Allowed import third party libraries from node_modules.
+* VSCode auto import support, based on [@ui5-next/types](https://github.com/ui5-next/types)
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
 * ~~Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.~~
 
@@ -108,8 +109,6 @@ to generate webpack bundle, resources maybe lost, remember to check `webpack.con
 
 * ```proxy```, edit ```proxies.js```, supported by gulp connect, use a tranditional node lib, it can set local proxy to remote server
 
-* ```webpack.config.js```, webpack config, bundle file generator
-
 ## Command
 
 * ```npm start```, default *gulp* will start a hot reload server, based on BrowserSync. Recommended to develop in this way.
@@ -117,8 +116,6 @@ to generate webpack bundle, resources maybe lost, remember to check `webpack.con
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
-
-* ```npm run dev```, start webpack dev server, but current version server not support `sourcemap`
 
 * ```npm run bundle```, generate `webpack` bundle file & copy necessary files.
 
