@@ -2,7 +2,7 @@ export const manifest = {
   "_version": "1.1.0",
   "sap.app": {
     "_version": "1.1.0",
-    "id": "<%= namespace %>",
+    "id": "ui5.demo.walkthrough",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "title": "{{appTitle}}",
@@ -35,7 +35,7 @@ export const manifest = {
   "sap.ui5": {
     "_version": "1.1.0",
     "rootView": {
-      "viewName": "<%= namespace %>.views.App",
+      "viewName": "ui5.demo.walkthrough.views.App",
       "type": "JS"
     },
     "dependencies": {
@@ -48,7 +48,7 @@ export const manifest = {
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "<%= namespace %>.i18n.i18n"
+          "bundleName": "ui5.demo.walkthrough.i18n.i18n"
         }
       },
       "invoice": {
@@ -66,7 +66,7 @@ export const manifest = {
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "JS",
-        "viewPath": "<%= namespace %>.views",
+        "viewPath": "ui5.demo.walkthrough.views",
         "controlId": "app",
         "controlAggregation": "pages"
       },
@@ -92,4 +92,4 @@ export const manifest = {
       }
     }
   }
-}
+};

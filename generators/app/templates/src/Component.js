@@ -41,7 +41,7 @@ export default class Component extends UIComponent {
         }
       };
       // create dialog via fragment factory
-      this._dialog = createHelloDialog(oFragmentController)
+      this._dialog = createHelloDialog(oFragmentController);
       // connect dialog to the root view of this component (models, lifecycle)
       oView.addDependent(this._dialog);
       // forward compact/cozy style into dialog

@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@types/openui5": "^1.40.1",
-    "@ui5-next/types": "^1.0.2",
+    "@ui5-next/types": "latest",
     "babel-cli": "^6.7.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
