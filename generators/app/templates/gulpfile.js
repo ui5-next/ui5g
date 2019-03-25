@@ -126,19 +126,6 @@ gulp.task("bs", () => {
   });
 });
 
-gulp.task("bs:test", () => {
-  var middlewares = require("./proxies");
-  middlewares.push(gulpMem.middleware);
-  browserSync.init({
-    server: {
-      baseDir: DEST_ROOT,
-      middleware: middlewares,
-      notify: false
-    },
-    startPath: "test/mockServer.html"
-  });
-});
-
 // run gulp lint to auto fix src directory
 gulp.task("lint", () => {
   return gulp
