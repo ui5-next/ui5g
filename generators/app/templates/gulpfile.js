@@ -13,11 +13,13 @@ var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
 var { join } = require("path");
 
+var packageJson = require("./package.json");
+
 var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
-var APP_NAME = "<%= name %>";
-var namespace = "<%= namespace %>";
-var resourceRoot = "https://<%= ui5Domain %>/resources/";
+var APP_NAME = packageJson.name;
+var namespace = packageJson.app.namespace;
+var resourceRoot = packageJson.app.resource;
 
 var gulpMem = new GulpMem();
 gulpMem.serveBasePath = DEST_ROOT;
@@ -173,5 +175,3 @@ gulp.task(
   "dev:preload",
   gulp.series("clean", "build:sourcemap", gulp.parallel("bs", "watch"))
 );
-
-gulp.task("test", gulp.series(["clean", "build:mem", "bs:test", "watch:mem"]));
