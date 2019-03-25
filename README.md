@@ -8,14 +8,13 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 ## Features
 
-* Full ES6 syntax support.
-* Full module system mapping, (ui5 tranditional `sap.ui.define` still work)
-* Eager `preload.js` file (with [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
-* React `JSX` syntax support, (XMLView still work)
-* Allowed import third party libraries from node_modules.
-* VSCode auto import support, based on [@ui5-next/types](https://github.com/ui5-next/types)
+* Full ES6 syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* Full module system mapping. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* Eager `preload.js` file. (powered by [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
+* React `JSX` syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* Allowed import third party libraries from `node_modules`. (powered by [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
+* VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
-* ~~Experimental **webpack** bundle support, extremely code loading experience. Please DONT use it in production env.~~
 
 ## A sample view file syntax
 
@@ -130,7 +129,7 @@ But I think converting `React Component` to UI5 Control is feasible and meaningf
 
 ## TO-DO
 
-* Convert react components to UI5 control
+* More templates support
 
 ## [CHANGELOG](./CHANGELOG.md)
 
@@ -141,7 +140,3 @@ This generator is written by `Theo` but some ideas come from `Madeleine`, and it
 The idea of `JSX Support` is from `Kenny`, just a syntactic sugar.
 
 Very pleased to be able to help you.
-
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSoontao%2Fui5g.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSoontao%2Fui5g?ref=badge_large)
