@@ -1,5 +1,6 @@
 {
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": false,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "editor.fontSize": 14
 }
