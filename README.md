@@ -20,7 +20,7 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 Developer can use JSX element in JSView defination & and no need to write additional controllers.
 
-(But developers can still use a custom controller by writing `getControllerName()`)
+But developers can still use a custom controller by writing `getControllerName()`
 
 Source Code:
 
