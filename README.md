@@ -90,13 +90,11 @@ npm start
 
 ## Build
 
-Please run
+Just run
 
 ```bash
 npm run build
 ```
-
-to generate webpack bundle, resources maybe lost, remember to check `webpack.config.js` if you meet 404 code
 
 ## Configuration
 
