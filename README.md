@@ -114,8 +114,6 @@ npm run build
   
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
 
-* ```npm run bundle```, generate `webpack` bundle file & copy necessary files.
-
 ## Why support JSX syntax but not support react lifecycle and virtual dom
 
 * UI5 `Controls` (Components in the modern sense) have its' own lifecycle, and can not overwrite them.
