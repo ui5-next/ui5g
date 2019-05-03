@@ -10,7 +10,7 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 * Full ES6 syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
 * Full module system mapping. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
-* Eager `preload.js` file. (powered by [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
+* Eager `preload.js` file. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * React `JSX` syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
 * Allowed import third party libraries from `node_modules`. (powered by [gulp ui5 eager preload plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
