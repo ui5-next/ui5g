@@ -1,0 +1,8 @@
+{
+    "eslint.autoFixOnSave": true,
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "on",
+    "files.eol": "\n"
+}

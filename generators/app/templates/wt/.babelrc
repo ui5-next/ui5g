@@ -1,0 +1,11 @@
+{
+  "sourceRoot": "src",
+  "presets": [
+    [
+      "babel-preset-ui5-next",
+      {
+        "namespace": "<%= namespace %>"
+      }
+    ]
+  ]
+}

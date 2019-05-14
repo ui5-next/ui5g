@@ -1,0 +1,209 @@
+<mvc:View
+	controllerName="<%= namespace %>.controller.Home"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false">
+		<landmarkInfo>
+			<PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>Home_rootLabel}"
+				contentRole="Main"
+				contentLabel="{i18n>Home_contentLabel}"/>
+		</landmarkInfo>
+		<l:BlockLayout
+			id="BlockLayout"
+			background="Default">
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell class="sapUiNoContentPadding">
+					<Image
+						src="{
+							path: 'view>/isPhone',
+							formatter: '.formatter.srcImageValue'
+						}"
+						width="100%"
+						height="100%"/>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeD">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://role"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							id="administrationTile"
+							text="{i18n>administrationTitle}"
+							level="H3"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>administrationContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link
+							text="{i18n>accessLink}"
+							tooltip="{i18n>accessAdministrationLink}"/>
+						<Link
+							text="{i18n>learnLink}"
+							tooltip="{i18n>learnAdministrationTooltip}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeB">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://add-product"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							id="productTile"
+							text="{i18n>productTitle}"
+							level="H3"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>productContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link
+							text="{i18n>accessLink}"
+							tooltip="{i18n>accessProductsLink}"/>
+						<Link
+							text="{i18n>learnLink}"
+							tooltip="{i18n>learnProductsTooltip}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeD">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://customer-financial-fact-sheet"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>revenueTitle}"
+							level="H3"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>revenueContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link
+							text="{i18n>accessLink}"
+							tooltip="{i18n>accessRevenueLink}"/>
+						<Link
+							text="{i18n>learnLink}"
+							tooltip="{i18n>learnRevenueTooltip}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeB">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://supplier"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>supplierTitle}"
+							level="H3"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>supplierContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link
+							text="{i18n>accessLink}"
+							tooltip="{i18n>accessSuppliersLink}"/>
+						<Link
+							text="{i18n>learnLink}"
+							tooltip="{i18n>learnSuppliersTooltip}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeB">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://thumb-up"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>socialMediaTitle}"
+							level="H3"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>socialMediaContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link
+							text="{i18n>accessLink}"
+							tooltip="{i18n>accessSocialLink}"/>
+						<Link
+							text="{i18n>learnLink}"
+							tooltip="{i18n>learnSocialMediaTooltip}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet9"
+					backgroundColorShade="ShadeA"
+					width="3">
+					<Table
+						items="{path:'customer>/customers', templateShareable: false}"
+						fixedLayout="false">
+						<headerToolbar>
+							<Toolbar design="Transparent">
+								<Title
+									text="{i18n>customerOverviewTitle}"
+									level="H3"/>
+							</Toolbar>
+						</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>customerName}"/>
+								</Column>
+								<Column minScreenWidth="Tablet">
+									<Text text="{i18n>productId}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" hAlign="End">
+									<Text text="{i18n>lastPurchase}"/>
+								</Column>
+								<Column hAlign="Center">
+									<Text text="{i18n>payment}"/>
+								</Column>
+								<Column hAlign="End">
+									<Text text="{i18n>amount}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{customer>name}"/>
+										<Text text="{customer>productId}"/>
+										<Text text="{customer>lastPurchase}"/>
+										<ObjectNumber
+											number="{customer>payment}"
+											state="{customer>state}"/>
+										<ObjectNumber
+											number="{
+												parts:[{path:'customer>amount'},{path:'customer>currencyCode'}],
+												type: 'sap.ui.model.type.Currency',
+												formatOptions: {showMeasure: false}
+											}"
+											unit="{customer>currencyCode}" />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+	</Page>
+</mvc:View>
