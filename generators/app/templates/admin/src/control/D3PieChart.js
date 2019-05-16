@@ -12,7 +12,8 @@ sap.ui.define([
 			D3Chart.prototype.init.call(this);
 			this.setType("Pie");
 		},
-//comment
+		
+		//comment
 		_updateSVG: function (iWidth) {
 			var aData = this.getBinding("data").getCurrentContexts().map(function (oContext) {
 				return oContext.getObject();

@@ -67,14 +67,25 @@ var copy = ({ preload = false }) => {
         sourceDir: join(__dirname, "./src"),
         thirdpartyLibPath: "_thridparty",
         projectNameSpace: namespace,
-        addtionalResources: [
+        additionalResources: [
           "sap/m/messagebundle_zh_CN.properties",
           "sap/ui/core/messagebundle_zh_CN.properties"
         ],
         title: APP_NAME,
         theme: "sap_belize",
         bootScriptPath: "./index.js",
-        addtionalModules: ["sap/m/routing/Router", "sap/ui/thirdparty/datajs"]
+        additionalModules: [
+          "sap/m/routing/Router",
+          "sap/ui/thirdparty/datajs",
+          "sap/m/ResponsivePopover",
+          "sap/m/MessagePopover",
+          "sap/m/MessageListItem",
+          "sap/m/SegmentedButton",
+          "sap/m/MessageItem",
+          "sap/m/NotificationListItem",
+          "sap/m/MessagePopoverItem",
+          "sap/m/MessageToast"
+        ]
       })
     )
   );
