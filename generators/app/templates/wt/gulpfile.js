@@ -65,7 +65,7 @@ var copy = ({ preload = false }) => {
         ui5ResourceRoot: resourceRoot,
         preload,
         sourceDir: join(__dirname, "./src"),
-        thirdpartyLibPath: "_thridparty",
+        thirdpartyLibPath: "_thirdparty",
         projectNameSpace: namespace,
         additionalResources: [
           "sap/m/messagebundle_zh_CN.properties",
