@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.0"></a>
+# [1.12.0](https://github.com/Soontao/ui5g/compare/v1.11.4...v1.12.0) (2019-05-16)
+
+
+### Bug Fixes
+
+* **spell:** word ([7514c9f](https://github.com/Soontao/ui5g/commit/7514c9f))
+
+
+### Features
+
+* **template:** support ([8b86361](https://github.com/Soontao/ui5g/commit/8b86361))
+
+
+
 <a name="1.11.4"></a>
 ## [1.11.4](https://github.com/Soontao/ui5g/compare/v1.11.3...v1.11.4) (2019-04-30)
 
