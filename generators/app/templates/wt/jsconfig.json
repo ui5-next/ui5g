@@ -1,4 +1,0 @@
-{
-  "compilerOptions": {},
-  "include": ["src","./node_modules/@ui5-next/types/bin/index.d.ts"]
-}
