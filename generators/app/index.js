@@ -78,7 +78,6 @@ module.exports = class extends Generator {
       this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath(), this.props);
       this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath('.vscode'), this.props);
       this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props);
-      this.fs.copyTpl(this.templatePath(this.props.skeleton, ".*/**"), this.destinationPath(), this.props);
       done();
     });
   }
