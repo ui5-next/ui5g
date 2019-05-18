@@ -1,0 +1,10 @@
+{
+  "additionalResources": [
+    "sap/m/messagebundle_zh_CN.properties",
+    "sap/ui/core/messagebundle_zh_CN.properties"
+  ],
+  "additionalModules": [
+    "sap/m/routing/Router",
+    "sap/ui/thirdparty/datajs"
+  ]
+}

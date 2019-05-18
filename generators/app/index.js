@@ -28,20 +28,26 @@ module.exports = class extends Generator {
           {
             name: 'Shop Administration Tool',
             value: 'admin'
+          },
+          {
+            name: 'Empty Project',
+            value: 'empty'
           }
         ]
-      },
+      }
+    ];
+    const projectPrompts = (skeleton = "") => [
       {
         type: 'input',
         name: 'name',
         message: 'App name',
-        "default": 'ui5-workthrough'
+        "default": `ui5-${skeleton.toLowerCase()}`
       },
       {
         type: 'input',
         name: 'namespace',
         message: 'App namespace/package',
-        "default": 'ui5.demo.walkthrough'
+        "default": `ui5.${skeleton.toLowerCase()}`
       },
       {
         type: 'list',
@@ -59,14 +65,21 @@ module.exports = class extends Generator {
         ]
       }
     ];
-    return this.prompt(prompts).then(props => {
-      props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
-      props.namepath = props.namespace.replace(/\./g, '/');
-      if (props.namespace.startsWith("sap")) {
-        warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
-      }
-      this.props = props;
-    });
+
+    return this
+      .prompt(prompts)
+      .then(props => {
+        this.props = props;
+        return this.prompt(projectPrompts(props.skeleton));
+      })
+      .then(props => {
+        props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
+        props.namepath = props.namespace.replace(/\./g, '/');
+        if (props.namespace.startsWith("sap")) {
+          warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
+        }
+        this.props = Object.assign(this.props, props);
+      });
   }
 
   writing() {
@@ -83,6 +96,6 @@ module.exports = class extends Generator {
   }
 
   installing() {
-    this.npmInstall();
+    this.installDependencies({ npm: true, bower: false, yarn: false });
   }
 };

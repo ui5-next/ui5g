@@ -1,16 +1,16 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
-var ui5preload = require("gulp-ui5-preload");
 var eslint = require("gulp-eslint");
 var merge = require("merge-stream");
 var browserSync = require("browser-sync");
-var GulpMem = require("gulp-mem");
 var less = require("gulp-less");
 var del = require("del");
 var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
+var ui5preload = eagerPreload.componentPreload;
+var addtionalPreload = require("./ui5Preload")
 var { join } = require("path");
 
 var packageJson = require("./package.json");
@@ -20,10 +20,6 @@ var DEST_ROOT = "./dist";
 var APP_NAME = packageJson.name;
 var namespace = packageJson.app.namespace;
 var resourceRoot = packageJson.app.resource;
-
-var gulpMem = new GulpMem();
-gulpMem.serveBasePath = DEST_ROOT;
-gulpMem.enableLog = false;
 
 var buildJs = ({ sourcemap }) => {
   // use to avoid an error cause whole gulp failed
@@ -62,30 +58,16 @@ var copy = ({ preload = false }) => {
     gulp.src([`${SRC_ROOT}/**/lib/*`], { base: `${SRC_ROOT}` }),
     gulp.src("./package.json").pipe(
       eagerPreload({
+        title: APP_NAME,
+        theme: "sap_belize",
+        bootScriptPath: "./index.js",
         ui5ResourceRoot: resourceRoot,
         preload,
         sourceDir: join(__dirname, "./src"),
         thirdpartyLibPath: "_thirdparty",
         projectNameSpace: namespace,
-        additionalResources: [
-          "sap/m/messagebundle_zh_CN.properties",
-          "sap/ui/core/messagebundle_zh_CN.properties"
-        ],
-        title: APP_NAME,
-        theme: "sap_belize",
-        bootScriptPath: "./index.js",
-        additionalModules: [
-          "sap/m/routing/Router",
-          "sap/ui/thirdparty/datajs",
-          "sap/m/ResponsivePopover",
-          "sap/m/MessagePopover",
-          "sap/m/MessageListItem",
-          "sap/m/SegmentedButton",
-          "sap/m/MessageItem",
-          "sap/m/NotificationListItem",
-          "sap/m/MessagePopoverItem",
-          "sap/m/MessageToast"
-        ]
+        additionalResources: addtionalPreload.additionalResources,
+        additionalModules: addtionalPreload.additionalModules
       })
     )
   );
@@ -114,10 +96,6 @@ var build = ({ preload = false, sourcemap = false }) => {
 
 gulp.task("clean", () => del(DEST_ROOT));
 
-gulp.task("build:mem", () => {
-  return build({ preload: false, sourcemap: true }).pipe(gulpMem.dest(DEST_ROOT));
-});
-
 gulp.task("build:sourcemap", () => {
   return build({ preload: true, sourcemap: true }).pipe(gulp.dest(DEST_ROOT));
 });
@@ -128,7 +106,6 @@ gulp.task("build", () => {
 
 gulp.task("bs", () => {
   var middlewares = require("./proxies");
-  middlewares.push(gulpMem.middleware);
   browserSync.init({
     server: {
       baseDir: DEST_ROOT,
@@ -155,10 +132,6 @@ gulp.task("watch", () => {
   gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build", "reload"]));
 });
 
-gulp.task("watch:mem", () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:mem", "reload"]));
-});
-
 gulp.task("live-build", gulp.series("build", "bs"), () => {
   gulp.watch(`${SRC_ROOT}/**/*`, () => gulp.series("build", "reload"));
 });
@@ -173,16 +146,6 @@ gulp.task("build-js", buildJs);
 gulp.task("build-css", buildCss);
 
 gulp.task("copy", copy);
-
-gulp.task(
-  "default",
-  gulp.series("clean", "build:mem", gulp.parallel("bs", "watch:mem"))
-);
-
-gulp.task(
-  "dev",
-  gulp.series("clean", "build:mem", gulp.parallel("bs", "watch:mem"))
-);
 
 gulp.task(
   "dev:preload",
