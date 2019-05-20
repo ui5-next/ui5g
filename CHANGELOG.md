@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.7"></a>
+## [1.12.7](https://github.com/Soontao/ui5g/compare/v1.12.6...v1.12.7) (2019-05-20)
+
+
+### Bug Fixes
+
+* **non-ui5:** import ([ec72490](https://github.com/Soontao/ui5g/commit/ec72490))
+
+
+
 <a name="1.12.6"></a>
 ## [1.12.6](https://github.com/Soontao/ui5g/compare/v1.12.5...v1.12.6) (2019-05-20)
 
