@@ -1,6 +1,7 @@
 {
   "sourceRoot": "src",
   "presets": [
+    "babel-preset-flow",
     [
       "babel-preset-ui5-next",
       {
