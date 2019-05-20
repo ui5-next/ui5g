@@ -26,7 +26,7 @@ export const manifest = {
 	"sap.ui5": {
 		"rootView": {
 			"viewName": "<%= namespace %>.view.App",
-			"type": "XML",
+			"type": "JS",
 			"async": true,
 			"id": "app"
 		},
