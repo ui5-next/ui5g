@@ -10,7 +10,7 @@ var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
 var ui5preload = eagerPreload.componentPreload;
-var addtionalPreload = require("./ui5Preload")
+var additionalPreload = require("./ui5Preload");
 var { join } = require("path");
 
 var packageJson = require("./package.json");
@@ -66,8 +66,8 @@ var copy = ({ preload = false }) => {
         sourceDir: join(__dirname, "./src"),
         thirdpartyLibPath: "_thirdparty",
         projectNameSpace: namespace,
-        additionalResources: addtionalPreload.additionalResources,
-        additionalModules: addtionalPreload.additionalModules
+        additionalResources: additionalPreload.additionalResources,
+        additionalModules: additionalPreload.additionalModules
       })
     )
   );
@@ -114,7 +114,7 @@ gulp.task("bs", () => {
     reloadDelay:1 * 1000,
     reloadDebounce:1 * 1000,
     notify: false,
-    startPath: "index.html"
+    startPath: "/"
   });
 });
 
