@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.8"></a>
+## [1.12.8](https://github.com/Soontao/ui5g/compare/v1.12.7...v1.12.8) (2019-05-21)
+
+
+
 <a name="1.12.7"></a>
 ## [1.12.7](https://github.com/Soontao/ui5g/compare/v1.12.6...v1.12.7) (2019-05-20)
 
