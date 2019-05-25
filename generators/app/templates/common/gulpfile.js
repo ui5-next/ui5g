@@ -74,8 +74,8 @@ var copy = ({ preload = false, offline = false }) => {
   );
 };
 
-var build = ({ preload = false, sourcemap = false }) => {
-  var tasks = merge(copy({ preload }), buildJs({ sourcemap }), buildCss());
+var build = ({ preload = false, sourcemap = false, offline = false }) => {
+  var tasks = merge(copy({ preload, offline }), buildJs({ sourcemap }), buildCss());
   if (preload) {
     return tasks
       .pipe(gulp.dest(DEST_ROOT))
