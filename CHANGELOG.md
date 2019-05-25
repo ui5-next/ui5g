@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.13.1"></a>
+## [1.13.1](https://github.com/Soontao/ui5g/compare/v1.13.0...v1.13.1) (2019-05-25)
+
+
+### Bug Fixes
+
+* **offline:** not work ([17e1739](https://github.com/Soontao/ui5g/commit/17e1739))
+
+
+
 <a name="1.13.0"></a>
 # [1.13.0](https://github.com/Soontao/ui5g/compare/v1.12.11...v1.13.0) (2019-05-25)
 
