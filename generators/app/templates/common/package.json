@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "postinstall": "npm run lint:fix",
-    "start": "node_modules/.bin/gulp dev",
-    "start:preload": "node_modules/.bin/gulp dev:preload",
+    "start:debug": "node_modules/.bin/gulp dev",
+    "start": "node_modules/.bin/gulp dev:preload",
     "build": "node_modules/.bin/gulp build",
     "build:sourcemap": "node_modules/.bin/gulp build:sourcemap",
     "lint:fix": "node_modules/.bin/eslint --fix \"src/**/*.js\""
@@ -24,7 +24,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-preset-flow": "^6.23.0",
-    "babel-preset-ui5-next": "^1.4.5",
+    "babel-preset-ui5-next": "^1.4.6",
     "browser-sync": "2.26.5",
     "del": "^2.2.2",
     "eslint": "^5.7.0",

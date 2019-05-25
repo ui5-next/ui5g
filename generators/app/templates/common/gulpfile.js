@@ -147,7 +147,6 @@ gulp.task("build-css", buildCss);
 
 gulp.task("copy", copy);
 
-gulp.task(
-  "dev:preload",
-  gulp.series("clean", "build:sourcemap", gulp.parallel("bs", "watch"))
-);
+gulp.task("dev", gulp.series("clean", "build", gulp.parallel("bs", "watch")));
+
+gulp.task("dev:preload", gulp.series("clean", "build:sourcemap", gulp.parallel("bs", "watch")));
