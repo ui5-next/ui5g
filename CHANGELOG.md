@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.12.11"></a>
+## [1.12.11](https://github.com/Soontao/ui5g/compare/v1.12.10...v1.12.11) (2019-05-25)
+
+
+### Bug Fixes
+
+* **build:** gulp ([374f960](https://github.com/Soontao/ui5g/commit/374f960))
+
+
+
 <a name="1.12.10"></a>
 ## [1.12.10](https://github.com/Soontao/ui5g/compare/v1.12.9...v1.12.10) (2019-05-25)
 
