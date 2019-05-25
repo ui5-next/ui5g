@@ -44,7 +44,7 @@ var buildCss = () => {
     .pipe(less());
 };
 
-var copy = ({ preload = false }) => {
+var copy = ({ preload = false, offline = false }) => {
   return merge(
     gulp.src(
       [
@@ -63,6 +63,7 @@ var copy = ({ preload = false }) => {
         bootScriptPath: "./index.js",
         ui5ResourceRoot: resourceRoot,
         preload,
+        offline,
         sourceDir: join(__dirname, "./src"),
         thirdpartyLibPath: "_thirdparty",
         projectNameSpace: namespace,
@@ -105,7 +106,7 @@ gulp.task("build:dev", () => {
 });
 
 gulp.task("build", () => {
-  return build({ preload: true, sourcemap: false }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: false, offline: true }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
