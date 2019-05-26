@@ -137,6 +137,14 @@ gulp.task("watch", () => {
   gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build", "reload"]));
 });
 
+gulp.task("watch:debug", () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:debug", "reload"]));
+});
+
+gulp.task("watch:preload", () => {
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:preload", "reload"]));
+});
+
 gulp.task("live-build", gulp.series("build", "bs"), () => {
   gulp.watch(`${SRC_ROOT}/**/*`, () => gulp.series("build", "reload"));
 });
@@ -152,6 +160,6 @@ gulp.task("build-css", buildCss);
 
 gulp.task("copy", copy);
 
-gulp.task("dev", gulp.series("clean", "build:debug", gulp.parallel("bs", "watch")));
+gulp.task("dev", gulp.series("clean", "build:debug", gulp.parallel("bs", "watch:debug")));
 
-gulp.task("dev:preload", gulp.series("clean", "build:preload", gulp.parallel("bs", "watch")));
+gulp.task("dev:preload", gulp.series("clean", "build:preload", gulp.parallel("bs", "watch:preload")));
