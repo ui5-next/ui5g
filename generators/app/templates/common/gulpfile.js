@@ -98,11 +98,11 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:preload", () => {
-  return build({ preload: true, sourcemap: true }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
-gulp.task("build:dev", () => {
-  return build({ preload: false, sourcemap: true }).pipe(gulp.dest(DEST_ROOT));
+gulp.task("build:debug", () => {
+  return build({ preload: false, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("build", () => {
@@ -152,6 +152,6 @@ gulp.task("build-css", buildCss);
 
 gulp.task("copy", copy);
 
-gulp.task("dev", gulp.series("clean", "build:dev", gulp.parallel("bs", "watch")));
+gulp.task("dev", gulp.series("clean", "build:debug", gulp.parallel("bs", "watch")));
 
 gulp.task("dev:preload", gulp.series("clean", "build:preload", gulp.parallel("bs", "watch")));
