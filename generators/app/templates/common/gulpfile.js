@@ -85,7 +85,11 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
           "**/*.xml",
           "**/*.properties",
           "**/*.json",
+          // remove offline files
+          "!**/resources/**/*.*",
+          // avoid preload file
           "!**/preload.js",
+          // not use now
           "!**/lib/*"
         ])
       )
