@@ -13,6 +13,8 @@ var ui5preload = eagerPreload.componentPreload;
 var additionalPreload = require("./ui5Preload");
 var { join } = require("path");
 
+var babelConfig = require("./.babelrc");
+
 var packageJson = require("./package.json");
 
 var SRC_ROOT = "./src";
@@ -23,7 +25,7 @@ var resourceRoot = packageJson.app.resource;
 
 var buildJs = ({ sourcemap }) => {
   // use to avoid an error cause whole gulp failed
-  var b = babel().on("error", e => {
+  var b = babel(babelConfig).on("error", e => {
     console.log(e.stack);
     b.end();
   });
@@ -33,7 +35,7 @@ var buildJs = ({ sourcemap }) => {
   }
   rt = rt.pipe(b);
   if (sourcemap) {
-    rt = rt.pipe(sourcemaps.write("/sourcemap"));
+    rt = rt.pipe(sourcemaps.write({ sourceRoot: "/sourcemaps" }));
   }
   return rt;
 };
@@ -127,6 +129,21 @@ gulp.task("bs", () => {
   });
 });
 
+gulp.task("bs:silent", () => {
+  var middlewares = require("./proxies");
+  browserSync.init({
+    server: {
+      baseDir: DEST_ROOT,
+      middleware: middlewares
+    },
+    open: false,
+    reloadDelay: 1 * 1000,
+    reloadDebounce: 1 * 1000,
+    notify: false,
+    startPath: "/"
+  });
+});
+
 // run gulp lint to auto fix src directory
 gulp.task("lint", () => {
   return gulp
@@ -167,3 +184,5 @@ gulp.task("copy", copy);
 gulp.task("dev", gulp.series("clean", "build:debug", gulp.parallel("bs", "watch:debug")));
 
 gulp.task("dev:preload", gulp.series("clean", "build:preload", gulp.parallel("bs", "watch:preload")));
+
+gulp.task("dev:silent", gulp.series("clean", "build:preload", gulp.parallel("bs:silent", "watch:preload")));
