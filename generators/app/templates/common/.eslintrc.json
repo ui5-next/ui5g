@@ -15,7 +15,8 @@
     "es6": true,
     "node": true,
     "amd": true,
-    "qunit": true
+    "qunit": true,
+    "jest": true
   },
   "plugins": [
     "react"
@@ -24,7 +25,11 @@
     "sap": true,
     "jQuery": true,
     "com": true,
-    "_": true
+    "_": true,
+    "page": true,
+    "browser": true,
+    "context": true,
+    "jestPuppeteer": true
   },
   "parser": "babel-eslint",
   "rules": {
@@ -197,7 +202,7 @@
     "react/jsx-boolean-value": 0,
     "react/jsx-no-comment-textnodes": 1,
     "react/jsx-no-duplicate-props": 2,
-    "react/jsx-no-undef": 0,
+    "react/jsx-no-undef": 2,
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
