@@ -18,15 +18,18 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: npm i -g yo
-      - run: npm link
-      - run: yo ui5g --template empty
-      - run: cd project && npm i && npm run build
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm install yo
+      - run: npm link
+      - run: ./node_modules/.bin/yo ui5g --template empty
+      - run: cd project && npm i && npm run build
+
+
 
   deploy:
     working_directory: ~/repo
