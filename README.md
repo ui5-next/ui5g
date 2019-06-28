@@ -2,6 +2,7 @@
 
 ![Open UI5 Logo](https://openui5.org/images/OpenUI5_new_big_side.png)
 
+[![CircleCI](https://circleci.com/gh/ui5-next/ui5g.svg?style=shield)](https://circleci.com/gh/ui5-next/ui5g)
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
 
 The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
