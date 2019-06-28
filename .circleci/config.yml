@@ -24,7 +24,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: sudo npm install yo
+      - run: sudo npm i -g yo
       - run: sudo npm link
       - run: yo ui5g --template empty
       - run: cd project && npm i && npm run build
