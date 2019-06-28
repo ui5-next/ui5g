@@ -1,6 +1,33 @@
 version: 2
 
 jobs:
+  test:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+      - run: npm i -g yo
+      - run: npm link
+      - run: yo ui5g --template empty
+      - run: cd project && npm i && npm run build
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
   deploy:
     working_directory: ~/repo
     docker:
@@ -17,9 +44,17 @@ jobs:
 
 workflows:
   version: 2
-  deploy:
+  main:
     jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
       - deploy:
+          requires:
+            - test
           filters:
             tags:
               only: /.*/
