@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.14.0"></a>
+# [1.14.0](https://github.com/Soontao/ui5g/compare/v1.13.6...v1.14.0) (2019-06-28)
+
+
+### Bug Fixes
+
+* dep  install ([313683a](https://github.com/Soontao/ui5g/commit/313683a))
+* **ci:** script ([f8034cb](https://github.com/Soontao/ui5g/commit/f8034cb))
+
+
+### Features
+
+* cli options ([7deef92](https://github.com/Soontao/ui5g/commit/7deef92))
+* **jsx:** jsx import check ([4d9c884](https://github.com/Soontao/ui5g/commit/4d9c884))
+
+
+
 <a name="1.13.6"></a>
 ## [1.13.6](https://github.com/Soontao/ui5g/compare/v1.13.5...v1.13.6) (2019-06-02)
 
