@@ -29,8 +29,6 @@ jobs:
       - run: yo ui5g --template empty
       - run: cd project && npm i && npm run build
 
-
-
   deploy:
     working_directory: ~/repo
     docker:
