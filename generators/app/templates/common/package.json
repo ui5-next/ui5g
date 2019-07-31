@@ -1,7 +1,7 @@
 {
   "app": {
     "namespace": "<%= namespace %>",
-    "resource": "https://<%= ui5Domain %>/resources/"
+    "resource": "https://<%= ui5Domain %>/1.68.1/resources/"
   },
   "name": "<%= name %>",
   "version": "1.0.0",
@@ -24,7 +24,7 @@
     "babel-core": "^6",
     "babel-eslint": "^10",
     "babel-preset-flow": "^6",
-    "babel-preset-ui5-next": "^1.6.3",
+    "babel-preset-ui5-next": "^1.7.0",
     "browser-sync": "2.26.7",
     "del": "^5",
     "eslint": "^6",
@@ -37,6 +37,6 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-ui5-eager-preload": "^1.12.20",
     "http-proxy-middleware": "^0.19.1",
-    "merge-stream": "^1.0.1"
+    "merge-stream": "^1"
   }
 }

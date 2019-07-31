@@ -17,52 +17,6 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 * VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
 
-## A sample view file syntax
-
-Developer can use JSX element in JSView defination & and no need to write additional controllers.
-
-But developers can still use a custom controller by writing `getControllerName()`
-
-Source Code:
-
-```jsx
-import JSView from "sap/ui/core/mvc/JSView";
-import Page from "sap/m/Page";
-import Button from "sap/m/Button";
-import HelloPanel from "./HelloPanel.view"; // another js view
-import InvoiceList from "./InvoiceList.view"; // another js view
-
-export default class App extends JSView {
-
-  createContent(controller) {
-    this.addStyleClass(controller.getOwnerComponent().getContentDensityClass());
-    // yes, JSX support
-    return (
-      <Page
-        headerContent={
-          <Button
-            icon="sap-icon://hello-world"
-            press={() => {
-              this.oController.getOwnerComponent().openHelloDialog();
-            }}
-          />
-        }
-      >
-        {
-          // extra will be passed into HelloPanel
-          // and use this.getViewData().extra to get it
-        }
-        <HelloPanel extra="this_is_a_test_string" />
-        <InvoiceList />
-      </Page>
-    );
-  }
-
-}
-```
-
-and it works
-
 ## Installation
 
 Firstly, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
@@ -81,9 +35,7 @@ Also, dependencies will be auto installed by `npm`
 
 ## Development
 
-This template is based on [UI5 Walkthrough](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/tutorial/walkthrough/37/webapp/test/mockServer.html?sap-ui-theme=sap_belize), It contains most features of ui5
-
-start your project
+start your development, this command will open ui5 application by `BrowserSync`
 
 ```bash
 npm start
@@ -91,21 +43,19 @@ npm start
 
 ## Build
 
-Just run
-
 ```bash
 npm run build
 ```
 
 ## Configuration
 
-* ```babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemap inline
+* ```babel```, edit ```.babelrc``` to modify babel behavior, for example, make sourcemaps inline
 
 * ```eslint```, edit ```.eslintrc``` to modify eslint lint config, by default, new project will use most rules of ui5 standard, only add es6 and other essential rules.
 
 * ```gulp```, edit ```gulpfile.js``` to modify gulp task and other task behavior, you can add *sass* or *uglify* or other processes manually, or adjust *src*/*dist* directory
 
-* ```proxy```, edit ```proxies.js```, supported by gulp connect, use a tranditional node lib, it can set local proxy to remote server
+* ```proxy```, edit ```proxies.js```, supported by gulp connect, use a traditional node lib, it can set local proxy to remote server
 
 ## Command
 
@@ -114,19 +64,6 @@ npm run build
   PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
   
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
-
-## Why support JSX syntax but not support react lifecycle and virtual dom
-
-* UI5 `Controls` (Components in the modern sense) have its' own lifecycle, and can not overwrite them.
-* UI5 `Renderers` normally write `DOM` directly, but react `render` function just return a data object. That's the core of virtual dom.
-* Its hard to convert `model` in MVC to `react` one-way data binding. I think `vue` will be better choice because its `two-way-binding`, but vue's template syntax is complex.
-* Additional performance overhead, and additional in-stability.
-
-But I think converting `React Component` to UI5 Control is feasible and meaningful.
-
-## TO-DO
-
-* More templates support
 
 ## [CHANGELOG](./CHANGELOG.md)
 
