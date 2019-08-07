@@ -112,7 +112,7 @@ gulp.task("build:debug", () => {
 });
 
 gulp.task("build", () => {
-  return build({ preload: true, sourcemap: false, offline: true }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: false, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
