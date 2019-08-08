@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/Soontao/ui5g/compare/v1.14.5...v1.15.0) (2019-08-08)
+
+
+### Bug Fixes
+
+* **ci:** scripts ([f294915](https://github.com/Soontao/ui5g/commit/f294915))
+* **ci:** scripts ([bb09ce4](https://github.com/Soontao/ui5g/commit/bb09ce4))
+
+
+### Features
+
+* electron app ([dcaa435](https://github.com/Soontao/ui5g/commit/dcaa435))
+
+
+
 ### [1.14.5](https://github.com/Soontao/ui5g/compare/v1.14.4...v1.14.5) (2019-08-07)
 
 
