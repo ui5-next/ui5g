@@ -17,21 +17,27 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install dependencies
+          command: npm install && sudo npm i -g yo
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: sudo npm i -g yo
-      - run: sudo npm link
+      - run:
+          name: Link app
+          command: sudo npm link
 
       - run: yo ui5g --template empty
       - run: cd project && npm i && npm run build
 
       # electron tests
-      - run: cd .. && rm -rf project
+      - run:
+          name: Clean temp files
+          command: rm -rf project
+
       - run: yo ui5g --template empty --electron
       - run: npm run ui:build && npm run pack
 
