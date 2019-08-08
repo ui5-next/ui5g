@@ -16,6 +16,7 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 * Allowed import third party libraries from `node_modules`. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
+* Electron support.
 
 ## Installation
 

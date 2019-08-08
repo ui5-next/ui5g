@@ -15,6 +15,7 @@ module.exports = class extends Generator {
     this.option("name", { "default": "project", type: String });
     this.option("namespace", { "default": "ui5.project", type: String });
     this.option("ui5resource", { "default": "openui5.hana.ondemand.com", type: String });
+    this.option("electron", { "default": false, type: Boolean });
   }
 
   prompting() {
@@ -33,6 +34,8 @@ module.exports = class extends Generator {
       this.props.namespace = this.options.namespace;
       this.props.namepath = this.options.namespace.replace(/\./g, '/');
       this.props.ui5Domain = this.options.ui5resource;
+      this.props.electron = this.options.electron;
+
       if (this.props.namespace.startsWith("sap")) {
         this.log(`The namespace ${this.props.namespace} start with 'sap'\nIt maybe CAUSE error`);
       }
@@ -85,6 +88,12 @@ module.exports = class extends Generator {
               value: 'sapui5.hana.ondemand.com'
             }
           ]
+        },
+        {
+          type: "confirm",
+          name: "electron",
+          message: "Electron App?",
+          "default": false
         }
       ];
 
@@ -108,18 +117,37 @@ module.exports = class extends Generator {
 
   writing() {
     const done = this.async();
+
     const targetPathRoot = path.join(process.cwd(), this.props.dir);
+
     this.destinationRoot(targetPathRoot);
-    mkdirp(targetPathRoot, () => {
-      this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props);
-      this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath(), this.props);
-      this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath('.vscode'), this.props);
-      this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props);
-      done();
-    });
+
+    // if with electron wrapper
+    if (this.props.electron) {
+      mkdirp(targetPathRoot, () => {
+        this.fs.copyTpl(this.templatePath("electron"), this.destinationPath(), this.props);
+        this.fs.copyTpl(this.templatePath("electron", ".*/**"), this.destinationPath(), this.props);
+        this.fs.copyTpl(this.templatePath("common"), this.destinationPath("ui"), this.props);
+        this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath("ui"), this.props);
+        this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath("ui", '.vscode'), this.props);
+        this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath("ui"), this.props);
+        done();
+      });
+    } else {
+      mkdirp(targetPathRoot, () => {
+        this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props);
+        this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath(), this.props);
+        this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath('.vscode'), this.props);
+        this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props);
+        done();
+      });
+    }
+
+
   }
 
   installing() {
     this.installDependencies({ npm: true, bower: false, yarn: false });
   }
+
 };

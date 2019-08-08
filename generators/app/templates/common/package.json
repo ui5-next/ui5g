@@ -9,6 +9,7 @@
   "scripts": {
     "postinstall": "npm run lint:fix",
     "start:debug": "node_modules/.bin/gulp dev",
+    "start:silent": "node_modules/.bin/gulp dev:silent",
     "start": "node_modules/.bin/gulp dev:preload",
     "build": "node_modules/.bin/gulp build",
     "build:sourcemap": "node_modules/.bin/gulp build:sourcemap",
