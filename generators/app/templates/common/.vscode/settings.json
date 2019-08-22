@@ -5,5 +5,17 @@
     "editor.insertSpaces": true,
     "editor.wordWrap": "on",
     "files.eol": "\n",
-    "javascript.validate.enable": false
+    "javascript.validate.enable": false,
+    "cSpell.words": [
+        "Netlify",
+        "devtools",
+        "fiori",
+        "middlewares",
+        "northwind",
+        "openui",
+        "preload",
+        "sourcemap",
+        "thirdparty",
+        "unfavorite"
+    ]
 }
