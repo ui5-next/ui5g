@@ -169,6 +169,10 @@
     "no-nested-ternary": 2,
     "no-new-object": 2,
     "no-spaced-func": 2,
+    "quotes": [
+      "error",
+      "double"
+    ],
     "quote-props": [
       2,
       "as-needed",

@@ -1,10 +1,10 @@
-const proxy = require('http-proxy-middleware');
+const proxy = require("http-proxy-middleware");
 
 module.exports =
   /**
    * modify here to set node proxy server
    *
-   * documention see https://github.com/chimurai/http-proxy-middleware
+   * documentation see https://github.com/chimurai/http-proxy-middleware
    */
   [
     proxy("/destinations/northwind", {
@@ -12,7 +12,7 @@ module.exports =
       // with http basic auth if necessary
       auth: "username:password",
       pathRewrite: {
-        '^/destinations/northwind': '/'
+        "^/destinations/northwind": "/"
       },
       changeOrigin: true
     })
