@@ -112,6 +112,7 @@
       2,
       "any"
     ],
+    "quotes": "error",
     "yoda": 2,
     "strict": [
       "warn",

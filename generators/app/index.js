@@ -1,10 +1,10 @@
 
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
-const path = require('path');
-const process = require('process');
-const mkdirp = require('mkdirp');
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
+const yosay = require("yosay");
+const path = require("path");
+const process = require("process");
+const mkdirp = require("mkdirp");
 const { warn } = require("console");
 
 module.exports = class extends Generator {
@@ -22,7 +22,7 @@ module.exports = class extends Generator {
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the ' + chalk.red('generator-ui5g') + ' generator!'
+      "Welcome to the " + chalk.red("generator-ui5g") + " generator!"
     ));
 
     if (this.options.template) {
@@ -30,9 +30,9 @@ module.exports = class extends Generator {
       this.props = this.props || {};
       this.props.name = this.options.name;
       this.props.skeleton = this.options.template;
-      this.props.dir = this.options.name.replace(/[^a-zA-Z0-9]/g, '');
+      this.props.dir = this.options.name.replace(/[^a-zA-Z0-9]/g, "");
       this.props.namespace = this.options.namespace;
-      this.props.namepath = this.options.namespace.replace(/\./g, '/');
+      this.props.namepath = this.options.namespace.replace(/\./g, "/");
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
 
@@ -42,42 +42,42 @@ module.exports = class extends Generator {
     } else {
       const prompts = [
         {
-          type: 'list',
-          name: 'skeleton',
-          message: 'APP Skeleton?',
+          type: "list",
+          name: "skeleton",
+          message: "APP Skeleton?",
           choices: [
-            { name: 'Empty Project', value: 'empty' },
-            { name: 'Walk Through', value: 'wt' },
-            { name: 'Shop Admin Tool', value: 'admin' }
+            { name: "Empty Project", value: "empty" },
+            { name: "Walk Through", value: "wt" },
+            { name: "Shop Admin Tool", value: "admin" }
           ]
         }
       ];
 
       const projectPrompts = (skeleton = "") => [
         {
-          type: 'input',
-          name: 'name',
-          message: 'App name',
+          type: "input",
+          name: "name",
+          message: "App name",
           "default": `ui5-${skeleton.toLowerCase()}`
         },
         {
-          type: 'input',
-          name: 'namespace',
-          message: 'App namespace/package',
+          type: "input",
+          name: "namespace",
+          message: "App namespace/package",
           "default": `ui5.${skeleton.toLowerCase()}`
         },
         {
-          type: 'list',
-          name: 'ui5Domain',
-          message: 'SAPUI5 or OpenUI5?',
+          type: "list",
+          name: "ui5Domain",
+          message: "SAPUI5 or OpenUI5?",
           choices: [
             {
-              name: 'OpenUI5',
-              value: 'openui5.hana.ondemand.com'
+              name: "OpenUI5",
+              value: "openui5.hana.ondemand.com"
             },
             {
-              name: 'SAPUI5',
-              value: 'sapui5.hana.ondemand.com'
+              name: "SAPUI5",
+              value: "sapui5.hana.ondemand.com"
             }
           ]
         },
@@ -103,8 +103,8 @@ module.exports = class extends Generator {
           return this.prompt(projectPrompts(props.skeleton));
         })
         .then(props => {
-          props.dir = props.name.replace(/[^a-zA-Z0-9]/g, '');
-          props.namepath = props.namespace.replace(/\./g, '/');
+          props.dir = props.name.replace(/[^a-zA-Z0-9]/g, "");
+          props.namepath = props.namespace.replace(/\./g, "/");
           if (props.namespace.startsWith("sap")) {
             warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
           }

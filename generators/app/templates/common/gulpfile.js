@@ -130,8 +130,7 @@ gulp.task("bs", () => {
       baseDir: DEST_ROOT,
       middleware: middlewares
     },
-    reloadDelay: 1 * 1000,
-    reloadDebounce: 1 * 1000,
+    reloadDebounce: 5 * 1000,
     notify: false,
     startPath: "/"
   });
@@ -145,8 +144,7 @@ gulp.task("bs:silent", () => {
       middleware: middlewares
     },
     open: false,
-    reloadDelay: 1 * 1000,
-    reloadDebounce: 1 * 1000,
+    reloadDebounce: 5 * 1000,
     notify: false,
     startPath: "/"
   });

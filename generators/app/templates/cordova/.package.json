@@ -3,5 +3,13 @@
     "build": {
       "dist": "./www"
     }
+  },
+  "devDependencies": {
+    "cordova": "^9.0.0"
+  },
+  "scripts": {
+    "postinstall": "npm run lint:fix && cordova platform add ios android",
+    "run-android": "node_modules/.bin/cordova run android",
+    "run-ios": "node_modules/.bin/cordova run ios"
   }
 }
