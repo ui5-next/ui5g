@@ -1,3 +1,4 @@
+var { existsSync } = require("fs");
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
@@ -10,15 +11,22 @@ var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
 var ui5preload = eagerPreload.componentPreload;
-var additionalPreload = require("./ui5Preload");
+
+var additionalPreload = { additionalResources: [], additionalModules: [] };
+
+if (existsSync("./ui5Preload.json")) {
+  additionalPreload = require("./ui5Preload");
+}
+
 var { join } = require("path");
 
 var babelConfig = require("./.babelrc");
 
 var packageJson = require("./package.json");
 
-var SRC_ROOT = "./src";
-var DEST_ROOT = "./dist";
+var SRC_ROOT = packageJson.ui5.build.src;
+var DEST_ROOT = packageJson.ui5.build.dist;
+
 var APP_NAME = packageJson.name;
 var namespace = packageJson.app.namespace;
 var resourceRoot = packageJson.app.resource;
@@ -104,15 +112,15 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:preload", () => {
-  return build({ preload: true, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: true, offline: packageJson.ui5.build.offline }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("build:debug", () => {
   return build({ preload: false, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
-gulp.task("build", () => {
-  return build({ preload: true, sourcemap: false, offline: false }).pipe(gulp.dest(DEST_ROOT));
+gulp.task("build:prod", () => {
+  return build({ preload: true, sourcemap: false, offline: packageJson.ui5.build.offline }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
@@ -155,7 +163,7 @@ gulp.task("lint", () => {
 });
 
 gulp.task("watch", () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build", "reload"]));
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:preload", "reload"]));
 });
 
 gulp.task("watch:debug", () => {
@@ -164,10 +172,6 @@ gulp.task("watch:debug", () => {
 
 gulp.task("watch:preload", () => {
   gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:preload", "reload"]));
-});
-
-gulp.task("live-build", gulp.series("build", "bs"), () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, () => gulp.series("build", "reload"));
 });
 
 gulp.task("reload", done => {

@@ -10,7 +10,7 @@ unhandled();
 contextMenu();
 
 // Note: Must match `build.appId` in package.json
-app.setAppUserModelId('com.company.AppName');
+app.setAppUserModelId('<%= namespace %>');
 
 // Uncomment this before publishing your first version.
 // It's commented out as it throws an error if there are no published versions.
@@ -27,60 +27,60 @@ app.setAppUserModelId('com.company.AppName');
 let mainWindow;
 
 const createMainWindow = async () => {
-	const win = new BrowserWindow({
-		title: app.getName(),
-		show: false,
-		width: 1200,
-		height: 750,
-		webPreferences: {
-			nodeIntegration: false,
-			preload: path.join(__dirname, "preload.js")
-		}
-	});
+  const win = new BrowserWindow({
+    title: app.getName(),
+    show: false,
+    width: 1200,
+    height: 750,
+    webPreferences: {
+      nodeIntegration: false,
+      preload: path.join(__dirname, "preload.js")
+    }
+  });
 
-	win.on('ready-to-show', () => {
-		win.show();
-	});
+  win.on('ready-to-show', () => {
+    win.show();
+  });
 
-	win.on('closed', () => {
-		// Dereference the window
-		// For multiple windows store them in an array
-		mainWindow = undefined;
-	});
+  win.on('closed', () => {
+    // Dereference the window
+    // For multiple windows store them in an array
+    mainWindow = undefined;
+  });
 
-	await win.loadFile(path.join(__dirname, "ui", "dist", 'index.html'));
+  await win.loadFile(path.join(__dirname, "dist", 'index.html'));
 
-	return win;
+  return win;
 };
 
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
-	app.quit();
+  app.quit();
 }
 
 app.on('second-instance', () => {
-	if (mainWindow) {
-		if (mainWindow.isMinimized()) {
-			mainWindow.restore();
-		}
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
 
-		mainWindow.show();
-	}
+    mainWindow.show();
+  }
 });
 
 app.on('window-all-closed', () => {
-	if (!is.macos) {
-		app.quit();
-	}
+  if (!is.macos) {
+    app.quit();
+  }
 });
 
 app.on('activate', async () => {
-	if (!mainWindow) {
-		mainWindow = await createMainWindow();
-	}
+  if (!mainWindow) {
+    mainWindow = await createMainWindow();
+  }
 });
 
 (async () => {
-	await app.whenReady();
-	mainWindow = await createMainWindow();
+  await app.whenReady();
+  mainWindow = await createMainWindow();
 })();

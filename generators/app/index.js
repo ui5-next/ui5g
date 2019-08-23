@@ -46,21 +46,13 @@ module.exports = class extends Generator {
           name: 'skeleton',
           message: 'APP Skeleton?',
           choices: [
-            {
-              name: 'Walk through',
-              value: 'wt'
-            },
-            {
-              name: 'Shop Administration Tool',
-              value: 'admin'
-            },
-            {
-              name: 'Empty Project',
-              value: 'empty'
-            }
+            { name: 'Empty Project', value: 'empty' },
+            { name: 'Walk Through', value: 'wt' },
+            { name: 'Shop Admin Tool', value: 'admin' }
           ]
         }
       ];
+
       const projectPrompts = (skeleton = "") => [
         {
           type: 'input',
@@ -94,6 +86,13 @@ module.exports = class extends Generator {
           name: "electron",
           message: "Electron App?",
           "default": false
+        },
+        {
+          type: "confirm",
+          name: "cordova",
+          when: (props) => !props.electron,
+          message: "Cordova App?",
+          "default": false
         }
       ];
 
@@ -123,26 +122,40 @@ module.exports = class extends Generator {
     this.destinationRoot(targetPathRoot);
 
     // if with electron wrapper
-    if (this.props.electron) {
-      mkdirp(targetPathRoot, () => {
-        this.fs.copyTpl(this.templatePath("electron"), this.destinationPath(), this.props);
-        this.fs.copyTpl(this.templatePath("electron", ".*/**"), this.destinationPath(), this.props);
-        this.fs.copyTpl(this.templatePath("common"), this.destinationPath("ui"), this.props);
-        this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath("ui"), this.props);
-        this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath("ui", '.vscode'), this.props);
-        this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath("ui"), this.props);
-        done();
-      });
-    } else {
-      mkdirp(targetPathRoot, () => {
-        this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props);
-        this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath(), this.props);
-        this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath('.vscode'), this.props);
-        this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props);
-        done();
-      });
-    }
+    mkdirp(targetPathRoot, () => {
 
+      this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+      // this.fs.copyTpl(this.templatePath("common", ".*/**"), this.destinationPath(), this.props);
+      // this.fs.copyTpl(this.templatePath("common", ".vscode/**"), this.destinationPath('.vscode'), this.props);
+      this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+
+      if (this.props.electron) {
+
+        this.fs.copyTpl(this.templatePath("electron"), this.destinationPath(), this.props);
+
+        const oElectronPackageJson = this.fs.readJSON(this.templatePath("electron", ".package.json"));
+
+        oElectronPackageJson.build.appId = this.props.namespace;
+
+        this.fs.extendJSON(this.destinationPath("package.json"), oElectronPackageJson);
+
+
+      }
+
+      if (this.props.cordova) {
+
+        this.fs.copyTpl(this.templatePath("cordova"), this.destinationPath(), this.props);
+
+        const oCordovaPackageJson = this.fs.readJSON(this.templatePath("cordova", ".package.json"));
+
+        this.fs.extendJSON(this.destinationPath("package.json"), oCordovaPackageJson);
+
+        this.fs.copyTpl(this.templatePath("cordova", "www"), this.destinationPath("www"), this.props, {}, { globOptions: { dot: true } });
+
+      }
+
+      done();
+    });
 
   }
 
