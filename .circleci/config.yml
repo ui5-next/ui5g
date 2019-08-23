@@ -39,7 +39,7 @@ jobs:
           command: rm -rf project
 
       - run: yo ui5g --template empty --electron
-      - run: cd project && npm run ui:build && npm run pack
+      - run: cd project && npm run build && npm run pack
 
   deploy:
     working_directory: ~/repo

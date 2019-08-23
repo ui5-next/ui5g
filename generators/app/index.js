@@ -10,12 +10,16 @@ const { warn } = require("console");
 module.exports = class extends Generator {
 
   constructor(args, opts) {
+
     super(args, opts);
+
     this.option("template", { type: String });
     this.option("name", { "default": "project", type: String });
-    this.option("namespace", { "default": "ui5.project", type: String });
+    this.option("ui5namspace", { "default": "ui5.project", type: String });
     this.option("ui5resource", { "default": "openui5.hana.ondemand.com", type: String });
     this.option("electron", { "default": false, type: Boolean });
+    this.option("cordova", { "default": false, type: Boolean });
+
   }
 
   prompting() {
@@ -26,12 +30,14 @@ module.exports = class extends Generator {
     ));
 
     if (this.options.template) {
+
       this.log("With cli options configuration.");
+
       this.props = this.props || {};
       this.props.name = this.options.name;
       this.props.skeleton = this.options.template;
       this.props.dir = this.options.name.replace(/[^a-zA-Z0-9]/g, "");
-      this.props.namespace = this.options.namespace;
+      this.props.namespace = this.options.ui5namspace;
       this.props.namepath = this.options.namespace.replace(/\./g, "/");
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
