@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/Soontao/ui5g/compare/v1.15.1...v1.16.0) (2019-08-24)
+
+
+### Bug Fixes
+
+* **ci:** test ([e000e4b](https://github.com/Soontao/ui5g/commit/e000e4b))
+
+
+### Features
+
+* cordova init ([7d3c154](https://github.com/Soontao/ui5g/commit/7d3c154))
+* cordova part ([ccc4cef](https://github.com/Soontao/ui5g/commit/ccc4cef))
+
+
+
 ### [1.15.1](https://github.com/Soontao/ui5g/compare/v1.15.0...v1.15.1) (2019-08-22)
 
 
