@@ -7,7 +7,7 @@ module.exports = {
     [
       "babel-preset-ui5-next",
       {
-        "namespace": packageJson.app.namespace
+        "namespace": packageJson.ui5.namespace
       }
     ]
   ]

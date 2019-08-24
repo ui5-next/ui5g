@@ -26,10 +26,10 @@ var packageJson = require("./package.json");
 
 var SRC_ROOT = packageJson.ui5.build.src;
 var DEST_ROOT = packageJson.ui5.build.dist;
+var APP_NAME = packageJson.displayName;
 
-var APP_NAME = packageJson.name;
-var namespace = packageJson.app.namespace;
-var resourceRoot = packageJson.app.resource;
+var namespace = packageJson.ui5.namespace;
+var resourceRoot = packageJson.ui5.build.resource;
 
 var buildJs = ({ sourcemap }) => {
   // use to avoid an error cause whole gulp failed
