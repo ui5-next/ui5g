@@ -3,4 +3,7 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.fontSize": 14,
+  "cSpell.words": [
+    "yosay"
+  ],
 }
