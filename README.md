@@ -62,8 +62,6 @@ npm run build
 
 * ```npm start```, default *gulp* will start a hot reload server, based on BrowserSync. Recommended to develop in this way.
   
-  PLEASE NOTE THAT: ALL COMPILED FILES ARE STORAGE IN MEMORY WHEN DEVELOPING
-  
 * ```npm run build```, build files to *dist* directory, and ```Component-preload.js``` will be created.
 
 ## [CHANGELOG](./CHANGELOG.md)
