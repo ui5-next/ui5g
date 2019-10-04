@@ -97,6 +97,8 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
           "**/*.json",
           // remove offline files
           "!**/resources/**/*.*",
+          // not preload thirdparty js file
+          "!**/_thirdparty/**/*.js",
           // avoid preload file
           "!**/preload.js",
           // not use now
@@ -144,7 +146,7 @@ gulp.task("bs:silent", () => {
       middleware: middlewares
     },
     open: false,
-    reloadDebounce: 5 * 1000,
+    reloadDebounce: 2 * 1000,
     notify: false,
     startPath: "/"
   });
@@ -173,8 +175,11 @@ gulp.task("watch:preload", () => {
 });
 
 gulp.task("reload", done => {
-  browserSync.reload();
-  done();
+  setTimeout(() => {
+    // wait 500ms to reload
+    browserSync.reload();
+    done();
+  }, 500);
 });
 
 gulp.task("build-js", buildJs);

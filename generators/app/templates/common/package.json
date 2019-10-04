@@ -47,7 +47,7 @@
     "gulp-filter": "^5.0.0",
     "gulp-less": "^4.0.1",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-ui5-eager-preload": "^1.13.2",
+    "gulp-ui5-eager-preload": "^1.13.3",
     "http-proxy-middleware": "^0.19.1",
     "merge-stream": "^1"
   }

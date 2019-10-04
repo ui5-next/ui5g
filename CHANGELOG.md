@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.1](https://github.com/Soontao/ui5g/compare/v1.16.0...v1.16.1) (2019-09-05)
+
+
+
 ## [1.16.0](https://github.com/Soontao/ui5g/compare/v1.15.1...v1.16.0) (2019-08-24)
 
 
