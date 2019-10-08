@@ -31,22 +31,37 @@ jobs:
           command: sudo npm link
 
       # simple test
-      - run: yo ui5g --template empty
-      - run: cd project && npm i && npm run build
-
-      - run: rm -rf project
-
-      # typescript test
-      - run: yo ui5g --template wt-ts
-      - run: cd project && npm i && npm run build
-
-      # electron tests
+      - run:
+          name: Test - Simple Project Creation
+          command: yo ui5g --template empty
+      - run:
+          name: Test - Simple Project Build
+          command: cd project && npm i && npm run build
       - run:
           name: Clean temp files
           command: rm -rf project
 
-      - run: yo ui5g --template empty --electron
-      - run: cd project && npm run build && npm run pack
+      # typescript test
+      - run:
+          name: Test - Typescript Project Creation
+          command: yo ui5g --template wt-ts
+      - run:
+          name: Test - Typescript Project Build
+          command: cd project && npm i && npm run build
+      - run:
+          name: Clean temp files
+          command: rm -rf project
+
+      # electron test
+      - run:
+          name: Test - Electron Project Creation
+          command: yo ui5g --template empty --electron
+      - run:
+          name: Test - Electron Project Build
+          command: cd project && npm run build && npm run pack
+      - run:
+          name: Clean temp files
+          command: rm -rf project
 
   deploy:
     working_directory: ~/repo
