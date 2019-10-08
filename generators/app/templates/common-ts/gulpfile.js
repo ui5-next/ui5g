@@ -2,7 +2,6 @@ var { existsSync } = require("fs");
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
-var eslint = require("gulp-eslint");
 var merge = require("merge-stream");
 var browserSync = require("browser-sync");
 var less = require("gulp-less");
@@ -37,7 +36,7 @@ var buildJs = ({ sourcemap }) => {
     console.log(e.stack);
     b.end();
   });
-  var rt = gulp.src([`${SRC_ROOT}/**/*.js`, `!${SRC_ROOT}/**/lib/*.js`]);
+  var rt = gulp.src([`${SRC_ROOT}/**/*.js`, `${SRC_ROOT}/**/*.ts`, `${SRC_ROOT}/**/*.tsx`, `!${SRC_ROOT}/**/lib/*.js`]);
   if (sourcemap) {
     rt = rt.pipe(sourcemaps.init());
   }
@@ -61,7 +60,9 @@ var copy = ({ preload = false, offline = false }) => {
         `${SRC_ROOT}/**/*`,
         `!${SRC_ROOT}/**/*.js`,
         `!${SRC_ROOT}/index.html`,
-        `!${SRC_ROOT}/**/*.less`
+        `!${SRC_ROOT}/**/*.less`,
+        `!${SRC_ROOT}/**/*.ts`,
+        `!${SRC_ROOT}/**/*.tsx`
       ],
       { base: `${SRC_ROOT}` }
     ),
@@ -150,16 +151,6 @@ gulp.task("bs:silent", () => {
     notify: false,
     startPath: "/"
   });
-});
-
-// run gulp lint to auto fix src directory
-gulp.task("lint", () => {
-  return gulp
-    .src([`${SRC_ROOT}/**/*.js`, "!node_modules/**"])
-    .pipe(eslint({ fix: true, useEslintrc: true }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(gulp.dest(SRC_ROOT));
 });
 
 gulp.task("watch", () => {

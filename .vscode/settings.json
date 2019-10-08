@@ -3,6 +3,7 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.fontSize": 14,
+  "typescript.validate.enable": false,
   "cSpell.words": [
     "yosay"
   ],

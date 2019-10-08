@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    // with js files
+    "allowJs": true,
+    // enable js syntax, and disable the 'can not found "React"' warning
+    "jsx": "preserve",
+    // just for avoid warning, the really build logic in gulpfile
+    "outDir": "dist"
+  },
+  // source and type definition
+  "include": [
+    "src",
+    "./node_modules/@ui5-next/types/bin/index.d.ts"
+  ]
+}

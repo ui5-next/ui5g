@@ -42,6 +42,7 @@ module.exports = class extends Generator {
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
 
+
       if (this.props.namespace.startsWith("sap")) {
         this.log(`The namespace ${this.props.namespace} start with 'sap'\nIt maybe CAUSE error`);
       }
@@ -54,6 +55,7 @@ module.exports = class extends Generator {
           choices: [
             { name: "Empty Project", value: "empty" },
             { name: "Walk Through", value: "wt" },
+            { name: "Walk Through (Typescript)", value: "wt-ts" },
             { name: "Shop Admin Tool", value: "admin" }
           ]
         }
@@ -70,7 +72,7 @@ module.exports = class extends Generator {
           type: "input",
           name: "namespace",
           message: "App namespace/package",
-          "default": `ui5.${skeleton.toLowerCase()}`
+          "default": `ui5.${skeleton.replace(/[\W_]+/g, ".").toLowerCase()}`
         },
         {
           type: "list",
@@ -132,6 +134,12 @@ module.exports = class extends Generator {
 
       this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
       this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+
+      if (this.props.skeleton.endsWith("-ts")) {
+        this.fs.copyTpl(this.templatePath("common-ts"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+      } else {
+        this.fs.copyTpl(this.templatePath("common-js"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+      }
 
       if (this.props.electron) {
 
