@@ -30,7 +30,14 @@ jobs:
           name: Link app
           command: sudo npm link
 
+      # simple test
       - run: yo ui5g --template empty
+      - run: cd project && npm i && npm run build
+
+      - run: rm -rf project
+
+      # typescript test
+      - run: yo ui5g --template wt-ts
       - run: cd project && npm i && npm run build
 
       # electron tests
