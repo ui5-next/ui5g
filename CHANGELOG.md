@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/Soontao/ui5g/compare/v1.17.1...v1.18.0) (2019-10-08)
+
+
+### Features
+
+* ts walkthrough early release ([a69b2e1](https://github.com/Soontao/ui5g/commit/a69b2e1))
+
+
+
 ### [1.17.1](https://github.com/Soontao/ui5g/compare/v1.17.0...v1.17.1) (2019-10-04)
 
 
