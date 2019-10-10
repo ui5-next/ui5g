@@ -29,8 +29,8 @@ export default class InvoiceList extends JSView {
     }
 
     // filter binding
-    var oList = this.byId("invoiceList");
-    var oBinding = oList.getBinding("items") as ListBinding;
+    var oBinding = this._invoiceList.getBinding("items") as ListBinding;
+
     oBinding.filter(aFilter);
   }
 
@@ -109,35 +109,37 @@ export default class InvoiceList extends JSView {
     );
   }
 
+  private _invoiceList: Table;
+
   createContent() {
 
     var oViewModel = new JSONModel({ currency: "EUR" });
     this.setModel(oViewModel, "view");
     this._formatter = createFormatter(this);
 
-    return (
-      <Table
-        id="invoiceList"
-        class="sapUiResponsiveMargin"
-        width="auto"
-        headerToolbar={
-          <Toolbar>
-            <Title>A Header Here</Title>
-            <ToolbarSpacer />
-            <SearchField width="50%" search={this.onFilterInvoices.bind(this)} selectOnFocus={false} />
-          </Toolbar>
+    this._invoiceList = <Table
+      id="invoiceList"
+      class="sapUiResponsiveMargin"
+      width="auto"
+      headerToolbar={
+        <Toolbar>
+          <Title>A Header Here</Title>
+          <ToolbarSpacer />
+          <SearchField width="50%" search={this.onFilterInvoices.bind(this)} selectOnFocus={false} />
+        </Toolbar>
+      }
+      columns={this.renderColumns()}
+      items={{
+        path: 'invoice>/Invoices',
+        template: this.renderItemsTemplate(),
+        sorter: {
+          path: 'ShipperName',
+          group: true
         }
-        columns={this.renderColumns()}
-        items={{
-          path: 'invoice>/Invoices',
-          template: this.renderItemsTemplate(),
-          sorter: {
-            path: 'ShipperName',
-            group: true
-          }
-        }}
-      />
-    );
+      }}
+    />
+
+    return this._invoiceList;
   }
 
 }
