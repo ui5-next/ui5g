@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.2](https://github.com/Soontao/ui5g/compare/v1.18.1...v1.18.2) (2019-10-10)
+
+
+### Bug Fixes
+
+* add type check ([0ee63c2](https://github.com/Soontao/ui5g/commit/0ee63c2))
+
+
+
 ### [1.18.1](https://github.com/Soontao/ui5g/compare/v1.18.0...v1.18.1) (2019-10-10)
 
 
