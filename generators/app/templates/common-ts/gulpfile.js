@@ -10,7 +10,6 @@ var del = require("del");
 var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
-var ts = require("typescript")
 var { execSync } = require("child_process")
 var ui5preload = eagerPreload.componentPreload;
 
