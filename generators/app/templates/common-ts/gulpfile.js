@@ -1,5 +1,6 @@
 var { existsSync } = require("fs");
 var gulp = require("gulp");
+var log = require("fancy-log")
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
 var merge = require("merge-stream");
@@ -9,6 +10,8 @@ var del = require("del");
 var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
+var ts = require("typescript")
+var { execSync } = require("child_process")
 var ui5preload = eagerPreload.componentPreload;
 
 var additionalPreload = { additionalResources: [], additionalModules: [] };
@@ -154,15 +157,15 @@ gulp.task("bs:silent", () => {
 });
 
 gulp.task("watch", () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:preload", "reload"]));
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["check", "build:preload", "reload"]));
 });
 
 gulp.task("watch:debug", () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:debug", "reload"]));
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["check", "build:debug", "reload"]));
 });
 
 gulp.task("watch:preload", () => {
-  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["build:preload", "reload"]));
+  gulp.watch(`${SRC_ROOT}/**/*`, gulp.series(["check", "build:preload", "reload"]));
 });
 
 gulp.task("reload", done => {
@@ -173,14 +176,24 @@ gulp.task("reload", done => {
   }, 500);
 });
 
+gulp.task("check", done => {
+  try {
+    execSync("tsc --noEmit", { encoding: "UTF-8" })
+    done()
+  } catch (error) {
+    log.error(error.stdout.trim())
+    throw new Error("Typescript check failed")
+  }
+})
+
 gulp.task("build-js", buildJs);
 
 gulp.task("build-css", buildCss);
 
 gulp.task("copy", copy);
 
-gulp.task("dev", gulp.series("clean", "build:debug", gulp.parallel("bs", "watch:debug")));
+gulp.task("dev", gulp.series("clean", "check", "build:debug", gulp.parallel("bs", "watch:debug")));
 
-gulp.task("dev:preload", gulp.series("clean", "build:preload", gulp.parallel("bs", "watch:preload")));
+gulp.task("dev:preload", gulp.series("clean", "check", "build:preload", gulp.parallel("bs", "watch:preload")));
 
-gulp.task("dev:silent", gulp.series("clean", "build:preload", gulp.parallel("bs:silent", "watch:preload")));
+gulp.task("dev:silent", gulp.series("clean", "check", "build:preload", gulp.parallel("bs:silent", "watch:preload")));
