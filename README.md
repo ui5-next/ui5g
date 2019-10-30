@@ -21,7 +21,7 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 ## Example Project
 
-[UI5 To Do](https://github.com/ui5-next/ui5-todo) is a sample project built on the next generation UI5 technical. It contains: 
+[UI5 To Do](https://github.com/ui5-next/ui5-todo) is a sample project built on the next generation UI5 technic. It contains: 
 
 * es6 modules
 * jsx syntax
