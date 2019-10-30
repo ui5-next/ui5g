@@ -9,15 +9,28 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 ## Features
 
-* Main ES6 & Typescript syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* Most ES6 & Typescript syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
 * Full module system mapping. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
 * Smart `preload.js` file. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * React `JSX` syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
-* Allowed import third party libraries from `node_modules`. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
+* Import npm libraries. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
 * Electron support.
 * Cordova (Experimental) support.
+
+## Example Project
+
+[UI5 To Do](https://github.com/ui5-next/ui5-todo) is a sample project built on the next generation UI5 technical. It contains: 
+
+* es6 modules
+* jsx syntax
+* using npm module
+* redux integration. (so that user can inspect model by [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension))
+* reactive programming
+* no controller & view
+
+features.
 
 ## Installation
 
@@ -69,7 +82,7 @@ npm run build
 
 ## About
 
-This generator is written by `Theo` but some ideas come from `Madeleine`, and it only can generate really simple project.
+This generator is written by `Theo` but some ideas come from `Madeleine`.
 
 The idea of `JSX Support` is from `Kenny`, just a syntactic sugar.
 

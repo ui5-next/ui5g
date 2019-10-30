@@ -5,6 +5,9 @@
   "editor.fontSize": 14,
   "typescript.validate.enable": false,
   "cSpell.words": [
+    "Theo",
+    "devtools",
+    "gulpfile",
     "yosay"
   ],
 }
