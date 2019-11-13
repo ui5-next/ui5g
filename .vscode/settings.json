@@ -8,6 +8,8 @@
     "Theo",
     "devtools",
     "gulpfile",
+    "preload",
+    "sourcemap",
     "yosay"
   ],
 }

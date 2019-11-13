@@ -76,6 +76,7 @@ var copy = ({ preload = false, offline = false }) => {
         ui5ResourceRoot: resourceRoot,
         preload,
         offline,
+        withLoadingSpinner: false,
         sourceDir: join(__dirname, "./src"),
         thirdpartyLibPath: "_thirdparty",
         projectNameSpace: namespace,
