@@ -12,4 +12,7 @@
     "sourcemap",
     "yosay"
   ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }

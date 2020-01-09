@@ -21,7 +21,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8",
     "@commitlint/config-conventional": "^8",
-    "standard-version": "^6",
+    "standard-version": "^7",
     "eslint": "^6",
     "husky": "0.14.3",
     "eslint-config-xo-space": "^0.16.0",
@@ -29,10 +29,10 @@
     "yeoman-test": "^2.0.0"
   },
   "dependencies": {
-    "chalk": "^1.1.3",
+    "chalk": "^1",
     "mkdirp": "^0.5.1",
-    "yeoman-generator": "^3.2.0",
-    "yosay": "^2.0.0"
+    "yeoman-generator": "^4",
+    "yosay": "^2"
   },
   "eslintConfig": {
     "extends": "xo-space",

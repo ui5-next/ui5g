@@ -1,21 +1,11 @@
 {
-    "eslint.autoFixOnSave": true,
-    "editor.formatOnSave": false,
-    "editor.tabSize": 2,
-    "editor.insertSpaces": true,
-    "editor.wordWrap": "on",
-    "files.eol": "\n",
-    "javascript.validate.enable": false,
-    "cSpell.words": [
-        "Netlify",
-        "devtools",
-        "fiori",
-        "middlewares",
-        "northwind",
-        "openui",
-        "preload",
-        "sourcemap",
-        "thirdparty",
-        "unfavorite"
-    ]
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "on",
+  "files.eol": "\n",
+  "javascript.validate.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
