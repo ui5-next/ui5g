@@ -41,7 +41,7 @@ module.exports = class extends Generator {
       this.props.namepath = this.options.namespace.replace(/\./g, "/");
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
-
+      this.props.cordova = this.options.cordova;
 
       if (this.props.namespace.startsWith("sap")) {
         this.log(`The namespace ${this.props.namespace} start with 'sap'\nIt maybe CAUSE error`);
@@ -90,17 +90,14 @@ module.exports = class extends Generator {
           ]
         },
         {
-          type: "confirm",
-          name: "electron",
-          message: "Electron App?",
-          "default": false
-        },
-        {
-          type: "confirm",
-          name: "cordova",
-          when: (props) => !props.electron,
-          message: "Cordova App?",
-          "default": false
+          type: "list",
+          name: "apptype",
+          message: "App Type?",
+          choices: [
+            { name: "Web Application", value: "web" },
+            { name: "Electron Application", value: "electron" },
+            { name: "Cordova Application (Beta)", value: "cordova" }
+          ]
         }
       ];
 
@@ -117,6 +114,16 @@ module.exports = class extends Generator {
             warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
           }
           this.props = Object.assign(this.props, props);
+          switch (this.props.apptype) {
+          case "electron":
+            this.props.electron = true;
+            break;
+          case "cordova":
+            this.props.cordova = true;
+            break;
+          default:
+            break;
+          }
         });
     }
 

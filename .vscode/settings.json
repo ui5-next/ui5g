@@ -1,17 +1,8 @@
 {
-  "eslint.autoFixOnSave": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.tabSize": 2,
   "editor.fontSize": 14,
   "typescript.validate.enable": false,
-  "cSpell.words": [
-    "Theo",
-    "devtools",
-    "gulpfile",
-    "preload",
-    "sourcemap",
-    "yosay"
-  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
