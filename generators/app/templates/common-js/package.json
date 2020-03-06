@@ -16,7 +16,7 @@
   "ui5": {
     "namespace": "<%= namespace %>",
     "build": {
-      "resource": "https://<%= ui5Domain %>/1.71.1/resources/",
+      "resource": "https://<%= ui5Domain %>/1.75.0/resources/",
       "src": "./src",
       "dist": "./dist",
       "offline": false
@@ -32,7 +32,7 @@
     "@types/openui5": "^1.40.2",
     "@ui5-next/types": "latest",
     "babel-eslint": "^10",
-    "babel-preset-ui5-next": "^7.2.3",
+    "babel-preset-ui5-next": "^7.3.2",
     "browser-sync": "2.26.7",
     "del": "^5",
     "eslint": "^6",

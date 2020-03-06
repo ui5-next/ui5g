@@ -31,6 +31,7 @@
   "dependencies": {
     "chalk": "^1",
     "mkdirp": "^0.5.1",
+    "node-fetch": "^2.6.0",
     "yeoman-generator": "^4",
     "yosay": "^2"
   },
