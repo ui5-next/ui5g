@@ -29,7 +29,6 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/preset-flow": "^7.0.0",
-    "@types/openui5": "^1.40.2",
     "@ui5-next/types": "latest",
     "babel-eslint": "^10",
     "babel-preset-ui5-next": "^7.3.2",

@@ -7,6 +7,8 @@ import Dialog from "sap/m/Dialog";
 import BindingMode from "sap/ui/model/BindingMode";
 import View from "sap/ui/core/mvc/View";
 import Controller from "sap/ui/core/mvc/Controller";
+import support from "sap/ui/Device/support";
+import syncStyleClass from "sap/ui/core/syncStyleClass";
 
 export default class Component extends UIComponent {
 
@@ -50,8 +52,9 @@ export default class Component extends UIComponent {
       this._dialog = createHelloDialog(oFragmentController);
       // connect dialog to the root view of this component (models, lifecycle)
       oView.addDependent(this._dialog);
+
       // forward compact/cozy style into dialog
-      jQuery.sap.syncStyleClass(((oView.getController() as Controller).getOwnerComponent() as Component).getContentDensityClass(), oView, this._dialog);
+      syncStyleClass(((oView.getController() as Controller).getOwnerComponent() as Component).getContentDensityClass(), oView, this._dialog);
     }
     this._dialog.open();
   }
@@ -60,7 +63,9 @@ export default class Component extends UIComponent {
 
   getContentDensityClass() {
     if (!this._sContentDensityClass) {
-      if (!sap.ui.Device.support.touch) {
+
+
+      if (!support.touch) {
         this._sContentDensityClass = "sapUiSizeCompact";
       } else {
         this._sContentDensityClass = "sapUiSizeCozy";

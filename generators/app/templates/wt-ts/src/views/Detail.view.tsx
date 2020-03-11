@@ -29,7 +29,7 @@ export default class Detail extends JSView {
       window.history.go(-1);
     } else {
       var oRouter = UIComponent.getRouterFor(this);
-      oRouter.navTo("overview", {}, true);
+      oRouter.navTo("overview", {}, {}, true);
     }
   }
 
