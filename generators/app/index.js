@@ -45,7 +45,7 @@ module.exports = class extends Generator {
     // >> cli option mode
     if (this.options.template) {
 
-      const [version] = await getAvailableVersions();
+      const versions = await getAvailableVersions();
 
       this.log("With cli options configuration.");
 
@@ -53,12 +53,12 @@ module.exports = class extends Generator {
       this.props.name = this.options.name;
       this.props.skeleton = this.options.template;
       this.props.dir = this.options.name.replace(/[^a-zA-Z0-9]/g, "");
-      this.props.namespace = this.options.ui5namspace;
+      this.props.namespace = this.options.ui5namespace;
       this.props.namepath = this.options.namespace.replace(/\./g, "/");
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
       this.props.cordova = this.options.cordova;
-      this.props.version = this.options.version || version;
+      this.props.version = this.options.version || versions[0];
 
       if (this.props.namespace.startsWith("sap")) {
         this.log(`The namespace ${this.props.namespace} start with 'sap'\nIt maybe CAUSE error`);
