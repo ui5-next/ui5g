@@ -7,6 +7,8 @@ const process = require("process");
 const mkdirp = require("mkdirp");
 const { warn } = require("console");
 
+const { getAvailableVersions } = require("./utils/version");
+
 module.exports = class extends Generator {
 
   constructor(args, opts) {
@@ -15,21 +17,35 @@ module.exports = class extends Generator {
 
     this.option("template", { type: String });
     this.option("name", { "default": "project", type: String });
-    this.option("ui5namspace", { "default": "ui5.project", type: String });
+    this.option("ui5namespace", { "default": "ui5.project", type: String });
     this.option("ui5resource", { "default": "openui5.hana.ondemand.com", type: String });
     this.option("electron", { "default": false, type: Boolean });
     this.option("cordova", { "default": false, type: Boolean });
+    this.option("version", { "default": false, type: String });
 
   }
 
-  prompting() {
+  async logLineNew(s = "") {
+    // eslint-disable-next-line no-console
+    return new Promise(resolve => {
+      process.stdout.write(s, resolve);
+    });
+  }
+
+  clearLine() {
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+  }
+
+  async prompting() {
 
     // Have Yeoman greet the user.
-    this.log(yosay(
-      "Welcome to the " + chalk.red("generator-ui5g") + " generator!"
-    ));
+    this.log(yosay("Welcome to the " + chalk.red("generator-ui5g") + " generator!"));
 
+    // >> cli option mode
     if (this.options.template) {
+
+      const [version] = await getAvailableVersions();
 
       this.log("With cli options configuration.");
 
@@ -42,94 +58,117 @@ module.exports = class extends Generator {
       this.props.ui5Domain = this.options.ui5resource;
       this.props.electron = this.options.electron;
       this.props.cordova = this.options.cordova;
+      this.props.version = this.options.version || version;
 
       if (this.props.namespace.startsWith("sap")) {
         this.log(`The namespace ${this.props.namespace} start with 'sap'\nIt maybe CAUSE error`);
       }
-    } else {
-      const prompts = [
-        {
-          type: "list",
-          name: "skeleton",
-          message: "APP Skeleton?",
-          choices: [
-            { name: "Empty Project", value: "empty" },
-            { name: "Walk Through", value: "wt" },
-            { name: "Walk Through (Typescript)", value: "wt-ts" },
-            { name: "Shop Admin Tool", value: "admin" }
-          ]
-        }
-      ];
 
-      const projectPrompts = (skeleton = "") => [
-        {
-          type: "input",
-          name: "name",
-          message: "App name",
-          "default": `ui5-${skeleton.toLowerCase()}`
-        },
-        {
-          type: "input",
-          name: "namespace",
-          message: "App namespace/package",
-          "default": `ui5.${skeleton.replace(/[\W_]+/g, ".").toLowerCase()}`
-        },
-        {
-          type: "list",
-          name: "ui5Domain",
-          message: "SAPUI5 or OpenUI5?",
-          choices: [
-            {
-              name: "OpenUI5",
-              value: "openui5.hana.ondemand.com"
-            },
-            {
-              name: "SAPUI5",
-              value: "sapui5.hana.ondemand.com"
-            }
-          ]
-        },
-        {
-          type: "list",
-          name: "apptype",
-          message: "App Type?",
-          choices: [
-            { name: "Web Application", value: "web" },
-            { name: "Electron Application", value: "electron" },
-            { name: "Cordova Application (Beta)", value: "cordova" }
-          ]
-        }
-      ];
-
-      return this
-        .prompt(prompts)
-        .then(props => {
-          this.props = props;
-          return this.prompt(projectPrompts(props.skeleton));
-        })
-        .then(props => {
-          props.dir = props.name.replace(/[^a-zA-Z0-9]/g, "");
-          props.namepath = props.namespace.replace(/\./g, "/");
-          if (props.namespace.startsWith("sap")) {
-            warn(`The namespace ${props.namespace} start with 'sap'\nIt maybe CAUSE error`);
-          }
-          this.props = Object.assign(this.props, props);
-          switch (this.props.apptype) {
-          case "electron":
-            this.props.electron = true;
-            break;
-          case "cordova":
-            this.props.cordova = true;
-            break;
-          default:
-            break;
-          }
-        });
+      return;
     }
+
+    // >> interactive mode
+
+    const { skeleton } = await this.prompt({
+      type: "list",
+      name: "skeleton",
+      message: "APP Skeleton?",
+      choices: [
+        { name: "Empty Project", value: "empty" },
+        { name: "Walk Through", value: "wt" },
+        { name: "Walk Through (Typescript)", value: "wt-ts" },
+        { name: "Shop Admin Tool", value: "admin" }
+      ]
+    });
+
+    const { name, namespace, ui5type } = await this.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "App name",
+        "default": `ui5-${skeleton.toLowerCase()}`
+      },
+      {
+        type: "input",
+        name: "namespace",
+        message: "App namespace/package",
+        "default": `ui5.${skeleton.replace(/[\W_]+/g, ".").toLowerCase()}`
+      },
+      {
+        type: "list",
+        name: "ui5type",
+        message: "OpenUI5 or SAPUI5?",
+        choices: [
+          {
+            name: "OpenUI5",
+            value: "openui5",
+            checked: true
+          },
+          {
+            name: "SAPUI5",
+            value: "sapui5"
+          }
+        ]
+      }
+
+    ]);
+
+    const ui5Domain = (ui5type == "openui5" ? "openui5.hana.ondemand.com" : "sapui5.hana.ondemand.com");
+
+    await this.logLineNew("loading ui5 versions from remote...");
+
+    const availableVersions = await getAvailableVersions(ui5type);
+
+    this.clearLine();
+
+    const { apptype, version } = await this.prompt([
+      {
+        type: "list",
+        name: "version",
+        message: "UI5 Version?",
+        choices: availableVersions.map((v, i) => ({
+          name: v,
+          value: v,
+          checked: i == 0
+        }))
+      },
+      {
+        type: "list",
+        name: "apptype",
+        message: "App Type?",
+        choices: [
+          { name: "Web Application", value: "web" },
+          { name: "Electron Application", value: "electron" },
+          { name: "Cordova Application (Beta)", value: "cordova" }
+        ]
+      }
+    ]);
+
+    const dir = name.replace(/[^a-zA-Z0-9]/g, "");
+    const namepath = namespace.replace(/\./g, "/");
+
+    if (namespace.startsWith("sap")) {
+      warn(`The namespace ${namespace} start with 'sap'\nIt maybe CAUSE error`);
+    }
+
+    this.props = Object.assign(this.props || {}, { dir, namepath, skeleton, name, namespace, ui5Domain, apptype, version });
+
+    switch (apptype) {
+    case "electron":
+      this.props.electron = true;
+      break;
+    case "cordova":
+      this.props.cordova = true;
+      break;
+    default:
+      break;
+    }
+
 
   }
 
   writing() {
+
     const done = this.async();
 
     const targetPathRoot = path.join(process.cwd(), this.props.dir);

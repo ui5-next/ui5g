@@ -6,4 +6,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "cSpell.words": [
+    "APIURI",
+    "hana",
+    "ondemand",
+    "openui",
+    "qunit",
+    "sapui"
+  ],
 }

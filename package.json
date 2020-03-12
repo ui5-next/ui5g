@@ -1,7 +1,7 @@
 {
   "name": "generator-ui5g",
   "version": "1.18.6",
-  "description": "Basic generator for sapui5/openui5",
+  "description": "yet another generator for sapui5/openui5",
   "author": {
     "name": "Theo Sun",
     "email": "theo.sun@sap.com"
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "chalk": "^1",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
     "node-fetch": "^2.6.0",
     "yeoman-generator": "^4",
