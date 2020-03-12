@@ -21,7 +21,7 @@ module.exports = class extends Generator {
     this.option("ui5resource", { "default": "openui5.hana.ondemand.com", type: String });
     this.option("electron", { "default": false, type: Boolean });
     this.option("cordova", { "default": false, type: Boolean });
-    this.option("version", { "default": false, type: String });
+    this.option("version", { type: String });
 
   }
 
