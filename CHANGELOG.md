@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/Soontao/ui5g/compare/v1.18.6...v1.19.0) (2020-03-13)
+
+
+### Features
+
+* active version ([e2b90d4](https://github.com/Soontao/ui5g/commit/e2b90d49c2ce8642c35e2eb04e457cfc475a814b))
+
+
+### Bug Fixes
+
+* cli version ([da668cd](https://github.com/Soontao/ui5g/commit/da668cdb374b4436941d2a3244c676a3552f0459))
+* spelling ([8c60011](https://github.com/Soontao/ui5g/commit/8c600118b0175b2b3d28cb6279a56962a378a8bc))
+
 ### [1.18.6](https://github.com/Soontao/ui5g/compare/v1.18.5...v1.18.6) (2020-03-11)
 
 ### [1.18.5](https://github.com/Soontao/ui5g/compare/v1.18.4...v1.18.5) (2020-02-03)
