@@ -75,6 +75,7 @@ module.exports = class extends Generator {
       message: "APP Skeleton?",
       choices: [
         { name: "Empty Project", value: "empty" },
+        { name: "Empty Project (Typescript)", value: "empty-ts" },
         { name: "Walk Through", value: "wt" },
         { name: "Walk Through (Typescript)", value: "wt-ts" },
         { name: "Shop Admin Tool", value: "admin" }
@@ -128,8 +129,7 @@ module.exports = class extends Generator {
         message: "UI5 Version?",
         choices: availableVersions.map((v, i) => ({
           name: v,
-          value: v,
-          checked: i == 0
+          value: v
         }))
       },
       {
