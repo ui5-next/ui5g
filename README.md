@@ -1,11 +1,10 @@
-# The ultimate generator for UI5
-
-![Open UI5 Logo](https://openui5.org/images/OpenUI5_new_big_side.png)
+# <img src="https://openui5.org/images/OpenUI5_new_big_side.png" width="35px" /> Yet another generator for UI5
 
 [![CircleCI](https://circleci.com/gh/ui5-next/ui5g.svg?style=shield)](https://circleci.com/gh/ui5-next/ui5g)
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
+[![Known Vulnerabilities](https://snyk.io/test/github/ui5-next/ui5g/badge.svg)](https://snyk.io/test/github/ui5-next/ui5g)
 
-The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 envrionment.
+The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax for UI5 environment.
 
 ## Features
 

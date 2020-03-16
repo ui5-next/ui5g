@@ -24,14 +24,14 @@
     "standard-version": "^7",
     "eslint": "^6",
     "husky": "0.14.3",
-    "eslint-config-xo-space": "^0.16.0",
+    "eslint-config-xo-space": "^0.24.0",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^2.0.0"
   },
   "dependencies": {
     "chalk": "^1",
     "lodash": "^4.17.15",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1",
     "node-fetch": "^2.6.0",
     "yeoman-generator": "^4",
     "yosay": "^2"

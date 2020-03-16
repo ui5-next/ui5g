@@ -12,6 +12,9 @@
     "ondemand",
     "openui",
     "qunit",
-    "sapui"
+    "sapui",
+    "gulpfile",
+    "theo",
+    "preload"
   ],
 }
