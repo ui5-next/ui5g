@@ -176,44 +176,47 @@ module.exports = class extends Generator {
     this.destinationRoot(targetPathRoot);
 
     // if with electron wrapper
-    mkdirp(targetPathRoot, () => {
+    mkdirp(targetPathRoot)
+      .then(() => {
 
-      this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
-      this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+        this.fs.copyTpl(this.templatePath("common"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+        this.fs.copyTpl(this.templatePath(this.props.skeleton), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
 
-      if (this.props.skeleton.endsWith("-ts")) {
-        this.fs.copyTpl(this.templatePath("common-ts"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
-      } else {
-        this.fs.copyTpl(this.templatePath("common-js"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
-      }
+        if (this.props.skeleton.endsWith("-ts")) {
+          this.fs.copyTpl(this.templatePath("common-ts"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+        } else {
+          this.fs.copyTpl(this.templatePath("common-js"), this.destinationPath(), this.props, {}, { globOptions: { dot: true } });
+        }
 
-      if (this.props.electron) {
+        if (this.props.electron) {
 
-        this.fs.copyTpl(this.templatePath("electron"), this.destinationPath(), this.props);
+          this.fs.copyTpl(this.templatePath("electron"), this.destinationPath(), this.props);
 
-        const oElectronPackageJson = this.fs.readJSON(this.templatePath("electron", ".package.json"));
+          const oElectronPackageJson = this.fs.readJSON(this.templatePath("electron", ".package.json"));
 
-        oElectronPackageJson.build.appId = this.props.namespace;
+          oElectronPackageJson.build.appId = this.props.namespace;
 
-        this.fs.extendJSON(this.destinationPath("package.json"), oElectronPackageJson);
+          this.fs.extendJSON(this.destinationPath("package.json"), oElectronPackageJson);
 
 
-      }
+        }
 
-      if (this.props.cordova) {
+        if (this.props.cordova) {
 
-        this.fs.copyTpl(this.templatePath("cordova"), this.destinationPath(), this.props);
+          this.fs.copyTpl(this.templatePath("cordova"), this.destinationPath(), this.props);
 
-        const oCordovaPackageJson = this.fs.readJSON(this.templatePath("cordova", ".package.json"));
+          const oCordovaPackageJson = this.fs.readJSON(this.templatePath("cordova", ".package.json"));
 
-        this.fs.extendJSON(this.destinationPath("package.json"), oCordovaPackageJson);
+          this.fs.extendJSON(this.destinationPath("package.json"), oCordovaPackageJson);
 
-        this.fs.copyTpl(this.templatePath("cordova", "www"), this.destinationPath("www"), this.props, {}, { globOptions: { dot: true } });
+          this.fs.copyTpl(this.templatePath("cordova", "www"), this.destinationPath("www"), this.props, {}, { globOptions: { dot: true } });
 
-      }
+        }
 
-      done();
-    });
+        done();
+
+      });
+
 
   }
 
