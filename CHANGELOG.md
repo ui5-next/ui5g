@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.1](https://github.com/Soontao/ui5g/compare/v1.19.0...v1.19.1) (2020-03-16)
+
+
+### Bug Fixes
+
+* **deps:** mkdirp upgrade logic ([15f636f](https://github.com/Soontao/ui5g/commit/15f636f33389ff23cab5d57f912601281a571bcb))
+
 ## [1.19.0](https://github.com/Soontao/ui5g/compare/v1.18.6...v1.19.0) (2020-03-13)
 
 
