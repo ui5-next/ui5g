@@ -1,4 +1,4 @@
-# <img src="https://openui5.org/images/OpenUI5_new_big_side.png" width="35px" /> Yet another generator for UI5
+# <img src="https://openui5.org/images/OpenUI5_new_big_side.png" height="25px" /> Yet another generator for UI5
 
 [![CircleCI](https://circleci.com/gh/ui5-next/ui5g.svg?style=shield)](https://circleci.com/gh/ui5-next/ui5g)
 [![npm version](https://badge.fury.io/js/generator-ui5g.svg)](https://www.npmjs.com/package/generator-ui5g)
@@ -8,10 +8,10 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 ## Features
 
-* Most ES6 & Typescript syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
-* Full module system mapping. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* Most ES6 & Typescript syntax support. (powered by [babel-plugin-ui5-next](https://github.com/ui5-next/babel-plugin-ui5-next))
+* Full module system mapping. (powered by [babel-plugin-ui5-next](https://github.com/ui5-next/babel-plugin-ui5-next))
 * Smart `preload.js` file. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
-* React `JSX` syntax support. (powered by [babel-preset-ui5-next](https://github.com/ui5-next/babel-preset-ui5-next))
+* React `JSX` syntax support. (powered by [babel-plugin-ui5-next](https://github.com/ui5-next/babel-plugin-ui5-next))
 * Import npm libraries. (powered by [gulp-ui5-eager-preload-plugin](https://github.com/Soontao/gulp-ui5-eager-preload))
 * VSCode auto import support. (powered by [@ui5-next/types](https://github.com/ui5-next/types))
 * Pre-defined `vscode`, `eslint`, `babel`, and `gulp` config
