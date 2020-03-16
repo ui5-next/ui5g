@@ -31,31 +31,31 @@ The ultimate generator for OpenUI5/SAPUI5, provide the next generation syntax fo
 
 features.
 
-## Installation
+## Installation & setup a new project
 
-Firstly, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)). [Here](https://github.com/Soontao/ui5g-generate-proj) is a generated sample app
+Firstly, install [Yeoman](http://yeoman.io) and generator-ui5g using [npm](https://www.npmjs.com/).
 
 ```bash
 npm i -g yo generator-ui5g
 ```
 
-## Generate Project
+Then run the `yo ui5g` command to generate your own project.
 
-Run `yo ui5g` to generate your own project.
+```bash
+yo ui5g
+```
 
 The project will be generated in a `new` folder, and the folder name is same as app name.
 
-Also, dependencies will be auto installed by `npm`
-
-## Development
-
-start your development, this command will open ui5 application by `BrowserSync`
+Then, just execute the `start` command, wait a moment, the application will be opened in a new browser window (after build).
 
 ```bash
 npm start
 ```
 
 ## Build
+
+Run the `build` command, and the production artifacts will be generated in the `dist` directory (default).
 
 ```bash
 npm run build
