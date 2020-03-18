@@ -33,7 +33,7 @@
     "lodash": "^4.17.15",
     "mkdirp": "^1",
     "node-fetch": "^2.6.0",
-    "yeoman-generator": "^4",
+    "yeoman-generator": "^4.5.0",
     "yosay": "^2"
   },
   "eslintConfig": {
