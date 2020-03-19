@@ -7,6 +7,9 @@
     // just for avoid warning, the really build logic in gulpfile
     "outDir": "dist"
   },
+  "exclude": [
+    "test"
+  ],
   // source and type definition
   "include": [
     "src",
