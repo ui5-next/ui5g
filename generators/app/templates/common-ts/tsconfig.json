@@ -4,6 +4,7 @@
     "allowJs": true,
     // enable js syntax, and disable the 'can not found "React"' warning
     "jsx": "preserve",
+    "esModuleInterop": true,
     // just for avoid warning, the really build logic in gulpfile
     "outDir": "dist"
   },

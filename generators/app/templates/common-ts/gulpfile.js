@@ -196,3 +196,5 @@ gulp.task("dev", gulp.series("clean", "check", "build:debug", gulp.parallel("bs"
 gulp.task("dev:preload", gulp.series("clean", "check", "build:preload", gulp.parallel("bs", "watch:preload")));
 
 gulp.task("dev:silent", gulp.series("clean", "check", "build:preload", gulp.parallel("bs:silent", "watch:preload")));
+
+gulp.task("build", gulp.series(["check", "build:prod"]))
