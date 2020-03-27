@@ -8,13 +8,18 @@
   },
   "cSpell.words": [
     "APIURI",
+    "apptype",
+    "commitlint",
+    "commitmsg",
+    "gulpfile",
     "hana",
+    "namepath",
     "ondemand",
     "openui",
+    "preload",
     "qunit",
     "sapui",
-    "gulpfile",
     "theo",
-    "preload"
+    "yosay"
   ],
 }

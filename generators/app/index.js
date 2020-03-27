@@ -5,7 +5,6 @@ const yosay = require("yosay");
 const path = require("path");
 const process = require("process");
 const mkdirp = require("mkdirp");
-const { warn } = require("console");
 
 const { getAvailableVersions } = require("./utils/version");
 
@@ -71,31 +70,36 @@ module.exports = class extends Generator {
 
     // >> interactive mode
 
-    const { skeleton } = await this.prompt({
-      type: "list",
-      name: "skeleton",
-      message: "APP Skeleton?",
-      choices: [
-        { name: "Empty Project", value: "empty" },
-        { name: "Empty Project (Typescript)", value: "empty-ts" },
-        { name: "Walk Through", value: "wt" },
-        { name: "Walk Through (Typescript)", value: "wt-ts" },
-        { name: "Shop Admin Tool", value: "admin" }
-      ]
-    });
-
-    const { name, namespace, ui5type } = await this.prompt([
+    const { name, namespace, ui5type, skeleton, apptype, version, jest } = await this.prompt([
+      {
+        type: "list",
+        name: "skeleton",
+        message: "APP Skeleton?",
+        choices: [
+          { name: "Empty Project", value: "empty" },
+          { name: "Empty Project (Typescript)", value: "empty-ts" },
+          { name: "Walk Through", value: "wt" },
+          { name: "Walk Through (Typescript)", value: "wt-ts" },
+          { name: "Shop Admin Tool", value: "admin" }
+        ]
+      },
       {
         type: "input",
         name: "name",
         message: "App name?",
-        "default": `ui5-${skeleton.toLowerCase()}`
+        "default": ans => `ui5-${ans.skeleton.toLowerCase()}`
       },
       {
         type: "input",
         name: "namespace",
+        validate: ns => {
+          if (ns.startsWith("sap")) {
+            return `The namespace ${ns} start with 'sap'\nIt maybe CAUSE error`;
+          }
+          return true;
+        },
         message: "App namespace/package?",
-        "default": `ui5.${skeleton.replace(/[\W_]+/g, ".").toLowerCase()}`
+        "default": ans=> `ui5.${ans.skeleton.replace(/[\W_]+/g, ".").toLowerCase()}`
       },
       {
         type: "list",
@@ -112,27 +116,19 @@ module.exports = class extends Generator {
             value: "sapui5"
           }
         ]
-      }
-
-    ]);
-
-    const ui5Domain = (ui5type == "openui5" ? "openui5.hana.ondemand.com" : "sapui5.hana.ondemand.com");
-
-    await this.logLineNew("loading ui5 versions from remote...");
-
-    const availableVersions = await getAvailableVersions(ui5type);
-
-    this.clearLine();
-
-    const { apptype, version } = await this.prompt([
+      },
       {
         type: "list",
         name: "version",
         message: "UI5 Version?",
-        choices: availableVersions.map((v, i) => ({
-          name: v,
-          value: v
-        }))
+        choices: async(ans)=> {
+          const availableVersions = await getAvailableVersions(ans.ui5type);
+          return availableVersions.map((v, i) => ({
+            name: v,
+            value: v
+          }));
+
+        }
       },
       {
         type: "list",
@@ -143,33 +139,24 @@ module.exports = class extends Generator {
           { name: "Electron Application", value: "electron" },
           { name: "Cordova Application (Beta)", value: "cordova" }
         ]
+      },
+      {
+        type: "list",
+        name: "jest",
+        message: "Jest Test?",
+        when: ans => ans.apptype == "web",
+        choices: [
+          { name: "Yes", value: true },
+          { name: "No", value: false }
+        ]
       }
+
     ]);
-
-    let jest = false;
-
-    if (apptype == "web") {
-      jest = (
-        await this.prompt([
-          {
-            type: "list",
-            name: "jest",
-            message: "Jest Test?",
-            choices: [
-              { name: "Yes", value: true },
-              { name: "No", value: false }
-            ]
-          }
-        ])
-      ).jest;
-    }
 
     const dir = name.replace(/[^a-zA-Z0-9]/g, "");
     const namepath = namespace.replace(/\./g, "/");
 
-    if (namespace.startsWith("sap")) {
-      warn(`The namespace ${namespace} start with 'sap'\nIt maybe CAUSE error`);
-    }
+    const ui5Domain = (ui5type == "openui5" ? "openui5.hana.ondemand.com" : "sapui5.hana.ondemand.com");
 
     this.props = Object.assign(this.props || {}, { dir, namepath, skeleton, name, namespace, ui5Domain, apptype, version, jest });
 
