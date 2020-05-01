@@ -11,7 +11,9 @@
     "start": "node_modules/.bin/gulp dev:preload",
     "build": "node_modules/.bin/gulp build:prod",
     "build:sourcemap": "node_modules/.bin/gulp build:preload",
-    "lint:fix": "node_modules/.bin/eslint --fix \"src/**/*.js\""
+    "lint:fix": "node_modules/.bin/eslint --fix \"src/**/*.js\"",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "ui5": {
     "namespace": "<%= namespace %>",
@@ -23,7 +25,8 @@
     }
   },
   "dependencies": {
-    "lodash": "^4"
+    "lodash": "^4",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -45,5 +48,6 @@
     "gulp-ui5-eager-preload": "^1.19.5",
     "http-proxy-middleware": "^0.20.0",
     "merge-stream": "^1"
-  }
+  },
+  "snyk": true
 }
