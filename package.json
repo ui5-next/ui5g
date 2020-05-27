@@ -29,7 +29,7 @@
     "yeoman-test": "^2.3.0"
   },
   "dependencies": {
-    "chalk": "^1",
+    "chalk": "^4",
     "lodash": "^4.17.15",
     "mkdirp": "^1",
     "node-fetch": "^2.6.0",
