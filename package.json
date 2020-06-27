@@ -19,7 +19,7 @@
     "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
+    "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^8",
     "standard-version": "^8.0.0",
     "eslint": "^6.8.0",
