@@ -1,5 +1,8 @@
 var fetch = require("node-fetch");
-var { maxBy, groupBy } = require("lodash");
+var groupBy = require("@newdash/newdash-node/groupBy").default;
+var maxBy = require("@newdash/newdash-node/maxBy").default;
+
+
 var versionAPIURI = type => `https://${type}.hana.ondemand.com/neo-app.json`;
 var maintainAPIURI = type => `https://${type}.hana.ondemand.com/versionoverview.json`;
 var S_OPEN_UI_5 = "openui5";
