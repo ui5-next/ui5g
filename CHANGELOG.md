@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/Soontao/ui5g/compare/v1.19.1...v1.20.0) (2020-06-30)
+
+
+### Features
+
+* [#12](https://github.com/Soontao/ui5g/issues/12) support jest ([bccf518](https://github.com/Soontao/ui5g/commit/bccf518910ef1e5d7e362f0ee6b756030d796a19))
+
+
+### Bug Fixes
+
+* newdash issue ([b2f611c](https://github.com/Soontao/ui5g/commit/b2f611c95c1ce428f0f021aca0c7875896265b3e))
+* ts build ([973a299](https://github.com/Soontao/ui5g/commit/973a299fb5a254a0fcad122c26b8316ef847444b))
+* upgrade yeoman-generator from 4.4.0 to 4.5.0 ([b292032](https://github.com/Soontao/ui5g/commit/b29203238f44e55d31568cc4d9ed80f119d84d52))
+
 ### [1.19.1](https://github.com/Soontao/ui5g/compare/v1.19.0...v1.19.1) (2020-03-16)
 
 
