@@ -21,7 +21,7 @@
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
     "standard-version": "^8.0.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.3.1",
     "husky": "^4.2.5",
     "eslint-config-xo-space": "^0.25.0",
     "yeoman-assert": "^3.1.1",
