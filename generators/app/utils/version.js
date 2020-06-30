@@ -1,7 +1,6 @@
 var fetch = require("node-fetch");
-var groupBy = require("@newdash/newdash-node/groupBy").default;
-var maxBy = require("@newdash/newdash-node/maxBy").default;
-
+var { maxBy } = require("@newdash/newdash/maxBy");
+var { groupBy } = require("@newdash/newdash/groupBy");
 
 var versionAPIURI = type => `https://${type}.hana.ondemand.com/neo-app.json`;
 var maintainAPIURI = type => `https://${type}.hana.ondemand.com/versionoverview.json`;
@@ -9,9 +8,9 @@ var S_OPEN_UI_5 = "openui5";
 var S_SAP_UI_5 = "sapui5";
 
 const fallbackVersions = [
-  "1.75.0",
-  "1.71.12",
-  "1.65.12"
+  "1.79.0",
+  "1.71.17",
+  "1.60.27"
 ];
 
 const parseVersion = (s = "") => {
