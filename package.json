@@ -25,7 +25,7 @@
     "husky": "^4.2.5",
     "eslint-config-xo-space": "^0.25.0",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.3.0"
+    "yeoman-test": "^2.6.0"
   },
   "dependencies": {
     "@newdash/newdash": "^5.8.0",
@@ -33,7 +33,7 @@
     "mkdirp": "^1",
     "node-fetch": "^2.6.0",
     "yeoman-generator": "^4.11.0",
-    "yosay": "^2"
+    "yosay": "^2.0.2"
   },
   "husky": {
     "hooks": {
