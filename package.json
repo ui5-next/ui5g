@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@newdash/newdash": "^5.8.0",
-    "chalk": "^1",
+    "chalk": "^4",
     "mkdirp": "^1",
     "node-fetch": "^2.6.0",
     "yeoman-generator": "^4.11.0",
