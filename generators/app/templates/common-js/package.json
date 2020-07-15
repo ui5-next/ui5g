@@ -23,7 +23,7 @@
     }
   },
   "dependencies": {
-    "@newdash/newdash": "^5.8.0"
+    "@newdash/newdash": "^5.11.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.3",
