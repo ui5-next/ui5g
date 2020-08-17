@@ -19,16 +19,16 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.1",
-    "eslint": "^7.4.0",
+    "@commitlint/config-conventional": "^9.1.2",
+    "eslint": "^7.7.0",
     "eslint-config-xo-space": "^0.25.0",
     "husky": "^4.2.5",
-    "standard-version": "^8.0.2",
+    "standard-version": "^9.0.0",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^2.7.0"
   },
   "dependencies": {
-    "@newdash/newdash": "^5.11.0",
+    "@newdash/newdash": "^5.13.0",
     "chalk": "^4.1.0",
     "mkdirp": "^1",
     "node-fetch": "^2.6.0",
