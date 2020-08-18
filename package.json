@@ -1,6 +1,6 @@
 {
   "name": "generator-ui5g",
-  "version": "1.20.0",
+  "version": "1.20.1",
   "description": "yet another generator for sapui5/openui5",
   "author": {
     "name": "Theo Sun",
