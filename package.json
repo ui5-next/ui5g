@@ -18,21 +18,21 @@
     "release": "standard-version --commit-all --no-verify && git push --follow-tags origin master"
   },
   "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.2",
-    "eslint": "^7.7.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "eslint": "^7.9.0",
     "eslint-config-xo-space": "^0.25.0",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "standard-version": "^9.0.0",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.7.0"
+    "yeoman-test": "^3.0.0"
   },
   "dependencies": {
     "@newdash/newdash": "^5.13.0",
     "chalk": "^4.1.0",
-    "mkdirp": "^1",
-    "node-fetch": "^2.6.0",
-    "yeoman-generator": "^4.11.0",
+    "mkdirp": "^1.0.4",
+    "node-fetch": "^2.6.1",
+    "yeoman-generator": "^4.12.0",
     "yosay": "^2.0.2"
   },
   "husky": {
