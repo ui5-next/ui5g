@@ -28,7 +28,7 @@
     "yeoman-test": "^3.0.0"
   },
   "dependencies": {
-    "@newdash/newdash": "^5.13.0",
+    "@newdash/newdash": "^5.14.0",
     "chalk": "^4.1.0",
     "mkdirp": "^1.0.4",
     "node-fetch": "^2.6.1",
