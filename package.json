@@ -25,7 +25,7 @@
     "husky": "^4.3.0",
     "standard-version": "^9.0.0",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^3.0.0"
+    "yeoman-test": "^4.0.1"
   },
   "dependencies": {
     "@newdash/newdash": "^5.13.0",
